@@ -1,0 +1,65 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../d2l-fetch-siren-entity-behavior/d2l-fetch-siren-entity-behavior.html">
+<link rel="import" href="../d2l-fetch/d2l-fetch.html">
+
+<!--
+`d2l-rubric`
+Polymer Web-Component to display rubrics
+
+@demo demo/index.html
+-->
+
+<dom-module id="d2l-rubric">
+	<template>
+		<style>
+			:host {
+				display: block;
+			}
+		</style>
+		<h1>[[title]]</h1>
+		<h2>[[description.properties.text]]</h2>
+		<d2l-rubric-criterion>
+	</template>
+
+	<script>
+		Polymer({
+
+			is: 'd2l-rubric',
+
+			properties: {
+				title: {
+					type: String
+				},
+				description: {
+					type: Object,
+				},
+				href: String,
+				token: String,
+				entity: Object
+			},
+
+			behaviors: [
+				window.D2L.FetchSirenEntityBehavior
+			],
+
+			observers: [
+				'_changed(entity)',
+				'_fetchEntity(href, token)'
+			],
+
+			_changed: function( entity ) {
+				this.rubric = entity;
+				this.title = entity.properties.name;
+				this.description = entity.getSubEntityByClass("description");
+			},
+
+			_fetchEntity: function(href, token) {
+				this._fetchEntityWithToken(href, function() { return Promise.resolve(token); })
+					.then(function(entity) {
+						this.entity = entity;
+					}.bind(this));
+			}
+
+		});
+	</script>
+</dom-module>
