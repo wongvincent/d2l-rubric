@@ -18,7 +18,6 @@ Polymer Web-Component to display rubrics
 		</style>
 		<h1>[[title]]</h1>
 		<h2>[[description.properties.text]]</h2>
-		<d2l-rubric-criterion>
 	</template>
 
 	<script>
@@ -35,7 +34,10 @@ Polymer Web-Component to display rubrics
 				},
 				href: String,
 				token: String,
-				entity: Object
+				entity: {
+					type: Object,
+					observer: '_onEntityChanged'
+				}
 			},
 
 			behaviors: [
@@ -43,14 +45,13 @@ Polymer Web-Component to display rubrics
 			],
 
 			observers: [
-				'_changed(entity)',
 				'_fetchEntity(href, token)'
 			],
 
-			_changed: function( entity ) {
+			_onEntityChanged: function(entity) {
 				this.rubric = entity;
 				this.title = entity.properties.name;
-				this.description = entity.getSubEntityByClass("description");
+				this.description = entity.getSubEntityByClass('description');
 			},
 
 			_fetchEntity: function(href, token) {
