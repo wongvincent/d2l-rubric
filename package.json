@@ -1,0 +1,29 @@
+{
+  "name": "d2l-rubric",
+  "description": "Polymer-based web components for D2L Rubrics",
+  "private": true,
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test:lint": "npm run test:lint:wc && npm run test:lint:html",
+    "test:lint:html": "eslint *.html",
+    "test:lint:wc": "polymer lint",
+    "test": "npm run test:lint && polymer test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Brightspace/d2l-rubric.git"
+  },
+  "keywords": [
+    "D2L",
+    "Rubric"
+  ],
+  "author": "D2L Corporation",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "eslint": "^4.13.1",
+    "eslint-config-brightspace": "^0.4.0",
+    "eslint-plugin-html": "^4.0.1"
+  }
+}
