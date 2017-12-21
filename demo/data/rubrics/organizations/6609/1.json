@@ -1,0 +1,37 @@
+{
+  "class": [
+      "rubric"
+  ],
+  "properties": {
+      "name": "This is not the greatest rubric in the world"
+  },
+  "entities": [
+      {
+          "class": [
+              "description",
+              "richtext"
+          ],
+          "properties": {
+              "html": "<p>This is just a tribute.</p>",
+              "text": "This is just a tribute."
+          },
+          "rel": [
+              "https://rubrics.api.brightspace.com/rels/description"
+          ]
+      }
+  ],
+  "links": [
+      {
+          "rel": [
+              "self"
+          ],
+          "href": "data/rubrics/organizations/6609/1.json"
+      },
+      {
+          "rel": [
+              "https://rubrics.api.brightspace.com/rels/criteria-groups"
+          ],
+          "href": "data/rubrics/organizations/6609/1/groups.json"
+      }
+  ]
+}
