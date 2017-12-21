@@ -1,15 +1,20 @@
 {
   "name": "d2l-rubric",
+  "version": "0.0.0",
   "description": "Polymer-based web components for D2L Rubrics",
   "private": true,
   "directories": {
     "test": "test"
   },
   "scripts": {
+    "postinstall": "bower install",
+    "test": "npm run test:lint && npm run test:wct",
     "test:lint": "npm run test:lint:wc && npm run test:lint:html",
     "test:lint:html": "eslint *.html",
     "test:lint:wc": "polymer lint",
-    "test": "npm run test:lint && polymer test"
+    "test:local": "npm run test:lint && npm run test:wct:local",
+    "test:wct": "polymer test -p",
+    "test:wct:local": "cross-env LAUNCHPAD_BROWSERS=chrome polymer test -p --skip-plugin sauce"
   },
   "repository": {
     "type": "git",
@@ -22,8 +27,12 @@
   "author": "D2L Corporation",
   "license": "Apache-2.0",
   "devDependencies": {
+    "bower": "^1.8.2",
+    "cross-env": "^5.1.1",
     "eslint": "^4.13.1",
     "eslint-config-brightspace": "^0.4.0",
-    "eslint-plugin-html": "^4.0.1"
+    "eslint-plugin-html": "^4.0.1",
+    "frau-ci": "^1.33.2",
+    "polymer-cli": "^1.5.7"
   }
 }
