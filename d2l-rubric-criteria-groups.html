@@ -1,0 +1,69 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../d2l-fetch-siren-entity-behavior/d2l-fetch-siren-entity-behavior.html">
+<link rel="import" href="../d2l-fetch/d2l-fetch.html">
+<link rel="import" href="./d2l-rubric-criteria-group.html">
+<link rel="import" href="../paper-card/paper-card.html"/>
+
+<dom-module id="d2l-rubric-criteria-groups">
+	<template>
+		<style>
+			:host {
+				display: block;
+			}
+		</style>
+		<template is="dom-repeat" items="[[groups]]">
+			<paper-card>
+				<d2l-rubric-criteria-group href="[[_getSelfLink(item)]]" token="[[token]]"></d2l-rubric-criteria-group>
+			</paper-card>
+		</template>
+	</template>
+
+	<script>
+		Polymer({
+			is: 'd2l-rubric-criteria-groups',
+
+			properties: {
+				entity: {
+					type: Object,
+					observer: '_onEntityChanged'
+				},
+
+				groups: {
+					type: Array,
+					value: []
+				},
+
+				href: String,
+
+				token: String
+
+			},
+
+			behaviors: [
+				window.D2L.FetchSirenEntityBehavior
+			],
+
+			observers: [
+				'_fetchEntity(href, token)'
+			],
+
+			_onEntityChanged: function(entity) {
+				this.entity = entity;
+				this.groups = entity.getSubEntitiesByClass('criterion-group');
+			},
+
+			_fetchEntity: function(href, token) {
+				if (href && token) {
+					this._fetchEntityWithToken(href, function() { return Promise.resolve(token); })
+						.then(function(entity) {
+							this.entity = entity;
+						}.bind(this));
+				}
+			},
+
+			_getSelfLink: function(entity) {
+				return entity && entity.getLinkByRel('self').href || '';
+			}
+		});
+	</script>
+</dom-module>
