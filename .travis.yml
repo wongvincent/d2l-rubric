@@ -1,0 +1,27 @@
+language: node_js
+node_js: 6
+dist: trusty
+sudo: required
+before_script:
+- npm run test:lint
+script:
+- set -e
+- xvfb-run wct test --skip-plugin sauce
+- 'if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then xvfb-run wct test --skip-plugin local; fi'
+- 'if [ "$TRAVIS_BRANCH" == "master" ]; then frauci-update-version; fi'
+env:
+  global:
+  - REPO_NAME=d2l-rubric
+  #SAUCE_USERNAME
+  #SAUCE_ACCESS_KEY
+  #GITHUB_RELEASE_TOKEN
+  - secure: QGtNHSKWV5JI0q5rqKANCbzCOCm5yu4B+TGCwt8i2O/yCYGP/Emp7iWG+NBqlV//jazSF3P8IJyEmUCN2uQMJkrIaqzxe+xEYYDJf9PioOEF0MXyVtyaVC+2+VU7vp+gkNSxdRdA+IABo2DtccDZknaJZ75NQw/eqRV3miU27g+9lbr4EZ/RPXC9jfYMOCULSNlFJcXIr5gIIjAYCc2IXxM+0G6w6EtoEzQAozWuTyIo8ZBHfeXCrpvS+Lkj91ekuPGIsQ2BpT07BXi7zt44zkOop+4oHDsfuIdSAS+rR74GUpVcZhycHqWcD2l5Vod6T1PyqZeGnHyOX2meH7ghDzEFXR3gVeOJY8LiB94AWvQ49oHR6cyFwa5Bsb9EK4K+sSawWE741CSxBwkxRNMHZmn6NPL7qaWrGoLcFLFi/CulDPOPVzhv0s//v7p6/5RPsBxHwhfTC22QId4ctrTmzVaK7Qgs/7QGZeYvNwQWIwmS+A1PgNOGdhhHVPTEUNWa/8hbqcva44lIKJBcCRoDpWTN3HccJcmIn3yT3qIgPq/PDfr7axKWFlijm0w2n6LkXtIyDKbAqbqRYwkLsNKUq6pFxvdRIE3pntQvDUUimDJ/3YgLPIkBA0K+2w8Wx9XTh94LECWaxU+RTbs48+0A6UMdcf4drH9V4Sc/rluzAg8=
+  - secure: MrzxVRQB7rKxrSyBq9/geVoxIn48WFSfFyQ2ioWKmHirzWyUwL0V8mY6oAFDfNEn/qKUQ3CYP6T+fQ024XKnRbrVOyySO9LzqChybmmMlINCoWt0rvuNF7MSTHHn7f0Pfq4Fx1LlmUezsGks3mKqhhpEb2MOZwd5g8ALEMd/5Y4+puw+fRB28rcDV8VZ908CAaiQl8IhUCynja0/vu4+16q9gmhxhTSxH0/qy0NQ/jcd2CvkHHh10xJLVydJLS1Lyk3QEuQZ5lu9wEjjgAJoO2mhX9vVqmTtXDV6almbFWGHV95S/WJA3ETEHzEI3cj40sombqHwGNJ2/la1UmcKK6M/eEVV9ocpsSnUf2aWvZwm20fKEmSMh7XEuW7fS0fl5by7Wm8AZR4sC5nlBU/QcZ9TjGBiLLFSzVRR0pJkCiCoU84koWmXAY4p6OEfhp9g1iuQcTOBAkq0Zx3eOCMWp92zBDPa7rzGd64tk0twM2LLjvbvjfz8whw3ukwGY3KwVPC7az22NsouKHQfLrr3+3Wq6d02MQFeEZeWf6Oc6pQOVBBwA65ro5N4f39fazmoZzdyIKMTRI6UeapW/08P6uZj2OuAoLRpGLvOvPdsmiZv0wUNfCMA84ftPvkP49g1r0GWCqfvBN1oRbt5I8cSq5MzGzVUM/4kVFyeC0DhYB8=
+  - secure: FlQ+8SMY60mJT790n/tHwZa0IJJcplJbsyepJAg+u4NVpifZk0SVxyBK9NO7PyR5yU07/B7mdQCYkQ7XZbtr9F54b5SggOMKHT1HjL/CLBo0AnvNcucWokKxtQNKGZ2IuE283pjBoN7Pcl1savPsVbbabuDpIp4ci4jZf+PkLCu/3K7q7HJUQdw37+i6V85hLTALJcO93zFevG2zz+DEEo8cbHBMWawD12gr38y+Uot7T+t1qTGm+Y/eL4reV1g9CcWq6N/hO6ny5xA8x8Rq8SCvWl8txJh396kqv488hYUrreCTr8B4v7v4KoA7R5X3SM5eRZHIoDYYyPyyj7wzWzVj47/3pBAqZfmhw2OaL2y6Tov+bM2TKFAUkZa92zQ5D0NOxo2A5lgN8xwgp+EsdyvYnfDTbTr7bWu8aNYTdbJKLCnAXT9r5zVi/BCjgdsrDV6U8pyWbE9WIecFS77hFTnuWTt/QcW5SARfL9L69ZxIVN+XqPA9ZziUbKteHid5QqzIIVIs8g8CCO8Tpwz1zILmIU+ntru43ulhTidcRWN8judEE6fOqT6X+pveoMOTG/RHq/9Q81vX2JGynFh8rh+3H0JN+bK9CR9Iu0Fm220yDnus4CXdNqRu1mjora2Jl9u4yYV9itPQ+FIggt7l6/QzCd96eGDnU8KWDxD7l9U=
+addons:
+  firefox: latest
+  apt:
+    packages:
+    - gdebi
+    - oracle-java9-installer
+    - oracle-java9-set-default
