@@ -1,6 +1,7 @@
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../d2l-table/d2l-table.html">
 <link rel="import" href="../d2l-fetch-siren-entity-behavior/d2l-fetch-siren-entity-behavior.html">
+<link rel="import" href="../d2l-hm-constants-behavior/d2l-hm-constants-behavior.html">
 
 <dom-module id="d2l-rubric-criteria-group">
 	<template>
@@ -8,7 +9,7 @@
 			:host {
 				display: block;
 			}
-			td:first-child {
+			td:first-of-type {
 				background-color: #f9fafb;
 			}
 
@@ -20,8 +21,8 @@
 						<th></th>
 						<template is="dom-repeat" items="[[levels]]">
 							<th>
-								<div>{{item.properties.name}}</div>
-								<div>{{item.properties.points}} points</div>
+								<div>[[item.properties.name]]</div>
+								<div>[[item.properties.points]] points</div>
 							</th>
 						</template>
 						<th></th>
@@ -30,7 +31,7 @@
 				<tbody>
 					<template is="dom-repeat" items="[[criteriaEntities]]">
 						<tr>
-							<td>{{item.properties.name}}</td>
+							<td>[[item.properties.name]]</td>
 							<template is="dom-repeat" as="criterionCell" items="[[_getCriterionCells(item)]]">
 								<td>
 									<div class="description">
@@ -82,7 +83,8 @@
 			},
 
 			behaviors: [
-				window.D2L.FetchSirenEntityBehavior
+				window.D2L.FetchSirenEntityBehavior,
+				window.D2L.Hypermedia.HMConstantsBehavior
 			],
 
 			observers: [
@@ -94,7 +96,7 @@
 			],
 
 			_onLevelsEntityChanged: function(levelsEntity) {
-				this.levels = levelsEntity.getSubEntitiesByClass('level');
+				this.levels = levelsEntity.getSubEntitiesByClass(this.HypermediaClasses.rubrics.level);
 			},
 
 			_fetchEntity: function(href, token) {
@@ -125,27 +127,27 @@
 			},
 
 			_onCriteriaCollectionEntityChanged: function(entity) {
-				this.criteriaEntities = entity.getSubEntitiesByClass('criterion');
+				this.criteriaEntities = entity.getSubEntitiesByClass(this.HypermediaClasses.rubrics.criterion);
 			},
 
 			_getCriteriaLink: function(entity) {
-				var link = entity && entity.getLinkByRel('https://rubrics.api.brightspace.com/rels/criteria');
+				var link = entity && entity.getLinkByRel(this.HypermediaRels.Rubrics.criteria);
 				return link && link.href || '';
 			},
 			_getLevelsLink: function(entity) {
-				var link = entity && entity.getLinkByRel('https://rubrics.api.brightspace.com/rels/levels');
+				var link = entity && entity.getLinkByRel(this.HypermediaRels.Rubrics.levels);
 				return link && link.href || '';
 			},
 			_getCriterionCells: function(entity) {
-				var entities = entity && entity.getSubEntitiesByClass('criterion-cell');
+				var entities = entity && entity.getSubEntitiesByClass(this.HypermediaClasses.rubrics.criterionCell);
 				return entities || [];
 			},
 			_getDescription: function(entity) {
-				var description = entity && entity.getSubEntityByClass('description');
+				var description = entity && entity.getSubEntityByClass(this.HypermediaClasses.rubrics.description);
 				return description && description.properties && description.properties.text || '';
 			},
 			_getFeedback: function(entity) {
-				var feedback = entity && entity.getSubEntityByClass('feedback');
+				var feedback = entity && entity.getSubEntityByClass(this.HypermediaClasses.rubrics.feedback);
 				return feedback && feedback.properties && feedback.properties.text || '';
 			},
 			_getMaxLevelScore: function() {
