@@ -40,7 +40,7 @@
 								</td>
 							</template>
 							<td>
-								/[[_getMaxLevelScore()]]
+								/[[maxLevelScore]]
 							</td>
 						</tr>
 					</template>
@@ -66,6 +66,10 @@
 				},
 				levels: {
 					type: Array
+				},
+				maxLevelScore: {
+					type: Number,
+					computed: '_getMaxLevelScore(levels)'
 				},
 				criteriaCollectionHref: {
 					type: Object,
@@ -150,8 +154,8 @@
 				var feedback = entity && entity.getSubEntityByClass(this.HypermediaClasses.rubrics.feedback);
 				return feedback && feedback.properties && feedback.properties.text || '';
 			},
-			_getMaxLevelScore: function() {
-				return this.levels && this.levels[0].properties.points || '';
+			_getMaxLevelScore: function(levels) {
+				return levels && levels[0].properties.points || '';
 			}
 		});
 	</script>
