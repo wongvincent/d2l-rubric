@@ -7,7 +7,7 @@
     "paper-card": "PolymerElements/paper-card#~2.0.0",
     "paper-item": "PolymerElements/paper-item#~2.0.0",
     "d2l-fetch-siren-entity-behavior": "Brightspace/d2l-fetch-siren-entity-behavior#~3.0.0",
-    "d2l-table": "git://github.com/BrightspaceUI/table.git#f5ab8665b35ffddb0465639d22005dc6c8b1505c",
+    "d2l-table": "git://github.com/BrightspaceUI/table.git#^1.1.0",
     "d2l-fetch": "Brightspace/d2l-fetch#^1.8.0",
     "d2l-hm-constants-behavior": "git://github.com/Brightspace/d2l-hm-constants-behavior.git#4.1.0"
   },
