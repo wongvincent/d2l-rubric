@@ -2,7 +2,6 @@
 <link rel="import" href="../d2l-fetch-siren-entity-behavior/d2l-fetch-siren-entity-behavior.html">
 <link rel="import" href="../d2l-fetch/d2l-fetch.html">
 <link rel="import" href="./d2l-rubric-criteria-group.html">
-<link rel="import" href="../paper-card/paper-card.html"/>
 <link rel="import" href="../d2l-hm-constants-behavior/d2l-hm-constants-behavior.html">
 
 <dom-module id="d2l-rubric-criteria-groups">
@@ -13,9 +12,7 @@
 			}
 		</style>
 		<template is="dom-repeat" items="[[groups]]">
-			<paper-card>
-				<d2l-rubric-criteria-group href="[[_getSelfLink(item)]]" token="[[token]]"></d2l-rubric-criteria-group>
-			</paper-card>
+			<d2l-rubric-criteria-group href="[[_getSelfLink(item)]]" token="[[token]]"></d2l-rubric-criteria-group>
 		</template>
 	</template>
 
