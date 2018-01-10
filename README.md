@@ -1,6 +1,6 @@
+# d2l-rubric
 [![Build Status](https://travis-ci.com/Brightspace/d2l-rubric.svg?token=ZYvPKniByWFPuyqz8hm5&branch=master)](https://travis-ci.com/Brightspace/d2l-rubric)
 
-# d2l-rubric
 Polymer based web-component to display a rubric
 
 ## Usage
