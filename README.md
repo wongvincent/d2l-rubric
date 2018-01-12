@@ -16,7 +16,7 @@ Include the [webcomponents.js](http://webcomponents.org/polyfills/) "lite" polyf
 ## Viewing Your Element
 
 ```
-$ polymer serve
+$ npm run serve
 ```
 
 Modify [demo/index.html](https://github.com/Brightspace/d2l-rubric/blob/master/demo/index.html) and supply your href and token.
