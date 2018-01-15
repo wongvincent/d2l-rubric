@@ -4,9 +4,8 @@
   "main": "d2l-rubric.html",
   "dependencies": {
     "polymer": "Polymer/polymer#^1.9.0",
-    "paper-item": "PolymerElements/paper-item#~2.0.0",
     "d2l-fetch-siren-entity-behavior": "Brightspace/d2l-fetch-siren-entity-behavior#~3.0.0",
-    "d2l-table": "git://github.com/BrightspaceUI/table.git#^1.1.0",
+    "d2l-table": "BrightspaceUI/table#^1.1.0",
     "d2l-fetch": "Brightspace/d2l-fetch#^1.8.0",
     "d2l-hm-constants-behavior": "git://github.com/Brightspace/d2l-hm-constants-behavior.git#4.1.1"
   },
@@ -14,9 +13,9 @@
     "webcomponentsjs": "^0.7.24"
   },
   "devDependencies": {
-    "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
-    "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^1.0.0",
+    "iron-component-page": "PolymerElements/iron-component-page#^3.0.0",
+    "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^2.0.0",
     "web-component-tester": "Polymer/web-component-tester#^6.0.0",
-    "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0"
+    "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.24"
   }
 }
