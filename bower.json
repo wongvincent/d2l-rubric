@@ -2,6 +2,7 @@
   "name": "d2l-rubric",
   "description": "Polymer Web-Component to display rubrics",
   "main": "d2l-rubric.html",
+  "license": "Apache-2.0",
   "dependencies": {
     "polymer": "Polymer/polymer#^1.9.0",
     "d2l-fetch-siren-entity-behavior": "Brightspace/d2l-fetch-siren-entity-behavior#~3.0.0",
