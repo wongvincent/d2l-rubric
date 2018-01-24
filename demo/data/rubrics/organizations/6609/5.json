@@ -1,19 +1,20 @@
 {
     "class": [
         "rubric"
-        ],
+    ],
     "entities": [
         {
             "class": [
-                "richtext", "description"
+                "richtext",
+                "description"
             ],
             "properties": {
-                "html": "", 
+                "html": "",
                 "text": "Custom points rubric description"
             },
             "rel": [
                 "item"
-                ]
+            ]
         }
     ],
     "links": [

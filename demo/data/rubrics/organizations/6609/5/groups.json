@@ -1,6 +1,7 @@
 {
 	"class": [
-		"collection", "criteria-groups"
+		"collection",
+		"criteria-groups"
 	],
 	"entities": [
 		{
@@ -34,7 +35,8 @@
 				}
 			],
 			"rel": [
-				"https://rubrics.api.brightspace.com/rels/criteria","item"
+				"https://rubrics.api.brightspace.com/rels/criteria",
+				"item"
 			]
 		}
 	],

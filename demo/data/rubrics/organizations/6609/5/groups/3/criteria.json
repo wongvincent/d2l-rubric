@@ -114,7 +114,7 @@
 								"self"
 							]
 						},
-						{	
+						{
 							"href": "data/rubrics/organizations/6609/5/groups/3/criteria/7.json",
 							"rel": [
 								"up"
@@ -810,13 +810,13 @@
 		{
 			"href": "data/rubrics/organizations/6609/5/groups/3/criteria.json",
 			"rel": [
-					"self"
+				"self"
 			]
 		},
 		{
 			"href": "data/rubrics/organizations/6609/5/groups/3.json",
 			"rel": [
-					"up"
+				"up"
 			]
 		}
 	]
