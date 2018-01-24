@@ -12,6 +12,17 @@
 			td:first-of-type {
 				background-color: #f9fafb;
 			}
+			th > div {
+				text-align: center;
+			}
+			.levels-header {
+				font-weight: bold;
+			}
+			.custom-points {
+				font-weight: bold;
+				color: #7c8695;
+				margin-bottom: 0.5rem;
+			}
 
 		</style>
 		<d2l-table-wrapper>
@@ -21,8 +32,10 @@
 						<th></th>
 						<template is="dom-repeat" items="[[levels]]">
 							<th>
-								<div>[[item.properties.name]]</div>
-								<div>[[item.properties.points]] points</div>
+								<div class="levels-header">[[item.properties.name]]</div>
+								<template is="dom-if" if="[[item.properties.points]]">
+									<div>[[item.properties.points]] points</div>
+								</template>
 							</th>
 						</template>
 						<th></th>
@@ -35,6 +48,11 @@
 							<template is="dom-repeat" as="criterionCell" items="[[_getCriterionCells(item)]]">
 								<td>
 									<div class="description">
+										<template is="dom-if" if="[[_hasCustomPoints(criterionCell)]]">
+											<div class="custom-points">
+												[[criterionCell.properties.points]] points
+											</div>
+										</template>
 										<span>[[_getDescription(criterionCell)]]</span>
 									</div>
 								</td>
@@ -138,24 +156,35 @@
 				var link = entity && entity.getLinkByRel(this.HypermediaRels.Rubrics.criteria);
 				return link && link.href || '';
 			},
+
 			_getLevelsLink: function(entity) {
 				var link = entity && entity.getLinkByRel(this.HypermediaRels.Rubrics.levels);
 				return link && link.href || '';
 			},
+
 			_getCriterionCells: function(entity) {
 				var entities = entity && entity.getSubEntitiesByClass(this.HypermediaClasses.rubrics.criterionCell);
 				return entities || [];
 			},
+
 			_getDescription: function(entity) {
 				var description = entity && entity.getSubEntityByClass(this.HypermediaClasses.rubrics.description);
 				return description && description.properties && description.properties.text || '';
 			},
+
 			_getFeedback: function(entity) {
 				var feedback = entity && entity.getSubEntityByClass(this.HypermediaClasses.rubrics.feedback);
 				return feedback && feedback.properties && feedback.properties.text || '';
 			},
+
 			_getMaxLevelScore: function(levels) {
 				return levels && levels[0].properties.points || '';
+			},
+
+			_hasCustomPoints: function(criterionCell) {
+				// TODO: The API currently returns 0 points for cells without custom points, this will be null soon.
+				// TODO: Once we get null then remove the > 0 compare
+				return criterionCell.properties && criterionCell.properties.points > 0;
 			}
 		});
 	</script>
