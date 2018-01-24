@@ -1,0 +1,823 @@
+{
+        "class": [
+                "collection",
+                "criteria"
+        ],
+        "entities": [
+                {
+                        "class": [
+                                "criterion"
+                        ],
+                        "entities": [
+                                {
+                                        "class": [
+                                                "criterion-cell"
+                                        ],
+                                        "entities": [
+                                                {
+                                                        "class": [
+                                                                "richtext",
+                                                                "description"
+                                                        ],
+                                                        "properties": {
+                                                                "html": "",
+                                                                "text": ""
+                                                        },
+                                                        "rel": [
+                                                                "item"
+                                                        ]
+                                                },
+                                                {
+                                                        "class": [
+                                                                "richtext",
+                                                                "feedback"
+                                                        ],
+                                                        "properties": {
+                                                                "html": "",
+                                                                "text": ""
+                                                        },
+                                                        "rel": [
+                                                                "item"
+                                                        ]
+                                                }
+                                        ],
+                                        "links": [
+                                                {
+                                                        "href": "data/rubrics/organizations/6609/5/groups/3/levels/18.json",
+                                                        "rel": [
+                                                                "https://rubrics.api.brightspace.com/rels/level"
+                                                        ]
+                                                },
+                                                {
+                                                        "href": "data/rubrics/organizations/6609/5/groups/3/criteria/7/0.json",
+                                                        "rel": [
+                                                                "self"
+                                                        ]
+                                                },
+                                                {
+                                                        "href": "data/rubrics/organizations/6609/5/groups/3/criteria/7.json",
+                                                        "rel": [
+                                                                "up"
+                                                        ]
+                                                }
+                                        ],
+                                        "properties": {
+                                                "points": 8.0
+                                        },
+                                        "rel": [
+                                                "item",
+                                                "https://rubrics.api.brightspace.com/rels/criterion-cell"
+                                        ]
+                                },
+                                {
+                                        "class": [
+                                                "criterion-cell"
+                                        ],
+                                        "entities": [
+                                                {
+                                                        "class": [
+                                                                "richtext",
+                                                                "description"
+                                                        ],
+                                                        "properties": {
+                                                                "html": "",
+                                                                "text": ""
+                                                        },
+                                                        "rel": [
+                                                                "item"
+                                                        ]
+                                                },
+                                                {
+                                                        "class": [
+                                                                "richtext",
+                                                                "feedback"
+                                                        ],
+                                                        "properties": {
+                                                                "html": "",
+                                                                "text": ""
+                                                        },
+                                                        "rel": [
+                                                                "item"
+                                                        ]
+                                                }
+                                        ],
+                                        "links": [
+                                                {
+                                                        "href": "data/rubrics/organizations/6609/5/groups/3/levels/19.json",
+                                                        "rel": [
+                                                                "https://rubrics.api.brightspace.com/rels/level"
+                                                        ]
+                                                },
+                                                {
+                                                        "href": "data/rubrics/organizations/6609/5/groups/3/criteria/7/1.json",
+                                                        "rel": [
+                                                                "self"
+                                                        ]
+                                                },
+                                                {
+                                                        "href": "data/rubrics/organizations/6609/5/groups/3/criteria/7.json",
+                                                        "rel": [
+                                                                "up"
+                                                        ]
+                                                }
+                                        ],
+                                        "properties": {
+                                                "points": 3.0
+                                        },
+                                        "rel": [
+                                                "item",
+                                                "https://rubrics.api.brightspace.com/rels/criterion-cell"
+                                        ]
+                                },
+                                {
+                                        "class": [
+                                                "criterion-cell"
+                                        ],
+                                        "entities": [
+                                                {
+                                                        "class": [
+                                                                "richtext",
+                                                                "description"
+                                                        ],
+                                                        "properties": {
+                                                                "html": "",
+                                                                "text": ""
+                                                        },
+                                                        "rel": [
+                                                                "item"
+                                                        ]
+                                                },
+                                                {
+                                                        "class": [
+                                                                "richtext",
+                                                                "feedback"
+                                                        ],
+                                                        "properties": {
+                                                                "html": "",
+                                                                "text": ""
+                                                        },
+                                                        "rel": [
+                                                                "item"
+                                                        ]
+                                                }
+                                        ],
+                                        "links": [
+                                                {
+                                                        "href": "data/rubrics/organizations/6609/5/groups/3/levels/20.json",
+                                                        "rel": [
+                                                                "https://rubrics.api.brightspace.com/rels/level"
+                                                        ]
+                                                },
+                                                {
+                                                        "href": "data/rubrics/organizations/6609/5/groups/3/criteria/7/2.json",
+                                                        "rel": [
+                                                                "self"
+                                                        ]
+                                                },
+                                                {
+                                                        "href": "data/rubrics/organizations/6609/5/groups/3/criteria/7.json",
+                                                        "rel": [
+                                                                "up"
+                                                        ]
+                                                }
+                                        ],
+                                        "properties": {
+                                                "points": 2.0
+                                        },
+                                        "rel": [
+                                                "item",
+                                                "https://rubrics.api.brightspace.com/rels/criterion-cell"
+                                        ]
+                                },
+                                {
+                                        "class": [
+                                                "criterion-cell"
+                                        ],
+                                        "entities": [
+                                                {
+                                                        "class": [
+                                                                "richtext",
+                                                                "description"
+                                                        ],
+                                                        "properties": {
+                                                                "html": "",
+                                                                "text": ""
+                                                        },
+                                                        "rel": [
+                                                                "item"
+                                                        ]
+                                                },
+                                                {
+                                                        "class": [
+                                                                "richtext",
+                                                                "feedback"
+                                                        ],
+                                                        "properties": {
+                                                                "html": "",
+                                                                "text": ""
+                                                        },
+                                                        "rel": [
+                                                                "item"
+                                                        ]
+                                                }
+                                        ],
+                                        "links": [
+                                                {
+                                                        "href": "data/rubrics/organizations/6609/5/groups/3/levels/21.json",
+                                                        "rel": [
+                                                                "https://rubrics.api.brightspace.com/rels/level"
+                                                        ]
+                                                },
+                                                {
+                                                        "href": "data/rubrics/organizations/6609/5/groups/3/criteria/7/3.json",
+                                                        "rel": [
+                                                                "self"
+                                                        ]
+                                                },
+                                                {
+                                                        "href": "data/rubrics/organizations/6609/5/groups/3/criteria/7.json",
+                                                        "rel": [
+                                                                "up"
+                                                        ]
+                                                }
+                                        ],
+                                        "properties": {
+                                                "points": 1.0
+                                        },
+                                        "rel": [
+                                                "item",
+                                                "https://rubrics.api.brightspace.com/rels/criterion-cell"
+                                        ]
+                                }
+                        ],
+                        "links": [
+                                {
+                                        "href": "data/rubrics/organizations/6609/5/groups/3/criteria/7.json",
+                                        "rel": [
+                                                "self"
+                                        ]
+                                },
+                                {
+                                        "href": "data/rubrics/organizations/6609/5/groups/3/criteria.json",
+                                        "rel": [
+                                                "up"
+                                        ]
+                                }
+                        ],
+                        "properties": {
+                                "name": "Criterion 1"
+                        },
+                        "rel": [
+                                "https://rubrics.api.brightspace.com/rels/criterion"
+                        ]
+                },
+                {
+                        "class": [
+                                "criterion"
+                        ],
+                        "entities": [
+                                {
+                                        "class": [
+                                                "criterion-cell"
+                                        ],
+                                        "entities": [
+                                                {
+                                                        "class": [
+                                                                "richtext",
+                                                                "description"
+                                                        ],
+                                                        "properties": {
+                                                                "html": "",
+                                                                "text": ""
+                                                        },
+                                                        "rel": [
+                                                                "item"
+                                                        ]
+                                                },
+                                                {
+                                                        "class": [
+                                                                "richtext",
+                                                                "feedback"
+                                                        ],
+                                                        "properties": {
+                                                                "html": "",
+                                                                "text": ""
+                                                        },
+                                                        "rel": [
+                                                                "item"
+                                                        ]
+                                                }
+                                        ],
+                                        "links": [
+                                                {
+                                                        "href": "data/rubrics/organizations/6609/5/groups/3/levels/18.json",
+                                                        "rel": [
+                                                                "https://rubrics.api.brightspace.com/rels/level"
+                                                        ]
+                                                },
+                                                {
+                                                        "href": "data/rubrics/organizations/6609/5/groups/3/criteria/8/0.json",
+                                                        "rel": [
+                                                                "self"
+                                                        ]
+                                                },
+                                                {
+                                                        "href": "data/rubrics/organizations/6609/5/groups/3/criteria/8.json",
+                                                        "rel": [
+                                                                "up"
+                                                        ]
+                                                }
+                                        ],
+                                        "properties": {
+                                                "points": 4.0
+                                        },
+                                        "rel": [
+                                                "item",
+                                                "https://rubrics.api.brightspace.com/rels/criterion-cell"
+                                        ]
+                                },
+                                {
+                                        "class": [
+                                                "criterion-cell"
+                                        ],
+                                        "entities": [
+                                                {
+                                                        "class": [
+                                                                "richtext",
+                                                                "description"
+                                                        ],
+                                                        "properties": {
+                                                                "html": "",
+                                                                "text": ""
+                                                        },
+                                                        "rel": [
+                                                                "item"
+                                                        ]
+                                                },
+                                                {
+                                                        "class": [
+                                                                "richtext",
+                                                                "feedback"
+                                                        ],
+                                                        "properties": {
+                                                                "html": "",
+                                                                "text": ""
+                                                        },
+                                                        "rel": [
+                                                                "item"
+                                                        ]
+                                                }
+                                        ],
+                                        "links": [
+                                                {
+                                                        "href": "data/rubrics/organizations/6609/5/groups/3/levels/19.json",
+                                                        "rel": [
+                                                                "https://rubrics.api.brightspace.com/rels/level"
+                                                        ]
+                                                },
+                                                {
+                                                        "href": "data/rubrics/organizations/6609/5/groups/3/criteria/8/1.json",
+                                                        "rel": [
+                                                                "self"
+                                                        ]
+                                                },
+                                                {
+                                                        "href": "data/rubrics/organizations/6609/5/groups/3/criteria/8.json",
+                                                        "rel": [
+                                                                "up"
+                                                        ]
+                                                }
+                                        ],
+                                        "properties": {
+                                                "points": 3.0
+                                        },
+                                        "rel": [
+                                                "item",
+                                                "https://rubrics.api.brightspace.com/rels/criterion-cell"
+                                        ]
+                                },
+                                {
+                                        "class": [
+                                                "criterion-cell"
+                                        ],
+                                        "entities": [
+                                                {
+                                                        "class": [
+                                                                "richtext",
+                                                                "description"
+                                                        ],
+                                                        "properties": {
+                                                                "html": "",
+                                                                "text": ""
+                                                        },
+                                                        "rel": [
+                                                                "item"
+                                                        ]
+                                                },
+                                                {
+                                                        "class": [
+                                                                "richtext",
+                                                                "feedback"
+                                                        ],
+                                                        "properties": {
+                                                                "html": "",
+                                                                "text": ""
+                                                        },
+                                                        "rel": [
+                                                                "item"
+                                                        ]
+                                                }
+                                        ],
+                                        "links": [
+                                                {
+                                                        "href": "data/rubrics/organizations/6609/5/groups/3/levels/20.json",
+                                                        "rel": [
+                                                                "https://rubrics.api.brightspace.com/rels/level"
+                                                        ]
+                                                },
+                                                {
+                                                        "href": "data/rubrics/organizations/6609/5/groups/3/criteria/8/2.json",
+                                                        "rel": [
+                                                                "self"
+                                                        ]
+                                                },
+                                                {
+                                                        "href": "data/rubrics/organizations/6609/5/groups/3/criteria/8.json",
+                                                        "rel": [
+                                                                "up"
+                                                        ]
+                                                }
+                                        ],
+                                        "properties": {
+                                                "points": 2.0
+                                        },
+                                        "rel": [
+                                                "item",
+                                                "https://rubrics.api.brightspace.com/rels/criterion-cell"
+                                        ]
+                                },
+                                {
+                                        "class": [
+                                                "criterion-cell"
+                                        ],
+                                        "entities": [
+                                                {
+                                                        "class": [
+                                                                "richtext",
+                                                                "description"
+                                                        ],
+                                                        "properties": {
+                                                                "html": "",
+                                                                "text": ""
+                                                        },
+                                                        "rel": [
+                                                                "item"
+                                                        ]
+                                                },
+                                                {
+                                                        "class": [
+                                                                "richtext",
+                                                                "feedback"
+                                                        ],
+                                                        "properties": {
+                                                                "html": "",
+                                                                "text": ""
+                                                        },
+                                                        "rel": [
+                                                                "item"
+                                                        ]
+                                                }
+                                        ],
+                                        "links": [
+                                                {
+                                                        "href": "data/rubrics/organizations/6609/5/groups/3/levels/21.json",
+                                                        "rel": [
+                                                                "https://rubrics.api.brightspace.com/rels/level"
+                                                        ]
+                                                },
+                                                {
+                                                        "href": "data/rubrics/organizations/6609/5/groups/3/criteria/8/3.json",
+                                                        "rel": [
+                                                                "self"
+                                                        ]
+                                                },
+                                                {
+                                                        "href": "data/rubrics/organizations/6609/5/groups/3/criteria/8.json",
+                                                        "rel": [
+                                                                "up"
+                                                        ]
+                                                }
+                                        ],
+                                        "properties": {
+                                                "points": 1.0
+                                        },
+                                        "rel": [
+                                                "item",
+                                                "https://rubrics.api.brightspace.com/rels/criterion-cell"
+                                        ]
+                                }
+                        ],
+                        "links": [
+                                {
+                                        "href": "data/rubrics/organizations/6609/5/groups/3/criteria/8.json",
+                                        "rel": [
+                                                "self"
+                                        ]
+                                },
+                                {
+                                        "href": "data/rubrics/organizations/6609/5/groups/3/criteria.json",
+                                        "rel": [
+                                                "up"
+                                        ]
+                                }
+                        ],
+                        "properties": {
+                                "name": "Criterion 2"
+                        },
+                        "rel": [
+                                "https://rubrics.api.brightspace.com/rels/criterion"
+                        ]
+                },
+                {
+                        "class": [
+                                "criterion"
+                        ],
+                        "entities": [
+                                {
+                                        "class": [
+                                                "criterion-cell"
+                                        ],
+                                        "entities": [
+                                                {
+                                                        "class": [
+                                                                "richtext",
+                                                                "description"
+                                                        ],
+                                                        "properties": {
+                                                                "html": "",
+                                                                "text": ""
+                                                        },
+                                                        "rel": [
+                                                                "item"
+                                                        ]
+                                                },
+                                                {
+                                                        "class": [
+                                                                "richtext",
+                                                                "feedback"
+                                                        ],
+                                                        "properties": {
+                                                                "html": "",
+                                                                "text": ""
+                                                        },
+                                                        "rel": [
+                                                                "item"
+                                                        ]
+                                                }
+                                        ],
+                                        "links": [
+                                                {
+                                                        "href": "data/rubrics/organizations/6609/5/groups/3/levels/18.json",
+                                                        "rel": [
+                                                                "https://rubrics.api.brightspace.com/rels/level"
+                                                        ]
+                                                },
+                                                {
+                                                        "href": "data/rubrics/organizations/6609/5/groups/3/criteria/9/0.json",
+                                                        "rel": [
+                                                                "self"
+                                                        ]
+                                                },
+                                                {
+                                                        "href": "data/rubrics/organizations/6609/5/groups/3/criteria/9.json",
+                                                        "rel": [
+                                                                "up"
+                                                        ]
+                                                }
+                                        ],
+                                        "properties": {
+                                                "points": 4.0
+                                        },
+                                        "rel": [
+                                                "item",
+                                                "https://rubrics.api.brightspace.com/rels/criterion-cell"
+                                        ]
+                                },
+                                {
+                                        "class": [
+                                                "criterion-cell"
+                                        ],
+                                        "entities": [
+                                                {
+                                                        "class": [
+                                                                "richtext",
+                                                                "description"
+                                                        ],
+                                                        "properties": {
+                                                                "html": "",
+                                                                "text": ""
+                                                        },
+                                                        "rel": [
+                                                                "item"
+                                                        ]
+                                                },
+                                                {
+                                                        "class": [
+                                                                "richtext",
+                                                                "feedback"
+                                                        ],
+                                                        "properties": {
+                                                                "html": "",
+                                                                "text": ""
+                                                        },
+                                                        "rel": [
+                                                                "item"
+                                                        ]
+                                                }
+                                        ],
+                                        "links": [
+                                                {
+                                                        "href": "data/rubrics/organizations/6609/5/groups/3/levels/19.json",
+                                                        "rel": [
+                                                                "https://rubrics.api.brightspace.com/rels/level"
+                                                        ]
+                                                },
+                                                {
+                                                        "href": "data/rubrics/organizations/6609/5/groups/3/criteria/9/1.json",
+                                                        "rel": [
+                                                                "self"
+                                                        ]
+                                                },
+                                                {
+                                                        "href": "data/rubrics/organizations/6609/5/groups/3/criteria/9.json",
+                                                        "rel": [
+                                                                "up"
+                                                        ]
+                                                }
+                                        ],
+                                        "properties": {
+                                                "points": 3.0
+                                        },
+                                        "rel": [
+                                                "item",
+                                                "https://rubrics.api.brightspace.com/rels/criterion-cell"
+                                        ]
+                                },
+                                {
+                                        "class": [
+                                                "criterion-cell"
+                                        ],
+                                        "entities": [
+                                                {
+                                                        "class": [
+                                                                "richtext",
+                                                                "description"
+                                                        ],
+                                                        "properties": {
+                                                                "html": "",
+                                                                "text": ""
+                                                        },
+                                                        "rel": [
+                                                                "item"
+                                                        ]
+                                                },
+                                                {
+                                                        "class": [
+                                                                "richtext",
+                                                                "feedback"
+                                                        ],
+                                                        "properties": {
+                                                                "html": "",
+                                                                "text": ""
+                                                        },
+                                                        "rel": [
+                                                                "item"
+                                                        ]
+                                                }
+                                        ],
+                                        "links": [
+                                                {
+                                                        "href": "data/rubrics/organizations/6609/5/groups/3/levels/20.json",
+                                                        "rel": [
+                                                                "https://rubrics.api.brightspace.com/rels/level"
+                                                        ]
+                                                },
+                                                {
+                                                        "href": "data/rubrics/organizations/6609/5/groups/3/criteria/9/2.json",
+                                                        "rel": [
+                                                                "self"
+                                                        ]
+                                                },
+                                                {
+                                                        "href": "data/rubrics/organizations/6609/5/groups/3/criteria/9.json",
+                                                        "rel": [
+                                                                "up"
+                                                        ]
+                                                }
+                                        ],
+                                        "properties": {
+                                                "points": 2.0
+                                        },
+                                        "rel": [
+                                                "item",
+                                                "https://rubrics.api.brightspace.com/rels/criterion-cell"
+                                        ]
+                                },
+                                {
+                                        "class": [
+                                                "criterion-cell"
+                                        ],
+                                        "entities": [
+                                                {
+                                                        "class": [
+                                                                "richtext",
+                                                                "description"
+                                                        ],
+                                                        "properties": {
+                                                                "html": "",
+                                                                "text": ""
+                                                        },
+                                                        "rel": [
+                                                                "item"
+                                                        ]
+                                                },
+                                                {
+                                                        "class": [
+                                                                "richtext",
+                                                                "feedback"
+                                                        ],
+                                                        "properties": {
+                                                                "html": "",
+                                                                "text": ""
+                                                        },
+                                                        "rel": [
+                                                                "item"
+                                                        ]
+                                                }
+                                        ],
+                                        "links": [
+                                                {
+                                                        "href": "data/rubrics/organizations/6609/5/groups/3/levels/21.json",
+                                                        "rel": [
+                                                                "https://rubrics.api.brightspace.com/rels/level"
+                                                        ]
+                                                },
+                                                {
+                                                        "href": "data/rubrics/organizations/6609/5/groups/3/criteria/9/3.json",
+                                                        "rel": [
+                                                                "self"
+                                                        ]
+                                                },
+                                                {
+                                                        "href": "data/rubrics/organizations/6609/5/groups/3/criteria/9.json",
+                                                        "rel": [
+                                                                "up"
+                                                        ]
+                                                }
+                                        ],
+                                        "properties": {
+                                                "points": 1.0
+                                        },
+                                        "rel": [
+                                                "item",
+                                                "https://rubrics.api.brightspace.com/rels/criterion-cell"
+                                        ]
+                                }
+                        ],
+                        "links": [
+                                {
+                                        "href": "data/rubrics/organizations/6609/5/groups/3/criteria/9.json",
+                                        "rel": [
+                                                "self"
+                                        ]
+                                },
+                                {
+                                        "href": "data/rubrics/organizations/6609/5/groups/3/criteria.json",
+                                        "rel": [
+                                                "up"
+                                        ]
+                                }
+                        ],
+                        "properties": {
+                                "name": "Criterion 3"
+                        },
+                        "rel": [
+                                "https://rubrics.api.brightspace.com/rels/criterion"
+                        ]
+                }
+        ],
+        "links": [
+                {
+                        "href": "data/rubrics/organizations/6609/5/groups/3/criteria.json",
+                        "rel": [
+                                "self"
+                        ]
+                },
+                {
+                        "href": "data/rubrics/organizations/6609/5/groups/3.json",
+                        "rel": [
+                                "up"
+                        ]
+                }
+        ]
+}
