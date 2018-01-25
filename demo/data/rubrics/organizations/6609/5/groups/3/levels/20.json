@@ -1,0 +1,23 @@
+{
+	"class": [
+		"level"
+	],
+	"links": [
+		{
+			"href": "data/rubrics/organizations/6609/5/groups/3/levels/20.json",
+			"rel": [
+				"self"
+			]
+		},
+		{
+			"href": "data/rubrics/organizations/6609/5/groups/3/levels.json",
+			"rel": [
+				"up"
+			]
+		}
+	],
+	"properties": {
+		"name": "Level 2",
+		"points": null
+	}
+}

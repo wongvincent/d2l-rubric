@@ -1,0 +1,43 @@
+{
+    "class": [
+        "rubric"
+    ],
+    "entities": [
+        {
+            "class": [
+                "richtext",
+                "description"
+            ],
+            "properties": {
+                "html": "",
+                "text": "Custom points rubric description"
+            },
+            "rel": [
+                "item"
+            ]
+        }
+    ],
+    "links": [
+        {
+            "href": "data/rubrics/organizations/6609/5.json",
+            "rel": [
+                "self"
+            ]
+        },
+        {
+            "href": "data/rubrics/organizations/6609",
+            "rel": [
+                "up"
+            ]
+        },
+        {
+            "href": "data/rubrics/organizations/6609/5/groups.json",
+            "rel": [
+                "https://rubrics.api.brightspace.com/rels/criteria-groups"
+            ]
+        }
+    ],
+    "properties": {
+        "name": "Custom Points"
+    }
+}
