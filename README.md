@@ -19,7 +19,7 @@ Include the [webcomponents.js](http://webcomponents.org/polyfills/) "lite" polyf
 $ npm run serve
 ```
 
-Modify [demo/index.html](https://github.com/Brightspace/d2l-rubric/blob/master/demo/index.html) and supply your href and token.
+The demo can be viewed at http://127.0.0.1:8081/#/elements/d2l-rubric/demos/demo/index.html
 
 ## Running Tests
 
