@@ -3,6 +3,7 @@
 <link rel="import" href="../d2l-fetch-siren-entity-behavior/d2l-fetch-siren-entity-behavior.html">
 <link rel="import" href="../d2l-hm-constants-behavior/d2l-hm-constants-behavior.html">
 <link rel="import" href="../d2l-colors/d2l-colors.html">
+<link rel="import" href="../d2l-localize-behavior/d2l-localize-behavior.html">
 
 <dom-module id="d2l-rubric-criteria-group">
 	<template>
@@ -27,14 +28,14 @@
 
 		</style>
 		<d2l-table-wrapper>
-			<table class="d2l-table" summary="This table lists criteria and criteria group names in the first column. The first row lists level names and includes scores if the rubric uses a numeric scoring method">
+			<table class="d2l-table" summary="{{localize('rubric_summary_a11y')}}">
 				<thead>
 					<tr>
 						<th></th>
 						<template is="dom-repeat" items="[[levels]]">
 							<th>
 								<div class="levels-header">[[item.properties.name]]</div>
-								<div hidden="[[!item.properties.points]]">[[item.properties.points]] points</div>
+								<div hidden="[[!item.properties.points]]">{{localize('points', 'number', item.properties.points)}}</div>
 							</th>
 						</template>
 						<th></th>
@@ -48,7 +49,7 @@
 								<td selected>
 									<div class="description">
 										<div hidden=[[!_hasCustomPoints(criterionCell)]] class="custom-points">
-											[[criterionCell.properties.points]] points
+											{{localize('points', 'number', criterionCell.properties.points)}}
 										</div>
 										<span>[[_getDescription(criterionCell)]]</span>
 									</div>
@@ -98,12 +99,27 @@
 				},
 				href: String,
 
-				token: String
+				token: String,
+
+				resources: {
+					value: function() {
+						return {
+							'en': {
+								'points': '{number} points',
+								'rubric_summary_a11y': 'This table lists criteria and criteria group name in the first column. The first row lists level names and includes scores if the rubric uses a numeric scoring method.'
+							},
+							'fr': {
+								'points': 'points {number}'
+							}
+						};
+					}
+				}
 			},
 
 			behaviors: [
 				window.D2L.FetchSirenEntityBehavior,
-				window.D2L.Hypermedia.HMConstantsBehavior
+				window.D2L.Hypermedia.HMConstantsBehavior,
+				D2L.PolymerBehaviors.LocalizeBehavior
 			],
 
 			observers: [
