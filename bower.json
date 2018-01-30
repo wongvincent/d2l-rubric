@@ -4,12 +4,12 @@
   "main": "d2l-rubric.html",
   "license": "Apache-2.0",
   "dependencies": {
-    "polymer": "Polymer/polymer#^1.9.0",
+    "polymer": "Polymer/polymer#^1.11.2",
     "d2l-fetch-siren-entity-behavior": "Brightspace/d2l-fetch-siren-entity-behavior#~3.0.0",
-    "d2l-table": "BrightspaceUI/table#^1.1.0",
+    "d2l-table": "BrightspaceUI/table#^1.2.0",
     "d2l-fetch": "Brightspace/d2l-fetch#^1.8.0",
     "d2l-hm-constants-behavior": "git://github.com/Brightspace/d2l-hm-constants-behavior.git#4.1.1",
-    "d2l-colors": "~3.1.2"
+    "d2l-colors": "^3.1.2"
   },
   "resolutions": {
     "webcomponentsjs": "^0.7.24"
