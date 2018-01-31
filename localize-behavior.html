@@ -1,0 +1,29 @@
+<link rel="import" href="../d2l-localize-behavior/d2l-localize-behavior.html">
+
+<script>
+	window.D2L = window.D2L || {};
+	window.D2L.PolymerBehaviors = window.D2L.PolymerBehaviors || {};
+	window.D2L.PolymerBehaviors.Rubric = window.D2L.PolymerBehaviors.Rubric || {};
+
+	/** @polymerBehavior D2L.PolymerBehaviors.Rubric.LocalizeBehavior */
+	D2L.PolymerBehaviors.Rubric.LocalizeBehaviorImpl = {
+		properties: {
+			resources: {
+				value: function() {
+					return {
+						'en': {
+							'points': '{number} points',
+							'rubric_summary_a11y': 'This table lists criteria and criteria group name in the first column. The first row lists level names and includes scores if the rubric uses a numeric scoring method.'
+						}
+					};
+				}
+			}
+		}
+	};
+
+	/** @polymerBehavior D2L.PolymerBehaviors.Rubric.LocalizeBehavior */
+	D2L.PolymerBehaviors.Rubric.LocalizeBehavior = [
+		D2L.PolymerBehaviors.LocalizeBehavior,
+		D2L.PolymerBehaviors.Rubric.LocalizeBehaviorImpl
+	];
+</script>
