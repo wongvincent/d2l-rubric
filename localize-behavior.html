@@ -1,0 +1,28 @@
+<link rel="import" href="../d2l-localize-behavior/d2l-localize-behavior.html">
+<link rel="import" href="./lang/en.html">
+
+<script>
+	window.D2L = window.D2L || {};
+	window.D2L.PolymerBehaviors = window.D2L.PolymerBehaviors || {};
+	window.D2L.PolymerBehaviors.Rubric = window.D2L.PolymerBehaviors.Rubric || {};
+
+	/** @polymerBehavior D2L.PolymerBehaviors.Rubric.LocalizeBehavior */
+	D2L.PolymerBehaviors.Rubric.LocalizeBehaviorImpl = {
+		properties: {
+			resources: {
+				value: function() {
+					return {
+						'en': this.en
+					};
+				}
+			}
+		}
+	};
+
+	/** @polymerBehavior */
+	D2L.PolymerBehaviors.Rubric.LocalizeBehavior = [
+		D2L.PolymerBehaviors.LocalizeBehavior,
+		D2L.PolymerBehaviors.Rubric.LocalizeBehaviorImpl,
+		D2L.PolymerBehaviors.Rubric.LocalizeBehavior.LangEnBehvaior
+	];
+</script>
