@@ -10,8 +10,17 @@
 			:host {
 				display: block;
 			}
+			td {
+				min-width: 130px;
+			}
 			td:first-of-type {
 				background-color: var(--d2l-color-regolith);
+			}
+			td:last-of-type {
+				min-width: 0px;
+			}
+			td:last-of-type > div {
+				text-align: right;
 			}
 			th > div {
 				text-align: center;
@@ -55,7 +64,7 @@
 								</td>
 							</template>
 							<td>
-								/[[maxLevelScore]]
+								<div>/[[maxLevelScore]]</div>
 							</td>
 						</tr>
 					</template>
