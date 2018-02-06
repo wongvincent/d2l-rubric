@@ -6,8 +6,8 @@ before_script:
 - npm run test:lint
 script:
 - set -e
-- xvfb-run wct test --skip-plugin sauce
-- 'if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then xvfb-run wct test --skip-plugin local; fi'
+- xvfb-run polymer test --skip-plugin sauce
+- 'if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then xvfb-run polymer test --skip-plugin local; fi'
 - 'if [ "$TRAVIS_BRANCH" == "master" ]; then frauci-update-version; fi'
 env:
   global:
