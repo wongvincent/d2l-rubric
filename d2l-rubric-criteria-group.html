@@ -30,12 +30,7 @@
 			th > div {
 				text-align: center;
 			}
-			.levels-header {
-				font-weight: bold;
-			}
 			.custom-points {
-				font-weight: bold;
-				color: var(--d2l-color-galena);
 				margin-bottom: 0.5rem;
 			}
 
@@ -64,9 +59,9 @@
 								<template is="dom-repeat" as="criterionCell" items="[[_getCriterionCells(item)]]">
 									<td selected>
 										<div class="description">
-											<div hidden=[[!_hasCustomPoints(criterionCell)]] class="custom-points">
+											<label class="custom-points d2l-label-text" hidden=[[!_hasCustomPoints(criterionCell)]] class="custom-points">
 												[[criterionCell.properties.points]] points
-											</div>
+											</label>
 											<span>[[_getDescription(criterionCell)]]</span>
 										</div>
 									</td>
