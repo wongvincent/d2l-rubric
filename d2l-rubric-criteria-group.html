@@ -35,7 +35,7 @@
 		</style>
 		<div class="d2l-typography">
 			<d2l-table-wrapper>
-				<table class="d2l-table" summary="This table lists criteria and criteria group names in the first column. The first row lists level names and includes scores if the rubric uses a numeric scoring method">
+				<table class="d2l-table" summary="[[localize('rubric_summary_a11y')]]">
 					<thead>
 						<tr>
 							<th></th>
@@ -43,7 +43,7 @@
 								<th>
 									<div>
 										<label class="d2l-label-text">[[item.properties.name]]</label>
-										<div hidden="[[!item.properties.points]]">[[item.properties.points]] points</div>
+										<div hidden="[[!item.properties.points]]">[[localize('points', 'number', item.properties.points)]]</div>
 									</div>
 								</th>
 							</template>
@@ -58,7 +58,7 @@
 									<td selected>
 										<div class="description">
 											<label class="custom-points d2l-label-text" hidden=[[!_hasCustomPoints(criterionCell)]] class="custom-points">
-												[[criterionCell.properties.points]] points
+												[[localize('points', 'number', criterionCell.properties.points)]]
 											</label>
 											<span>[[_getDescription(criterionCell)]]</span>
 										</div>
