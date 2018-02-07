@@ -4,6 +4,7 @@
 <link rel="import" href="../d2l-hm-constants-behavior/d2l-hm-constants-behavior.html">
 <link rel="import" href="../d2l-colors/d2l-colors.html">
 <link rel="import" href="../d2l-typography/d2l-typography.html">
+<link rel="import" href="./localize-behavior.html">
 
 <dom-module id="d2l-rubric-criteria-group">
 	<template>
@@ -119,8 +120,9 @@
 			},
 
 			behaviors: [
-				window.D2L.FetchSirenEntityBehavior,
-				window.D2L.Hypermedia.HMConstantsBehavior
+				D2L.PolymerBehaviors.FetchSirenEntityBehavior,
+				window.D2L.Hypermedia.HMConstantsBehavior,
+				D2L.PolymerBehaviors.Rubric.LocalizeBehavior
 			],
 
 			observers: [
