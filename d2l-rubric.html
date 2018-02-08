@@ -3,6 +3,7 @@
 <link rel="import" href="../d2l-fetch/d2l-fetch.html">
 <link rel="import" href="./d2l-rubric-criteria-groups.html">
 <link rel="import" href="../d2l-hm-constants-behavior/d2l-hm-constants-behavior.html">
+<link rel="import" href="../d2l-typography/d2l-typography.html">
 
 <!--
 `d2l-rubric`
@@ -13,14 +14,15 @@ Polymer Web-Component to display rubrics
 
 <dom-module id="d2l-rubric">
 	<template>
-		<style>
+		<style include="d2l-typography">
 			:host {
 				display: block;
 			}
 		</style>
-		<h1>[[title]]</h1>
-		<h2>[[description.properties.text]]</h2>
-		<d2l-rubric-criteria-groups href="[[_getHref(criteriaGroups)]]" token="[[token]]"></d2l-rubric-criteria-groups>
+		<div class="d2l-typography">
+			<h3 class="d2l-heading-3">[[title]]</h3>
+			<d2l-rubric-criteria-groups href="[[_getHref(criteriaGroups)]]" token="[[token]]"></d2l-rubric-criteria-groups>
+		</div>
 	</template>
 
 	<script>
@@ -31,10 +33,6 @@ Polymer Web-Component to display rubrics
 			properties: {
 				title: {
 					type: String
-				},
-
-				description: {
-					type: Object,
 				},
 
 				href: String,
@@ -63,7 +61,6 @@ Polymer Web-Component to display rubrics
 			_onEntityChanged: function(entity) {
 				this.rubric = entity;
 				this.title = entity.properties.name;
-				this.description = entity.getSubEntityByClass(this.HypermediaClasses.rubrics.description);
 				if (entity.hasLinkByRel(this.HypermediaRels.Rubrics.criteriaGroups)) {
 					this.criteriaGroups = entity.getLinkByRel(this.HypermediaRels.Rubrics.criteriaGroups);
 				}

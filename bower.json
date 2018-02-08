@@ -10,7 +10,8 @@
     "d2l-fetch": "Brightspace/d2l-fetch#^1.8.0",
     "d2l-hm-constants-behavior": "git://github.com/Brightspace/d2l-hm-constants-behavior.git#5.0.0",
     "d2l-colors": "^3.1.2",
-    "d2l-localize-behavior": "~1.1.0"
+    "d2l-localize-behavior": "~1.1.0",
+    "d2l-typography": "^6.1.2"
   },
   "resolutions": {
     "webcomponentsjs": "^0.7.24"
