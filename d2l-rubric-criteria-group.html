@@ -42,8 +42,8 @@
 						<template is="dom-repeat" items="[[levels]]">
 							<th>
 								<div>
-									<div class="points">[[item.properties.name]]</div>
-									<div hidden="[[!item.properties.points]]">[[localize('points', 'number', item.properties.points)]]</div>
+									<div>[[item.properties.name]]</div>
+									<div class="points" hidden="[[!item.properties.points]]">[[localize('points', 'number', item.properties.points)]]</div>
 								</div>
 							</th>
 						</template>
