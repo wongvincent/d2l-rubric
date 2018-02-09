@@ -96,10 +96,6 @@
 				levels: {
 					type: Array
 				},
-				maxLevelScore: {
-					type: Number,
-					computed: '_getMaxLevelScore(levels)'
-				},
 				criteriaCollectionHref: {
 					type: Object,
 					computed: '_getCriteriaLink(entity)	'
@@ -187,10 +183,6 @@
 			_getFeedback: function(entity) {
 				var feedback = entity && entity.getSubEntityByClass(this.HypermediaClasses.rubrics.feedback);
 				return feedback && feedback.properties && feedback.properties.text || '';
-			},
-
-			_getMaxLevelScore: function(levels) {
-				return levels && levels[0].properties.points || '';
 			},
 
 			_hasCustomPoints: function(criterionCell) {
