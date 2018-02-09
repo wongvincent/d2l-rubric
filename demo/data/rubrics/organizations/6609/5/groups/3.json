@@ -2,6 +2,9 @@
 	"class": [
 		"criteria-group"
 	],
+  "properties": {
+    "name": "Criteria"
+  },
 	"links": [
 		{
 			"href": "data/rubrics/organizations/6609/5/groups/3/criteria.json",

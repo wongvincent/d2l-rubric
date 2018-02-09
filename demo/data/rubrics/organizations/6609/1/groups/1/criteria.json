@@ -12,7 +12,8 @@
         "https://rubrics.api.brightspace.com/rels/criterion"
       ],
       "properties": {
-        "name": "Criterion 1"
+        "name": "Criterion 1",
+        "outOf": 4.000000000
       },
       "entities": [
         {
@@ -279,7 +280,8 @@
         "https://rubrics.api.brightspace.com/rels/criterion"
       ],
       "properties": {
-        "name": "Criterion 2"
+        "name": "Criterion 2",
+        "outOf": 4.000000000
       },
       "entities": [
         {
@@ -546,7 +548,8 @@
         "https://rubrics.api.brightspace.com/rels/criterion"
       ],
       "properties": {
-        "name": "Criterion 3"
+        "name": "Criterion 3",
+        "outOf": 4.000000000
       },
       "entities": [
         {

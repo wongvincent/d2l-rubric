@@ -38,7 +38,11 @@
 			<table class="d2l-table" summary="[[localize('rubric_summary_a11y')]]">
 				<thead>
 					<tr>
-						<th></th>
+						<th>
+							<div>
+								[[entity.properties.name]]
+							</div>
+						</th>
 						<template is="dom-repeat" items="[[levels]]">
 							<th>
 								<div>
@@ -65,7 +69,7 @@
 								</td>
 							</template>
 							<td>
-								<div>/[[maxLevelScore]]</div>
+								<div>/[[item.properties.outOf]]</div>
 							</td>
 						</tr>
 					</template>

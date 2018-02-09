@@ -2,6 +2,9 @@
   "class": [
     "criteria-group"
   ],
+  "properties": {
+    "name": "Criteria"
+  },
   "links": [
     {
       "rel": [
