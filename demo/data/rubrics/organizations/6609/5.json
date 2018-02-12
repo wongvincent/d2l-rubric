@@ -38,6 +38,7 @@
         }
     ],
     "properties": {
-        "name": "Custom Points"
+        "name": "Custom Points",
+        "outOf": 16
     }
 }

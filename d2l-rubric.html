@@ -4,7 +4,7 @@
 <link rel="import" href="./d2l-rubric-criteria-groups.html">
 <link rel="import" href="../d2l-hm-constants-behavior/d2l-hm-constants-behavior.html">
 <link rel="import" href="../d2l-typography/d2l-typography-shared-styles.html">
-
+<link rel="import" href="./localize-behavior.html">
 <!--
 `d2l-rubric`
 Polymer Web-Component to display rubrics
@@ -21,9 +21,27 @@ Polymer Web-Component to display rubrics
 			.rubric-title {
 				@apply --d2l-heading-3;
 			}
+			.out-of-container {
+				margin-top: 1rem;
+				margin-bottom: 1rem;
+				border: 1px solid var(--d2l-color-mica);
+				border-radius: 8px;
+				text-align: right;
+			}
+			.out-of-text {
+				@apply --d2l-body-compact-text;
+				margin-right: 1rem;
+				margin-top: 0.5rem;
+				margin-bottom: 0.5rem;
+			}
 		</style>
 		<h3 class="rubric-title">[[title]]</h3>
 		<d2l-rubric-criteria-groups href="[[_getHref(criteriaGroups)]]" token="[[token]]"></d2l-rubric-criteria-groups>
+		<div class="out-of-container">
+			<div class="out-of-text">
+				[[localize('total')]] &nbsp &nbsp / [[entity.properties.outOf]]
+			</div>
+		</div>
 	</template>
 
 	<script>
@@ -52,7 +70,8 @@ Polymer Web-Component to display rubrics
 
 			behaviors: [
 				D2L.PolymerBehaviors.FetchSirenEntityBehavior,
-				window.D2L.Hypermedia.HMConstantsBehavior
+				window.D2L.Hypermedia.HMConstantsBehavior,
+				D2L.PolymerBehaviors.Rubric.LocalizeBehavior
 			],
 
 			observers: [
