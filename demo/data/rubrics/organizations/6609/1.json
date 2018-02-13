@@ -3,7 +3,8 @@
       "rubric"
   ],
   "properties": {
-      "name": "This is not the greatest rubric in the world"
+      "name": "This is not the greatest rubric in the world",
+      "outOf": 12
   },
   "entities": [
       {
