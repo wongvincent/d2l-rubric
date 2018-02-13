@@ -11,7 +11,7 @@
     "d2l-colors": "^3.1.2",
     "d2l-localize-behavior": "^1.1.0",
     "d2l-typography": "^6.1.2",
-    "polymer": "1 - 2"
+    "polymer": "^1.9.1"
   },
   "devDependencies": {
     "iron-component-page": "^3.0.1",
@@ -24,11 +24,11 @@
         "polymer": "^1.9.1"
       },
       "resolutions": {
-        "webcomponentsjs":"^0.7.24"
+        "webcomponentsjs": "^0.7.24"
       }
     }
   },
   "resolutions": {
-    "webcomponentsjs": "^v1.0.0"
+    "webcomponentsjs": "^0.7.24"
   }
 }

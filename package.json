@@ -7,7 +7,7 @@
     "test": "test"
   },
   "scripts": {
-    "postinstall": "bower install",
+    "postinstall": "polymer install --variants",
     "serve": "polymer analyze > analysis.json && polymer serve",
     "test": "npm run test:lint && npm run test:wct",
     "test:lint": "npm run test:lint:wc && npm run test:lint:html",
