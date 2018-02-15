@@ -28,7 +28,6 @@
   "author": "D2L Corporation",
   "license": "Apache-2.0",
   "devDependencies": {
-    "bower": "^1.8.2",
     "cross-env": "^5.1.1",
     "eslint": "^4.13.1",
     "eslint-config-brightspace": "^0.4.0",

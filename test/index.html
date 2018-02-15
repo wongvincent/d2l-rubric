@@ -13,8 +13,14 @@
 			// Load and run all tests (.html, .js):
 			WCT.loadSuites([
 				'./components/d2l-rubric.html',
-				'./components/d2l-rubric-criteria-group.html'
-			]);
+				'./components/d2l-rubric-criteria-group.html',
+				'./components/d2l-rubric.html?wc-shadydom=true&wc-ce=true',
+				'./components/d2l-rubric-criteria-group.html?wc-shadydom=true&wc-ce=true',
+				'./components/d2l-rubric.html?dom=shadow',
+				'./components/d2l-rubric-criteria-group.html?dom=shadow',
+				'./components/d2l-rubric.html',
+				'./components/d2l-rubric-criteria-group.html?dom=shadow&lazyRegister=true&useNativeCSSProperties=true'
+				]);
 		</script>
 	</body>
 </html>

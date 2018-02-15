@@ -1,8 +1,29 @@
 {
   "name": "d2l-rubric",
   "description": "Polymer Web-Component to display rubrics",
+  "authors": [
+    "D2L Corporation"
+  ],
   "main": "d2l-rubric.html",
   "license": "Apache-2.0",
+  "keywords": [
+    "d2l",
+    "rubric",
+    "rubrics"
+  ],
+  "homepage": "https://github.com/Brightspace/d2l-rubric",
+  "private":true,
+  "ignore": [
+    ".editorconfig",
+    ".eslintrc.json",
+    ".gitignore",
+    ".travis.yml",
+    "package.json",
+    "polymer.json",
+    "wct.conf.json",
+    "test",
+    "demo"
+  ],
   "dependencies": {
     "d2l-fetch-siren-entity-behavior": "Brightspace/d2l-fetch-siren-entity-behavior#^4.0.2",
     "d2l-table": "BrightspaceUI/table#^1.2.0",
@@ -14,7 +35,7 @@
     "polymer": "1 - 2"
   },
   "devDependencies": {
-    "iron-component-page": "^3.0.1",
+    "iron-component-page": "^2.0.0",
     "iron-demo-helpers": "^2.0.0",
     "web-component-tester": "^6.5.0"
   },
