@@ -1,28 +1,28 @@
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
 
-		<title>d2l-rubric demo</title>
+	<title>d2l-rubric demo</title>
 
-		<script src="../../webcomponentsjs/webcomponents-lite.js"></script>
-		<script>
-			'use strict';
-			window.d2lfetch = {
-				fetch: function(req) {
-					return window.fetch(req);
-				}
-			};
-		</script>
+	<script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+	<script>
+		'use strict';
+		window.d2lfetch = {
+			fetch: function (req) {
+				return window.fetch(req);
+			}
+		};
+	</script>
 
-    <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
-    <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
-    <link rel="import" href="../d2l-rubric.html">
+	<link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
+	<link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
+	<link rel="import" href="../d2l-rubric.html">
 	<link rel="import" href="../../d2l-typography/d2l-typography.html">
 
-    <style is="custom-style" include="demo-pages-shared-styles">
-    </style>
+	<style is="custom-style" include="demo-pages-shared-styles">
+	</style>
 	<custom-style include="d2l-typography">
 		<style is="custom-style" include="d2l-typography">
 			html {
@@ -30,15 +30,19 @@
 			}
 		</style>
 	</custom-style>
-  </head>
-  <body class="d2l-typography">
-    <div class="vertical-section-container centered">
-      <h3>Basic d2l-rubric demo</h3>
-      <demo-snippet>
-        <template>
-          <d2l-rubric href="data/rubrics/organizations/6609/1.json" token="foozleberries"></d2l-rubric>
-        </template>
-      </demo-snippet>
-    </div>
-  </body>
+</head>
+<body class="d2l-typography">
+<div class="vertical-section-container centered">
+	<h3>Basic d2l-rubric demo</h3>
+	<demo-snippet>
+		<d2l-rubric href="data/rubrics/organizations/6609/1.json" token="foozleberries"></d2l-rubric>
+	</demo-snippet>
+	<demo-snippet>
+		<d2l-rubric href="data/rubrics/organizations/6609/5.json" token="foozleberries"></d2l-rubric>
+	</demo-snippet>
+	<demo-snippet>
+		<d2l-rubric href="data/rubrics/organizations/multiple-groups/1.json" token="foozleberries"></d2l-rubric>
+	</demo-snippet>
+</div>
+</body>
 </html>
