@@ -11,7 +11,7 @@
 				display: block;
 			}
 		</style>
-		<template is="dom-repeat" items="[[groups]]">
+		<template is="dom-repeat" items="[[_groups]]">
 			<d2l-rubric-criteria-group href="[[_getSelfLink(item)]]" token="[[token]]"></d2l-rubric-criteria-group>
 		</template>
 	</template>
@@ -21,18 +21,27 @@
 			is: 'd2l-rubric-criteria-groups',
 
 			properties: {
+				/**
+				 * The siren entity that represents the rubric groups
+				 */
 				entity: {
 					type: Object,
 					observer: '_onEntityChanged'
 				},
 
-				groups: {
+				_groups: {
 					type: Array,
 					value: function() { return []; }
 				},
 
+				/**
+				 * The href of the rubric groups
+				 */
 				href: String,
 
+				/**
+				 * The user access token
+				 */
 				token: String
 
 			},
@@ -48,7 +57,7 @@
 
 			_onEntityChanged: function(entity) {
 				this.entity = entity;
-				this.groups = entity.getSubEntitiesByClass(this.HypermediaClasses.rubrics.criteriaGroup);
+				this._groups = entity.getSubEntitiesByClass(this.HypermediaClasses.rubrics.criteriaGroup);
 			},
 
 			_fetchEntity: function(href, token) {

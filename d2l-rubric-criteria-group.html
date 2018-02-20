@@ -43,7 +43,7 @@
 								[[entity.properties.name]]
 							</div>
 						</th>
-						<template is="dom-repeat" items="[[levels]]">
+						<template is="dom-repeat" items="[[_levels]]">
 							<th>
 								<div>
 									<div>[[item.properties.name]]</div>
@@ -55,7 +55,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<template is="dom-repeat" items="[[criteriaEntities]]">
+					<template is="dom-repeat" items="[[_criteriaEntities]]">
 						<tr>
 							<td>[[item.properties.name]]</td>
 							<template is="dom-repeat" as="criterionCell" items="[[_getCriterionCells(item)]]">
@@ -83,31 +83,41 @@
 			is: 'd2l-rubric-criteria-group',
 
 			properties: {
+				/**
+				 * The siren entity that represents the rubric group
+				 */
 				entity: {
 					type: Object
 				},
-				levelsHref: {
+
+				_levelsHref: {
 					type: String,
 					computed: '_getLevelsLink(entity)'
 				},
-				levelsEntity: {
+				_levelsEntity: {
 					type: Object
 				},
-				levels: {
+				_levels: {
 					type: Array
 				},
-				criteriaCollectionHref: {
+				_criteriaCollectionHref: {
 					type: Object,
 					computed: '_getCriteriaLink(entity)	'
 				},
-				criteriaCollectionEntity: {
+				_criteriaCollectionEntity: {
 					type: Object
 				},
-				criteriaEntities: {
+				_criteriaEntities: {
 					type: Array
 				},
+				/**
+				 * The href to access this rubric criteria group
+				 */
 				href: String,
 
+				/**
+				 * The user access token
+				 */
 				token: String
 			},
 
@@ -119,14 +129,14 @@
 
 			observers: [
 				'_fetchEntity(href, token)',
-				'_fetchLevels(levelsHref, token)',
-				'_fetchCriteria(criteriaCollectionHref, token)',
-				'_onLevelsEntityChanged(levelsEntity)',
-				'_onCriteriaCollectionEntityChanged(criteriaCollectionEntity)'
+				'_fetchLevels(_levelsHref, token)',
+				'_fetchCriteria(_criteriaCollectionHref, token)',
+				'_onLevelsEntityChanged(_levelsEntity)',
+				'_onCriteriaCollectionEntityChanged(_criteriaCollectionEntity)'
 			],
 
 			_onLevelsEntityChanged: function(levelsEntity) {
-				this.levels = levelsEntity.getSubEntitiesByClass(this.HypermediaClasses.rubrics.level);
+				this._levels = levelsEntity.getSubEntitiesByClass(this.HypermediaClasses.rubrics.level);
 			},
 
 			_fetchEntity: function(href, token) {
@@ -142,7 +152,7 @@
 				if (href && token) {
 					this._fetchEntityWithToken(href, function() { return Promise.resolve(token); })
 						.then(function(entity) {
-							this.levelsEntity = entity;
+							this._levelsEntity = entity;
 						}.bind(this));
 				}
 			},
@@ -151,13 +161,13 @@
 				if (href && token) {
 					this._fetchEntityWithToken(href, function() { return Promise.resolve(token); })
 						.then(function(entity) {
-							this.criteriaCollectionEntity = entity;
+							this._criteriaCollectionEntity = entity;
 						}.bind(this));
 				}
 			},
 
 			_onCriteriaCollectionEntityChanged: function(entity) {
-				this.criteriaEntities = entity.getSubEntitiesByClass(this.HypermediaClasses.rubrics.criterion);
+				this._criteriaEntities = entity.getSubEntitiesByClass(this.HypermediaClasses.rubrics.criterion);
 			},
 
 			_getCriteriaLink: function(entity) {

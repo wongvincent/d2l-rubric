@@ -1,8 +1,29 @@
 {
   "name": "d2l-rubric",
   "description": "Polymer Web-Component to display rubrics",
+  "authors": [
+    "D2L Corporation"
+  ],
   "main": "d2l-rubric.html",
   "license": "Apache-2.0",
+  "keywords": [
+    "d2l",
+    "rubric",
+    "rubrics"
+  ],
+  "homepage": "https://github.com/Brightspace/d2l-rubric",
+  "private":true,
+  "ignore": [
+    ".editorconfig",
+    ".eslintrc.json",
+    ".gitignore",
+    ".travis.yml",
+    "package.json",
+    "polymer.json",
+    "wct.conf.json",
+    "test",
+    "demo"
+  ],
   "dependencies": {
     "d2l-fetch-siren-entity-behavior": "Brightspace/d2l-fetch-siren-entity-behavior#^4.0.2",
     "d2l-table": "BrightspaceUI/table#^1.2.0",
@@ -11,15 +32,24 @@
     "d2l-colors": "^3.1.2",
     "d2l-localize-behavior": "^1.1.0",
     "d2l-typography": "^6.1.2",
-    "polymer": "Polymer/polymer#^1.11.2"
-  },
-  "resolutions": {
-    "webcomponentsjs": "^0.7.24"
+    "polymer": "1 - 2"
   },
   "devDependencies": {
-    "iron-component-page": "PolymerElements/iron-component-page#^3.0.1",
-    "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^2.0.0",
-    "web-component-tester": "Polymer/web-component-tester#^6.5.0",
-    "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.24"
+    "iron-component-page": "^2.0.0",
+    "iron-demo-helpers": "^2.0.0",
+    "web-component-tester": "^6.5.0"
+  },
+  "variants": {
+    "1.x": {
+      "dependencies": {
+        "polymer": "^1.9.1"
+      },
+      "resolutions": {
+        "webcomponentsjs":"^0.7.24"
+      }
+    }
+  },
+  "resolutions": {
+    "webcomponentsjs": "^v1.0.0"
   }
 }

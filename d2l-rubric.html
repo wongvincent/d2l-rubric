@@ -13,7 +13,7 @@ Polymer Web-Component to display rubrics
 -->
 
 <dom-module id="d2l-rubric">
-	<template>
+	<template strip-whitespace>
 		<style>
 			:host {
 				display: block;
@@ -35,8 +35,8 @@ Polymer Web-Component to display rubrics
 				margin-bottom: 0.5rem;
 			}
 		</style>
-		<h3 class="rubric-title">[[title]]</h3>
-		<d2l-rubric-criteria-groups href="[[_getHref(criteriaGroups)]]" token="[[token]]"></d2l-rubric-criteria-groups>
+		<h3 class="rubric-title">[[_title]]</h3>
+		<d2l-rubric-criteria-groups href="[[_getHref(_criteriaGroups)]]" token="[[token]]"></d2l-rubric-criteria-groups>
 		<div class="out-of-container">
 			<div class="out-of-text">
 				[[localize('total')]] &nbsp &nbsp / [[entity.properties.outOf]]
@@ -50,20 +50,29 @@ Polymer Web-Component to display rubrics
 			is: 'd2l-rubric',
 
 			properties: {
-				title: {
+				_title: {
 					type: String
 				},
 
+				/**
+				 * The href of the rubric
+				 */
 				href: String,
 
+				/**
+				 * The user access token
+				 */
 				token: String,
 
+				/**
+				 * Siren entity that represents the rubric
+				 */
 				entity: {
 					type: Object,
 					observer: '_onEntityChanged'
 				},
 
-				criteriaGroups: {
+				_criteriaGroups: {
 					type: Object
 				}
 			},
@@ -79,10 +88,9 @@ Polymer Web-Component to display rubrics
 			],
 
 			_onEntityChanged: function(entity) {
-				this.rubric = entity;
-				this.title = entity.properties.name;
+				this._title = entity.properties.name;
 				if (entity.hasLinkByRel(this.HypermediaRels.Rubrics.criteriaGroups)) {
-					this.criteriaGroups = entity.getLinkByRel(this.HypermediaRels.Rubrics.criteriaGroups);
+					this._criteriaGroups = entity.getLinkByRel(this.HypermediaRels.Rubrics.criteriaGroups);
 				}
 			},
 
