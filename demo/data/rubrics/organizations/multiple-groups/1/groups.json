@@ -1,0 +1,90 @@
+{
+  "class": [
+    "collection",
+    "criteria-groups"
+  ],
+  "entities": [
+    {
+      "class": [
+        "criteria-group"
+      ],
+      "rel": [
+        "item"
+      ],
+      "links": [
+        {
+          "rel": [
+            "https://rubrics.api.brightspace.com/rels/criteria"
+          ],
+          "href": "data/rubrics/organizations/multiple-groups/1/groups/1/criteria.json"
+        },
+        {
+          "rel": [
+            "https://rubrics.api.brightspace.com/rels/levels"
+          ],
+          "href": "data/rubrics/organizations/multiple-groups/1/groups/1/levels.json"
+        },
+        {
+          "rel": [
+            "self"
+          ],
+          "href": "data/rubrics/organizations/multiple-groups/1/groups/1.json"
+        },
+        {
+          "rel": [
+            "up"
+          ],
+          "href": "data/rubrics/organizations/multiple-groups/1/groups.json"
+        }
+      ]
+    },
+    {
+      "class": [
+        "criteria-group"
+      ],
+      "rel": [
+        "item"
+      ],
+      "links": [
+        {
+          "rel": [
+            "https://rubrics.api.brightspace.com/rels/criteria"
+          ],
+          "href": "data/rubrics/organizations/multiple-groups/1/groups/2/criteria.json"
+        },
+        {
+          "rel": [
+            "https://rubrics.api.brightspace.com/rels/levels"
+          ],
+          "href": "data/rubrics/organizations/multiple-groups/1/groups/2/levels.json"
+        },
+        {
+          "rel": [
+            "self"
+          ],
+          "href": "data/rubrics/organizations/multiple-groups/1/groups/2.json"
+        },
+        {
+          "rel": [
+            "up"
+          ],
+          "href": "data/rubrics/organizations/multiple-groups/1/groups.json"
+        }
+      ]
+    }
+  ],
+  "links": [
+    {
+      "rel": [
+        "self"
+      ],
+      "href": "data/rubrics/organizations/multiple-groups/1/groups.json"
+    },
+    {
+      "rel": [
+        "up"
+      ],
+      "href": "data/rubrics/organizations/multiple-groups/1.json"
+    }
+  ]
+}

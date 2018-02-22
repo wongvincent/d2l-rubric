@@ -10,6 +10,9 @@
 			:host {
 				display: block;
 			}
+			d2l-rubric-criteria-group {
+				margin-bottom: 24px;
+			}
 		</style>
 		<template is="dom-repeat" items="[[_groups]]">
 			<d2l-rubric-criteria-group href="[[_getSelfLink(item)]]" token="[[token]]"></d2l-rubric-criteria-group>

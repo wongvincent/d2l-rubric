@@ -1,0 +1,129 @@
+{
+  "class": [
+    "collection",
+    "levels"
+  ],
+  "properties": {
+    "total": 4
+  },
+  "entities": [
+    {
+      "class": [
+        "level"
+      ],
+      "rel": [
+        "https://rubrics.api.brightspace.com/rels/level"
+      ],
+      "properties": {
+        "name": "Level 4",
+        "points": 4
+      },
+      "links": [
+        {
+          "rel": [
+            "self"
+          ],
+          "href": "data/rubrics/organizations/multiple-groups/1/groups/2/levels/1.json"
+        },
+        {
+          "rel": [
+            "up"
+          ],
+          "href": "data/rubrics/organizations/multiple-groups/1/groups/2/levels.json"
+        }
+      ]
+    },
+    {
+      "class": [
+        "level"
+      ],
+      "rel": [
+        "https://rubrics.api.brightspace.com/rels/level"
+      ],
+      "properties": {
+        "name": "Level 3",
+        "points": 3
+      },
+      "links": [
+        {
+          "rel": [
+            "self"
+          ],
+          "href": "data/rubrics/organizations/multiple-groups/1/groups/2/levels/2.json"
+        },
+        {
+          "rel": [
+            "up"
+          ],
+          "href": "data/rubrics/organizations/multiple-groups/1/groups/2/levels.json"
+        }
+      ]
+    },
+    {
+      "class": [
+        "level"
+      ],
+      "rel": [
+        "https://rubrics.api.brightspace.com/rels/level"
+      ],
+      "properties": {
+        "name": "Level 2",
+        "points": 2
+      },
+      "links": [
+        {
+          "rel": [
+            "self"
+          ],
+          "href": "data/rubrics/organizations/multiple-groups/1/groups/2/levels/3.json"
+        },
+        {
+          "rel": [
+            "up"
+          ],
+          "href": "data/rubrics/organizations/multiple-groups/1/groups/2/levels.json"
+        }
+      ]
+    },
+    {
+      "class": [
+        "level"
+      ],
+      "rel": [
+        "https://rubrics.api.brightspace.com/rels/level"
+      ],
+      "properties": {
+        "name": "Level 1",
+        "points": 1
+      },
+      "links": [
+        {
+          "rel": [
+            "self"
+          ],
+          "href": "data/rubrics/organizations/multiple-groups/1/groups/2/levels/4.json"
+        },
+        {
+          "rel": [
+            "up"
+          ],
+          "href": "data/rubrics/organizations/multiple-groups/1/groups/2/levels.json"
+        }
+      ]
+    }
+  ],
+  "links": [
+    {
+      "rel": [
+        "self"
+      ],
+      "href": "data/rubrics/organizations/multiple-groups/1/groups/2/levels.json"
+    },
+    {
+      "rel": [
+        "up"
+      ],
+      "href": "data/rubrics/organizations/multiple-groups/1/groups/2.json"
+    }
+  ]
+}
