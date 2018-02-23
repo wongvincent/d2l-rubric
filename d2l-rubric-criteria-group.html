@@ -140,15 +140,14 @@
 			_onLevelsEntityChanged: function(levelsEntity) {
 				this._levels = levelsEntity.getSubEntitiesByClass(this.HypermediaClasses.rubrics.level);
 				// trigger a resize event so that the table resizes with the new levels
-				var isPolymer1 = !Polymer.Element;
-				if (isPolymer1) {
-					window.requestAnimationFrame(function() {
-						this.notifyResize();
-					}.bind(this));
-				} else {
+				if (Polymer.Element) {
 					Polymer.RenderStatus.beforeNextRender(this, function() {
 						this.notifyResize();
 					});
+				} else {
+					requestAnimationFrame(function() {
+						this.notifyResize();
+					}.bind(this));
 				}
 			},
 
