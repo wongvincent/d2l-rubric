@@ -142,11 +142,11 @@
 				// trigger a resize event so that the table resizes with the new levels
 				var isPolymer1 = !Polymer.Element;
 				if (isPolymer1) {
-					window.requestAnimationFrame( function() {
+					window.requestAnimationFrame(function() {
 						this.notifyResize();
 					}.bind(this));
 				} else {
-					Polymer.RenderStatus.beforeNextRender(this, function () {
+					Polymer.RenderStatus.beforeNextRender(this, function() {
 						this.notifyResize();
 					});
 				}
