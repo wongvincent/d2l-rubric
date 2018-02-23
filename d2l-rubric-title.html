@@ -1,0 +1,50 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../d2l-fetch-siren-entity-behavior/d2l-fetch-siren-entity-behavior.html">
+<link rel="import" href="../d2l-fetch/d2l-fetch.html">
+
+<dom-module id="d2l-rubric-title">
+	<template>
+		<style>
+			:host {
+				display: block;
+			}
+		</style>
+		[[_title]]
+	</template>
+	<script>
+		Polymer({
+			is: 'd2l-rubric-title',
+
+			properties: {
+				_title: {
+					type: String
+				},
+
+				/**
+				 * The href of the rubric
+				 */
+				href: String,
+
+				/**
+				 * The user access token
+				 */
+				token: String
+			},
+
+			behaviors: [
+				D2L.PolymerBehaviors.FetchSirenEntityBehavior
+			],
+
+			observers: [
+				'_fetchEntity(href, token)'
+			],
+
+			_fetchEntity: function(href, token) {
+				this._fetchEntityWithToken(href, function() { return Promise.resolve(token); })
+					.then(function(entity) {
+						this._title = entity.properties.name;
+					}.bind(this));
+			},
+		});
+	</script>
+</dom-module>

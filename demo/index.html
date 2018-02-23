@@ -19,6 +19,7 @@
 	<link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
 	<link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
 	<link rel="import" href="../d2l-rubric.html">
+	<link rel="import" href="../d2l-rubric-title.html">
 	<link rel="import" href="../../d2l-typography/d2l-typography.html">
 
 	<style is="custom-style" include="demo-pages-shared-styles">
@@ -28,18 +29,29 @@
 			html {
 				font-size: 20px;
 			}
+			.rubric-title {
+				@apply --d2l-heading-3;
+			}
 		</style>
+
 	</custom-style>
 </head>
 <body class="d2l-typography">
 <div class="vertical-section-container centered">
-	<h3>Basic d2l-rubric demo</h3>
+	<h1>d2l-rubric demo</h1>
+	<h3>Rubric with a title</h3>
 	<demo-snippet>
-		<d2l-rubric href="data/rubrics/organizations/6609/1.json" token="foozleberries"></d2l-rubric>
+		<d2l-rubric href="data/rubrics/organizations/6609/1.json" token="foozleberries">
+			<h3 class="rubric-title">
+				<d2l-rubric-title href="data/rubrics/organizations/6609/1.json" token="foozleberries"/>
+			</h3>
+		</d2l-rubric>
 	</demo-snippet>
+	<h3>Rubric with custom points</h3>
 	<demo-snippet>
 		<d2l-rubric href="data/rubrics/organizations/6609/5.json" token="foozleberries"></d2l-rubric>
 	</demo-snippet>
+	<h3>Rubric with multiple criteria groups</h3>
 	<demo-snippet>
 		<d2l-rubric href="data/rubrics/organizations/multiple-groups/1.json" token="foozleberries"></d2l-rubric>
 	</demo-snippet>
