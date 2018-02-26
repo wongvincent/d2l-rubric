@@ -18,9 +18,6 @@ Polymer Web-Component to display rubrics
 			:host {
 				display: block;
 			}
-			.rubric-title {
-				@apply --d2l-heading-3;
-			}
 			.out-of-container {
 				margin-top: 24px;
 				border: 1px solid var(--d2l-color-mica);
@@ -34,7 +31,7 @@ Polymer Web-Component to display rubrics
 				margin-bottom: 0.5rem;
 			}
 		</style>
-		<h3 class="rubric-title">[[_title]]</h3>
+		<slot></slot>
 		<d2l-rubric-criteria-groups href="[[_getHref(_criteriaGroups)]]" token="[[token]]"></d2l-rubric-criteria-groups>
 		<div class="out-of-container">
 			<div class="out-of-text">
@@ -49,10 +46,6 @@ Polymer Web-Component to display rubrics
 			is: 'd2l-rubric',
 
 			properties: {
-				_title: {
-					type: String
-				},
-
 				/**
 				 * The href of the rubric
 				 */
@@ -87,7 +80,6 @@ Polymer Web-Component to display rubrics
 			],
 
 			_onEntityChanged: function(entity) {
-				this._title = entity.properties.name;
 				if (entity.hasLinkByRel(this.HypermediaRels.Rubrics.criteriaGroups)) {
 					this._criteriaGroups = entity.getLinkByRel(this.HypermediaRels.Rubrics.criteriaGroups);
 				}
