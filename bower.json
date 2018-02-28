@@ -33,7 +33,9 @@
     "d2l-localize-behavior": "^1.1.0",
     "d2l-typography": "^6.1.2",
     "polymer": "1 - 2",
-    "iron-resizable-behavior": "^2.1.0"
+    "iron-resizable-behavior": "^2.1.0",
+    "fetch": "^2.0.3",
+    "promise-polyfill": "PolymerLabs/promise-polyfill#^2.0.1"
   },
   "devDependencies": {
     "iron-component-page": "^2.0.0",
