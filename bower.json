@@ -33,7 +33,8 @@
     "d2l-localize-behavior": "^1.1.0",
     "d2l-typography": "^6.1.2",
     "polymer": "1 - 2",
-    "iron-resizable-behavior": "^2.1.0"
+    "iron-resizable-behavior": "^2.1.0",
+    "d2l-offscreen": "^3.0.3"
   },
   "devDependencies": {
     "fetch": "^2.0.3",

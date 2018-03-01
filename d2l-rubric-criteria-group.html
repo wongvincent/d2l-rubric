@@ -10,6 +10,7 @@
 <link rel="import" href="../d2l-colors/d2l-colors.html">
 <link rel="import" href="./localize-behavior.html">
 <link rel="import" href="../iron-resizable-behavior/iron-resizable-behavior.html">
+<link rel="import" href="../d2l-offscreen/d2l-offscreen.html">
 
 <dom-module id="d2l-rubric-criteria-group">
 	<template>
@@ -38,9 +39,11 @@
 			.custom-points {
 				margin-bottom: 0.5rem;
 			}
-
 		</style>
-		<d2l-table summary="[[localize('rubric_summary_a11y')]]">
+		<d2l-table>
+			<d2l-offscreen>
+				[[localize('rubric_summary_a11y')]]
+			</d2l-offscreen>
 			<d2l-thead>
 				<d2l-tr>
 					<d2l-th>
