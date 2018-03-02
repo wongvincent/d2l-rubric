@@ -1,10 +1,16 @@
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../d2l-table/d2l-table.html">
+<link rel="import" href="../d2l-table/d2l-td.html">
+<link rel="import" href="../d2l-table/d2l-tr.html">
+<link rel="import" href="../d2l-table/d2l-thead.html">
+<link rel="import" href="../d2l-table/d2l-tbody.html">
+<link rel="import" href="../d2l-table/d2l-th.html">
 <link rel="import" href="../d2l-fetch-siren-entity-behavior/d2l-fetch-siren-entity-behavior.html">
 <link rel="import" href="../d2l-hm-constants-behavior/d2l-hm-constants-behavior.html">
 <link rel="import" href="../d2l-colors/d2l-colors.html">
 <link rel="import" href="./localize-behavior.html">
 <link rel="import" href="../iron-resizable-behavior/iron-resizable-behavior.html">
+<link rel="import" href="../d2l-offscreen/d2l-offscreen.html">
 
 <dom-module id="d2l-rubric-criteria-group">
 	<template>
@@ -12,19 +18,19 @@
 			:host {
 				display: block;
 			}
-			td {
+			d2l-td {
 				min-width: 130px;
 			}
-			td:first-of-type {
+			d2l-td:first-of-type {
 				background-color: var(--d2l-color-regolith);
 			}
-			td:last-of-type {
+			d2l-td:last-of-type {
 				min-width: 0;
 			}
-			td:last-of-type > div {
+			d2l-td:last-of-type > div {
 				text-align: right;
 			}
-			th > div {
+			d2l-th > div {
 				text-align: center;
 			}
 			.points {
@@ -33,50 +39,50 @@
 			.custom-points {
 				margin-bottom: 0.5rem;
 			}
-
 		</style>
-		<d2l-table-wrapper>
-			<table class="d2l-table" summary="[[localize('rubric_summary_a11y')]]">
-				<thead>
-					<tr>
-						<th>
+		<d2l-table>
+			<d2l-offscreen>
+				[[localize('rubric_summary_a11y')]]
+			</d2l-offscreen>
+			<d2l-thead>
+				<d2l-tr>
+					<d2l-th>
+						<div>
+							[[entity.properties.name]]
+						</div>
+					</d2l-th>
+					<template is="dom-repeat" items="[[_levels]]">
+						<d2l-th>
 							<div>
-								[[entity.properties.name]]
+								<div>[[item.properties.name]]</div>
+								<div class="points" hidden="[[!item.properties.points]]">[[localize('points', 'number', item.properties.points)]]</div>
 							</div>
-						</th>
-						<template is="dom-repeat" items="[[_levels]]">
-							<th>
-								<div>
-									<div>[[item.properties.name]]</div>
-									<div class="points" hidden="[[!item.properties.points]]">[[localize('points', 'number', item.properties.points)]]</div>
-								</div>
-							</th>
-						</template>
-						<th></th>
-					</tr>
-				</thead>
-				<tbody>
-					<template is="dom-repeat" items="[[_criteriaEntities]]">
-						<tr>
-							<td>[[item.properties.name]]</td>
-							<template is="dom-repeat" as="criterionCell" items="[[_getCriterionCells(item)]]">
-								<td selected>
-									<div class="description">
-										<div class="points custom-points" hidden=[[!_hasCustomPoints(criterionCell)]]>
-											[[localize('points', 'number', criterionCell.properties.points)]]
-										</div>
-										<span>[[_getDescription(criterionCell)]]</span>
-									</div>
-								</td>
-							</template>
-							<td>
-								<div>/[[item.properties.outOf]]</div>
-							</td>
-						</tr>
+						</d2l-th>
 					</template>
-				</tbody>
-			</table>
-		</d2l-table-wrapper>
+					<d2l-th></d2l-th>
+				</d2l-tr>
+			</d2l-thead>
+			<d2l-tbody>
+				<template is="dom-repeat" items="[[_criteriaEntities]]">
+					<d2l-tr>
+						<d2l-td>[[item.properties.name]]</d2l-td>
+						<template is="dom-repeat" as="criterionCell" items="[[_getCriterionCells(item)]]">
+							<d2l-td selected>
+								<div class="description">
+									<div class="points custom-points" hidden=[[!_hasCustomPoints(criterionCell)]]>
+										[[localize('points', 'number', criterionCell.properties.points)]]
+									</div>
+									<span>[[_getDescription(criterionCell)]]</span>
+								</div>
+							</d2l-td>
+						</template>
+						<d2l-td>
+							<div>/[[item.properties.outOf]]</div>
+						</d2l-td>
+					</d2l-tr>
+				</template>
+			</d2l-tbody>
+		</d2l-table>
 	</template>
 
 	<script>
