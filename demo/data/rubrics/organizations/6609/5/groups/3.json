@@ -1,6 +1,7 @@
 {
 	"class": [
-		"criteria-group"
+		"criteria-group",
+    "numeric"
 	],
   "properties": {
     "name": "Criteria"

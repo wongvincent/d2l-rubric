@@ -34,11 +34,13 @@ Polymer Web-Component to display rubrics
 		</style>
 		<slot></slot>
 		<d2l-rubric-criteria-groups href="[[_getHref(_criteriaGroups)]]" token="[[token]]"></d2l-rubric-criteria-groups>
-		<div class="out-of-container">
-			<div class="out-of-text">
-				[[localize('total')]] &nbsp &nbsp / [[entity.properties.outOf]]
+		<template is="dom-if" if="[[_hasOutOf(entity)]]">
+			<div class="out-of-container">
+				<div class="out-of-text">
+					[[localize('total')]] &nbsp &nbsp / [[entity.properties.outOf]]
+				</div>
 			</div>
-		</div>
+		</template>
 	</template>
 
 	<script>
@@ -95,6 +97,10 @@ Polymer Web-Component to display rubrics
 
 			_getHref: function(link) {
 				return link.href;
+			},
+
+			_hasOutOf: function(entity) {
+				return entity && entity.properties.outOf;
 			}
 
 		});
