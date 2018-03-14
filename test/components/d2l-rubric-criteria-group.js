@@ -18,8 +18,7 @@ suite('<d2l-rubric-criteria-group>', function() {
 	suite('smoke test', function() {
 
 		test('can be instantiated', function() {
-            expect(element.is).to.equal('d2l-rubric-criteria-group');
-		});
-
+			expect(element.is).to.equal('d2l-rubric-criteria-group');
+        });
 	});
 });
