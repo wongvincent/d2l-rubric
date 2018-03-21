@@ -1,0 +1,216 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../d2l-fetch-siren-entity-behavior/d2l-fetch-siren-entity-behavior.html">
+<link rel="import" href="../d2l-fetch/d2l-fetch.html">
+<link rel="import" href="../d2l-icons/d2l-icon-button.html">
+<link rel="import" href="../d2l-typography/d2l-typography-shared-styles.html">
+<link rel="import" href="../web-animations-js/web-animations.min.html">
+<link rel="import" href="./localize-behavior.html">
+<link rel="import" href="./d2l-rubric-levels-mobile.html">
+<link rel="import" href="../d2l-hm-constants-behavior/d2l-hm-constants-behavior.html">
+
+<dom-module id="d2l-rubric-criterion-mobile">
+	<template>
+		<style>
+			:host {
+				display: block;
+			}
+			.criterion-name {
+				@apply --d2l-body-standard-text;
+				margin-top: 18px;
+				margin-bottom: 18px;
+			}
+			.criterion-description-container {
+				@apply --d2l-body-small-text;
+				display: inline-flex;
+				width:100%;
+				margin-top: 18px;
+				margin-bottom: 18px;
+			}
+			.criterion-description {
+				padding-top: 6px;
+			}
+			.criterion-middle {
+				display: block;
+				width: 100%;
+			}
+			.criterion-prev-next-container {
+				position: relative;
+				width: 42px;
+			}
+			.criterion-prev-next {
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+			}
+			.level-name {
+				font-weight: 700;
+			}
+		</style>
+		<div class="criterion-name">
+			[[_name]]
+		</div>
+		<d2l-rubric-levels-mobile
+			href="[[levelsHref]]"
+			token="[[token]]"
+			selected="{{_selected}}"
+			selected-name="{{_selectedLevelName}}"
+			selected-points="{{_selectedLevelPoints}}"
+			total="{{_total}}"
+			out-of="[[_outOf]]"
+		>
+		</d2l-rubric-levels-mobile>
+
+		<div class="criterion-description-container">
+			<div hidden="[[_maxLevelSelected(_selected)]]" class="criterion-prev-next-container" on-tap="_handleTapLeft">
+				<div class="criterion-prev-next">
+					<d2l-icon-button
+						icon="d2l-tier1:chevron-left"
+					></d2l-icon-button>
+				</div>
+			</div>
+			<div class="criterion-middle" id="animate">
+				<div class="level-name">
+					[[_getSelectedLevelText(_selectedLevelName, _selected, _criterionCells)]]
+				</div>
+				<div hidden=[[!_selectedCriterionText]] class="criterion-description">
+					[[_selectedCriterionText]]
+				</div>
+			</div>
+			<div hidden="[[_minLevelSelected(_selected)]]" class="criterion-prev-next-container" on-tap="_handleTapRight">
+				<div class="criterion-prev-next">
+					<d2l-icon-button
+						icon="d2l-tier1:chevron-right"
+					></d2l-icon-button>
+				</div>
+			</div>
+		</div>
+	</template>
+	<script>
+		Polymer({
+			is: 'd2l-rubric-criterion-mobile',
+
+			properties: {
+				/**
+				 * The href of this criterion
+				 */
+				href: String,
+
+				/**
+				 * The href of the levels for this criteria group
+				 */
+				levelsHref: String,
+
+				/**
+				 * The user access token
+				 */
+				token: String,
+
+				_name: String,
+
+				_outOf: Number,
+
+				_selected: {
+					type: Number,
+					value: 0
+				},
+
+				_selectedLevelName: String,
+
+				_selectedLevelPoints: Number,
+
+				_selectedCriterionText: String,
+
+				_total: Number,
+
+				_criterionCells: Array,
+
+				_selectedCustomPoints: Number
+			},
+
+			behaviors: [
+				D2L.PolymerBehaviors.FetchSirenEntityBehavior,
+				D2L.PolymerBehaviors.Rubric.LocalizeBehavior,
+				window.D2L.Hypermedia.HMConstantsBehavior
+			],
+
+			observers: [
+				'_fetchEntity(href, token)',
+				'_selectedCriterion( _criterionCells, _selected)'
+			],
+
+			_fetchEntity: function(href, token) {
+				if (!href) {
+					return;
+				}
+				this._fetchEntityWithToken(href, function() { return Promise.resolve(token); })
+					.then(function(entity) {
+						this._name = entity.properties.name;
+						this._outOf = entity.properties.outOf;
+						this._criterionCells = entity.getSubEntitiesByClass(this.HypermediaClasses.rubrics.criterionCell);
+					}.bind(this));
+			},
+
+			_selectedCriterion: function(criterionCells, selected) {
+				if (!criterionCells) {
+					return;
+				}
+				this._selectedCriterionText = criterionCells[selected].entities[0].properties.text;
+			},
+
+			_handleTapLeft: function() {
+				if (this._selected > 0) {
+					this._selected--;
+
+					this.$.animate.animate([
+						{opacity: '0.0', transform: 'translateX(-20px)'},
+						{opacity: '1.0',  transform: 'none'}
+					],
+					{
+						easing: 'cubic-bezier(0.0, 0.0, 0.2, 1)',
+						duration: 500,
+					});
+				}
+			},
+
+			_handleTapRight: function() {
+				if (this._selected < this._total - 1) {
+					this._selected++;
+					this.$.animate.animate([
+						{opacity: '0.0', transform: 'translateX(20px)'},
+						{opacity: '1.0',  transform: 'none'}
+					],
+					{
+						easing: 'cubic-bezier(0.0, 0.0, 0.2, 1)',
+						duration: 500,
+					});
+				}
+			},
+
+			_maxLevelSelected: function(selected) {
+				return selected === 0;
+			},
+
+			_minLevelSelected: function(selected) {
+				return selected === this._total - 1;
+			},
+
+			_getSelectedLevelText: function(levelTitle, selected, criterionCells) {
+				if (!levelTitle) {
+					return null;
+				}
+				// check for overrides
+				var points = this._selectedLevelPoints;
+				if (criterionCells && criterionCells[selected].hasClass(this.HypermediaClasses.rubrics.overridden)) {
+					points = criterionCells[selected].properties.points;
+				}
+
+				if (points === undefined || points === null) {
+					return levelTitle;
+				}
+				return this.localize('levelNameAndPoints', 'levelName', levelTitle, 'number', points);
+			}
+
+		});
+	</script>
+</dom-module>

@@ -1,0 +1,75 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../d2l-fetch-siren-entity-behavior/d2l-fetch-siren-entity-behavior.html">
+<link rel="import" href="../d2l-fetch/d2l-fetch.html">
+<link rel="import" href="../d2l-hm-constants-behavior/d2l-hm-constants-behavior.html">
+<link rel="import" href="./d2l-rubric-criterion-mobile.html">
+<link rel="import" href="./d2l-rubric-levels-mobile.html">
+<link rel="import" href="../d2l-colors/d2l-colors.html">
+
+<dom-module id="d2l-rubric-criteria-mobile">
+	<template>
+		<style>
+			:host {
+				display: block;
+			}
+			.line {
+				border: solid 1px var(--d2l-color-mica);
+			}
+		</style>
+		<hr class="line"></hr>
+		<template is="dom-repeat" items="[[_criteria]]" as="criterion">
+			<d2l-rubric-criterion-mobile href="[[_getSelfLink(criterion)]]" levels-href="[[levelsHref]]" token="[[token]]">
+			</d2l-rubric-criterion-mobile>
+			<hr class="line"></hr>
+		</template>
+	</template>
+	<script>
+		Polymer({
+			is: 'd2l-rubric-criteria-mobile',
+
+			properties: {
+				_criteria: {
+					type: Array
+				},
+
+				/**
+				 * The href of the rubric criteria
+				 */
+				href: String,
+
+				/**
+				 * The href of the rubric criteria
+				 */
+				levelsHref: String,
+
+				/**
+				 * The user access token
+				 */
+				token: String
+			},
+
+			behaviors: [
+				D2L.PolymerBehaviors.FetchSirenEntityBehavior,
+				window.D2L.Hypermedia.HMConstantsBehavior
+			],
+
+			observers: [
+				'_fetchEntity(href, token)'
+			],
+
+			_fetchEntity: function(href, token) {
+				if (!href) {
+					return;
+				}
+				this._fetchEntityWithToken(href, function() { return Promise.resolve(token); })
+					.then(function(entity) {
+						this._criteria = entity.getSubEntitiesByClass(this.HypermediaClasses.rubrics.criterion);
+					}.bind(this));
+			},
+
+			_getSelfLink: function(entity) {
+				return entity && (entity.getLinkByRel('self') || {}).href || '';
+			}
+		});
+	</script>
+</dom-module>

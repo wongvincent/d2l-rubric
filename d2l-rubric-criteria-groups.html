@@ -2,7 +2,9 @@
 <link rel="import" href="../d2l-fetch-siren-entity-behavior/d2l-fetch-siren-entity-behavior.html">
 <link rel="import" href="../d2l-fetch/d2l-fetch.html">
 <link rel="import" href="./d2l-rubric-criteria-group.html">
+<link rel="import" href="./d2l-rubric-criteria-group-mobile.html">
 <link rel="import" href="../d2l-hm-constants-behavior/d2l-hm-constants-behavior.html">
+<link rel="import" href="../iron-media-query/iron-media-query.html">
 
 <dom-module id="d2l-rubric-criteria-groups">
 	<template>
@@ -14,8 +16,16 @@
 				margin-bottom: 24px;
 			}
 		</style>
-		<template is="dom-repeat" items="[[_groups]]">
-			<d2l-rubric-criteria-group href="[[_getSelfLink(item)]]" token="[[token]]"></d2l-rubric-criteria-group>
+		<iron-media-query query="(min-width: 615px)" query-matches="{{_largeScreen}}"></iron-media-query>
+		<template is="dom-if" if="[[_largeScreen]]">
+			<template is="dom-repeat" items="[[_groups]]">
+				<d2l-rubric-criteria-group href="[[_getSelfLink(item)]]" token="[[token]]"></d2l-rubric-criteria-group>
+			</template>
+		</template>
+		<template is="dom-if" if="[[!_largeScreen]]">
+			<template is="dom-repeat" items="[[_groups]]">
+				<d2l-rubric-criteria-group-mobile href="[[_getSelfLink(item)]]" token="[[token]]"></d2l-rubric-criteria-group-mobile>
+			</template>
 		</template>
 	</template>
 
@@ -45,7 +55,9 @@
 				/**
 				 * The user access token
 				 */
-				token: String
+				token: String,
+
+				_largeScreen: Boolean
 
 			},
 

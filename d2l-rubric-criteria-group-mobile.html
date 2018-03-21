@@ -1,0 +1,75 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../d2l-fetch-siren-entity-behavior/d2l-fetch-siren-entity-behavior.html">
+<link rel="import" href="../d2l-hm-constants-behavior/d2l-hm-constants-behavior.html">
+<link rel="import" href="./d2l-rubric-criteria-mobile.html">
+<link rel="import" href="./d2l-rubric-levels-mobile.html">
+<link rel="import" href="../d2l-typography/d2l-typography-shared-styles.html">
+
+<dom-module id="d2l-rubric-criteria-group-mobile">
+	<template>
+		<style>
+			:host {
+				display: block;
+			}
+			h3 {
+				@apply --d2l-heading-3;
+			}
+		</style>
+		<h3>
+			[[_name]]
+		</h3>
+		<d2l-rubric-criteria-mobile href="[[_criteriaHref]]" levels-href="[[_levelsHref]]" token="[[token]]">
+		</d2l-rubric-criteria-mobile>
+	</template>
+	<script>
+		Polymer({
+			is: 'd2l-rubric-criteria-group-mobile',
+
+			properties: {
+				/**
+				 * The href to access this rubric criteria group
+				 */
+				href: String,
+
+				/**
+				 * The user access token
+				 */
+				token: String,
+
+				_name: String,
+				_criteriaHref: String,
+				_levelsHref: String
+			},
+
+			observers: [
+				'_fetchEntity(href, token)'
+			],
+
+			behaviors: [
+				D2L.PolymerBehaviors.FetchSirenEntityBehavior,
+				window.D2L.Hypermedia.HMConstantsBehavior
+			],
+
+			_fetchEntity: function(href, token) {
+				if (href && token) {
+					this._fetchEntityWithToken(href, function() { return Promise.resolve(token); })
+						.then(function(entity) {
+							this._name = entity.properties.name;
+							this._levelsHref = this._getLevelsLink(entity);
+							this._criteriaHref = this._getCriteriaLink(entity);
+						}.bind(this));
+				}
+			},
+
+			_getCriteriaLink: function(entity) {
+				var link = entity && entity.getLinkByRel(this.HypermediaRels.Rubrics.criteria);
+				return link && link.href || '';
+			},
+
+			_getLevelsLink: function(entity) {
+				var link = entity && entity.getLinkByRel(this.HypermediaRels.Rubrics.levels);
+				return link && link.href || '';
+			}
+		});
+	</script>
+</dom-module>
