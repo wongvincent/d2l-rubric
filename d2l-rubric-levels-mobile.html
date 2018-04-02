@@ -23,6 +23,7 @@
 			}
 			.level {
 				border: solid 1px var(--d2l-color-mica);
+				border-right: none;
 				display: flex;
 				overflow: hidden;
 				text-align: center;
@@ -35,6 +36,9 @@
 				background-color: var(--d2l-color-regolith);
 				border: solid 1px var(--d2l-color-galena);
 				box-shadow: inset 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+			}
+			.level.selected + .level {
+				border-left: none;
 			}
 			.level-name {
 				@apply --d2l-body-small-text;
@@ -49,6 +53,10 @@
 			.level.last {
 				border-top-right-radius: 6px;
 				border-bottom-right-radius: 6px;
+				border-right: solid 1px var(--d2l-color-mica);
+			}
+			.level.last.selected {
+				border: solid 1px var(--d2l-color-galena);
 			}
 			div.level:first-of-type {
 				border-top-left-radius: 6px;
@@ -56,6 +64,7 @@
 			}
 			.out-of {
 				border-radius: 6px;
+				border: solid 1px var(--d2l-color-mica);
 				width: 60px;
 				min-width: 60px;
 				margin-left: 15px;
