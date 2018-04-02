@@ -1,0 +1,56 @@
+<link rel="import" href="../d2l-fetch-siren-entity-behavior/d2l-fetch-siren-entity-behavior.html">
+
+<script>
+	'use strict';
+
+	window.D2L = window.D2L || {};
+	window.D2L.PolymerBehaviors = window.D2L.PolymerBehaviors || {};
+	window.D2L.PolymerBehaviors.Rubric = window.D2L.PolymerBehaviors.Rubric || {};
+
+	/*
+	* Behavior for fetching an entity when an href and token a present
+	* @polymerBehavior
+	*/
+	D2L.PolymerBehaviors.Rubric.SirenEntityBehaviorImpl = {
+		properties: {
+			/**
+			 * The href for this siren entity
+			 */
+			href: String,
+
+			/**
+			 * The user access token
+			 */
+			token: String,
+
+			/**
+			 * The fetched siren entity
+			 */
+			entity: Object
+		},
+
+		behaviors: [
+			D2L.PolymerBehaviors.FetchSirenEntityBehavior
+		],
+
+		observers: [
+			'_fetchEntity(href, token)'
+		],
+
+		_fetchEntity: function(href, token) {
+			if (!href) {
+				return;
+			}
+			this._fetchEntityWithToken(href, function() { return Promise.resolve(token); })
+				.then(function(entity) {
+					this.entity = entity;
+				}.bind(this));
+		},
+	}
+
+	/** @polymerBehavior */
+	D2L.PolymerBehaviors.Rubric.SirenEntityBehavior = [
+		D2L.PolymerBehaviors.FetchSirenEntityBehavior,
+		D2L.PolymerBehaviors.Rubric.SirenEntityBehaviorImpl
+	];
+</script>
