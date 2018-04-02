@@ -1,12 +1,13 @@
 <link rel="import" href="../polymer/polymer.html">
-<link rel="import" href="../d2l-fetch-siren-entity-behavior/d2l-fetch-siren-entity-behavior.html">
 <link rel="import" href="../d2l-fetch/d2l-fetch.html">
 <link rel="import" href="../d2l-colors/d2l-colors.html">
 <link rel="import" href="../d2l-typography/d2l-typography-shared-styles.html">
 <link rel="import" href="../d2l-hm-constants-behavior/d2l-hm-constants-behavior.html">
+<link rel="import" href="./localize-behavior.html">
+<link rel="import" href="./siren-entity-behavior.html">
 
 <dom-module id="d2l-rubric-levels-mobile">
-	<template>
+	<template strip-whitespace>
 		<style>
 			:host{
 				display:block;
@@ -63,6 +64,9 @@
 			.out-of:hover {
 				cursor: default;
 			}
+			[hidden] {
+				display: none !important;
+			}
 		</style>
 		<div class="levels-container">
 			<div class="levels">
@@ -74,13 +78,11 @@
 					</div>
 				</template>
 			</div>
-			<template is="dom-if" if="[[_hasOutOf(outOf)]]">
-				<div class="level out-of">
-					<div class="level-name">
-						&mdash; / [[outOf]]
-					</div>
+			<div hidden$="[[!_hasOutOf(outOf)]]" class="level out-of">
+				<div class="level-name">
+					[[localize('outOf', 'outOf', outOf)]]
 				</div>
-			</template>
+			</div>
 		</div>
 	</template>
 	<script>
@@ -88,16 +90,6 @@
 			is: 'd2l-rubric-levels-mobile',
 
 			properties: {
-				/**
-				 * The href of the criteria group levels
-				 */
-				href: String,
-
-				/**
-				 * The user access token
-				 */
-				token: String,
-
 				/**
 				 * The total number of levels
 				 */
@@ -141,24 +133,19 @@
 			},
 
 			behaviors: [
-				D2L.PolymerBehaviors.FetchSirenEntityBehavior,
-				window.D2L.Hypermedia.HMConstantsBehavior
+				D2L.PolymerBehaviors.Rubric.SirenEntityBehavior,
+				window.D2L.Hypermedia.HMConstantsBehavior,
+				D2L.PolymerBehaviors.Rubric.LocalizeBehavior
 			],
 
 			observers: [
-				'_fetchEntity(href, token)',
+				'_entityFetched(entity)',
 				'_getSelectedProperties(_levelEntities, selected)'
 			],
 
-			_fetchEntity: function(href, token) {
-				if (!href) {
-					return;
-				}
-				this._fetchEntityWithToken(href, function() { return Promise.resolve(token); })
-					.then(function(entity) {
-						this.total = entity.properties.total;
-						this._levelEntities = entity.getSubEntitiesByClass(this.HypermediaClasses.rubrics.level);
-					}.bind(this));
+			_entityFetched: function(entity) {
+				this.total = entity.properties.total;
+				this._levelEntities = entity.getSubEntitiesByClass(this.HypermediaClasses.rubrics.level);
 			},
 
 			_getSelectedProperties: function(levelEntities, selectedLevel) {

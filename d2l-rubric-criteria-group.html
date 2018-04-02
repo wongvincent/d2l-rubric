@@ -14,7 +14,7 @@
 <link rel="import" href="../d2l-typography/d2l-typography-shared-styles.html">
 
 <dom-module id="d2l-rubric-criteria-group">
-	<template>
+	<template strip-whitespace>
 		<style include="d2l-table-style">
 			:host {
 				display: block;
@@ -56,7 +56,7 @@
 		</style>
 		<d2l-table>
 			<d2l-offscreen>
-				[[localize('rubric_summary_a11y')]]
+				[[localize('rubricSummaryA11y')]]
 			</d2l-offscreen>
 			<d2l-thead>
 				<d2l-tr>

@@ -6,7 +6,7 @@
 <link rel="import" href="../d2l-typography/d2l-typography-shared-styles.html">
 
 <dom-module id="d2l-rubric-criteria-group-mobile">
-	<template>
+	<template strip-whitespace>
 		<style>
 			:host {
 				display: block;
@@ -26,16 +26,6 @@
 			is: 'd2l-rubric-criteria-group-mobile',
 
 			properties: {
-				/**
-				 * The href to access this rubric criteria group
-				 */
-				href: String,
-
-				/**
-				 * The user access token
-				 */
-				token: String,
-
 				_name: String,
 				_criteriaHref: String,
 				_levelsHref: String,
@@ -43,24 +33,19 @@
 			},
 
 			observers: [
-				'_fetchEntity(href, token)'
+				'_entityFetched(entity)'
 			],
 
 			behaviors: [
-				D2L.PolymerBehaviors.FetchSirenEntityBehavior,
+				D2L.PolymerBehaviors.Rubric.SirenEntityBehavior,
 				window.D2L.Hypermedia.HMConstantsBehavior
 			],
 
-			_fetchEntity: function(href, token) {
-				if (href && token) {
-					this._fetchEntityWithToken(href, function() { return Promise.resolve(token); })
-						.then(function(entity) {
-							this._name = entity.properties.name;
-							this._levelsHref = this._getLevelsLink(entity);
-							this._criteriaHref = this._getCriteriaLink(entity);
-							this._isHolistic = entity.hasClass(this.HypermediaClasses.rubrics.percentage);
-						}.bind(this));
-				}
+			_entityFetched: function(entity) {
+				this._name = entity.properties.name;
+				this._levelsHref = this._getLevelsLink(entity);
+				this._criteriaHref = this._getCriteriaLink(entity);
+				this._isHolistic = entity.hasClass(this.HypermediaClasses.rubrics.percentage);
 			},
 
 			_getCriteriaLink: function(entity) {
