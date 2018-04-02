@@ -18,7 +18,7 @@
 		<h3>
 			[[_name]]
 		</h3>
-		<d2l-rubric-criteria-mobile href="[[_criteriaHref]]" levels-href="[[_levelsHref]]" token="[[token]]">
+		<d2l-rubric-criteria-mobile href="[[_criteriaHref]]" levels-href="[[_levelsHref]]" token="[[token]]" is-holistic="[[_isHolistic]]">
 		</d2l-rubric-criteria-mobile>
 	</template>
 	<script>
@@ -38,7 +38,8 @@
 
 				_name: String,
 				_criteriaHref: String,
-				_levelsHref: String
+				_levelsHref: String,
+				_isHolistic: Boolean
 			},
 
 			observers: [
@@ -57,6 +58,7 @@
 							this._name = entity.properties.name;
 							this._levelsHref = this._getLevelsLink(entity);
 							this._criteriaHref = this._getCriteriaLink(entity);
+							this._isHolistic = entity.hasClass(this.HypermediaClasses.rubrics.percentage);
 						}.bind(this));
 				}
 			},
