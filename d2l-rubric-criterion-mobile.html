@@ -136,7 +136,8 @@
 
 				_selected: {
 					type: Number,
-					value: 0
+					value: 0,
+					observer: '_selectedChanged'
 				},
 
 				_selectedLevelName: String,
@@ -179,17 +180,23 @@
 				this._selectedCriterionText = criterionCells[selected].getSubEntityByClass(this.HypermediaClasses.rubrics.description).properties.text;
 			},
 
+			_selectedChanged: function(newValue, oldValue) {
+				if (oldValue === undefined || newValue === undefined || newValue === oldValue) {
+					return;
+				}
+
+				this._handledDescriptionAnimation(newValue > oldValue ? 'slide-from-right' : 'slide-from-left');
+			},
+
 			_handleTapLeft: function() {
 				if (this._selected > 0) {
 					this._selected--;
-					this._handledDescriptionAnimation('slide-from-left');
 				}
 			},
 
 			_handleTapRight: function() {
 				if (this._selected < this._total - 1) {
 					this._selected++;
-					this._handledDescriptionAnimation('slide-from-right');
 				}
 			},
 
