@@ -159,11 +159,11 @@
 			],
 
 			observers: [
-				'_entityFetched(entity)',
-				'_selectedCriterion( _criterionCells, _selected)'
+				'_onEntityChanged(entity)',
+				'_selectedCriterion(_criterionCells, _selected)'
 			],
 
-			_entityFetched: function(entity) {
+			_onEntityChanged: function(entity) {
 				this._name = entity.properties.name;
 				this._outOf = entity.properties.outOf;
 				this._criterionCells = entity.getSubEntitiesByClass(this.HypermediaClasses.rubrics.criterionCell);

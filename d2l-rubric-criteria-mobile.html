@@ -44,10 +44,10 @@
 			],
 
 			observers: [
-				'_entityFetched(entity)'
+				'_onEntityChanged(entity)'
 			],
 
-			_entityFetched: function(entity) {
+			_onEntityChanged: function(entity) {
 				this._criteria = entity.getSubEntitiesByClass(this.HypermediaClasses.rubrics.criterion);
 			},
 

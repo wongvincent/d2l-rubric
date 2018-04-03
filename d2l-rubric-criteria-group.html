@@ -5,7 +5,7 @@
 <link rel="import" href="../d2l-table/d2l-thead.html">
 <link rel="import" href="../d2l-table/d2l-tbody.html">
 <link rel="import" href="../d2l-table/d2l-th.html">
-<link rel="import" href="../d2l-fetch-siren-entity-behavior/d2l-fetch-siren-entity-behavior.html">
+<link rel="import" href="./siren-entity-behavior.html">
 <link rel="import" href="../d2l-hm-constants-behavior/d2l-hm-constants-behavior.html">
 <link rel="import" href="../d2l-colors/d2l-colors.html">
 <link rel="import" href="./localize-behavior.html">
@@ -106,58 +106,33 @@
 			is: 'd2l-rubric-criteria-group',
 
 			properties: {
-				/**
-				 * The siren entity that represents the rubric group
-				 */
-				entity: {
-					type: Object
-				},
-
-				_levelsHref: {
-					type: String,
-					computed: '_getLevelsLink(entity)'
-				},
-				_levelsEntity: {
-					type: Object
-				},
-				_levels: {
-					type: Array
-				},
-				_criteriaCollectionHref: {
-					type: Object,
-					computed: '_getCriteriaLink(entity)	'
-				},
-				_criteriaCollectionEntity: {
-					type: Object
-				},
-				_criteriaEntities: {
-					type: Array
-				},
-				/**
-				 * The href to access this rubric criteria group
-				 */
-				href: String,
-
-				/**
-				 * The user access token
-				 */
-				token: String
+				_levelsHref: String,
+				_levelsEntity: Object,
+				_levels: Array,
+				_criteriaCollectionHref: String,
+				_criteriaCollectionEntity: Object,
+				_criteriaEntities: Array
 			},
 
 			behaviors: [
-				D2L.PolymerBehaviors.FetchSirenEntityBehavior,
+				D2L.PolymerBehaviors.Rubric.SirenEntityBehavior,
 				window.D2L.Hypermedia.HMConstantsBehavior,
 				D2L.PolymerBehaviors.Rubric.LocalizeBehavior,
 				Polymer.IronResizableBehavior
 			],
 
 			observers: [
-				'_fetchEntity(href, token)',
+				'_onEntityChanged(entity)',
 				'_fetchLevels(_levelsHref, token)',
 				'_fetchCriteria(_criteriaCollectionHref, token)',
 				'_onLevelsEntityChanged(_levelsEntity)',
 				'_onCriteriaCollectionEntityChanged(_criteriaCollectionEntity)'
 			],
+
+			_onEntityChanged: function(entity) {
+				this._levelsHref = this._getLevelsLink(entity);
+				this._criteriaCollectionHref = this._getCriteriaLink(entity);
+			},
 
 			_onLevelsEntityChanged: function(levelsEntity) {
 				this._levels = levelsEntity.getSubEntitiesByClass(this.HypermediaClasses.rubrics.level);
@@ -170,15 +145,6 @@
 					requestAnimationFrame(function() {
 						this.notifyResize();
 					}.bind(this));
-				}
-			},
-
-			_fetchEntity: function(href, token) {
-				if (href && token) {
-					this._fetchEntityWithToken(href, function() { return Promise.resolve(token); })
-						.then(function(entity) {
-							this.entity = entity;
-						}.bind(this));
 				}
 			},
 

@@ -1,5 +1,5 @@
 <link rel="import" href="../polymer/polymer.html">
-<link rel="import" href="../d2l-fetch-siren-entity-behavior/d2l-fetch-siren-entity-behavior.html">
+<link rel="import" href="./siren-entity-behavior.html">
 <link rel="import" href="../d2l-hm-constants-behavior/d2l-hm-constants-behavior.html">
 <link rel="import" href="./d2l-rubric-criteria-mobile.html">
 <link rel="import" href="./d2l-rubric-levels-mobile.html">
@@ -32,7 +32,7 @@
 			},
 
 			observers: [
-				'_entityFetched(entity)'
+				'_onEntityChanged(entity)'
 			],
 
 			behaviors: [
@@ -40,7 +40,7 @@
 				window.D2L.Hypermedia.HMConstantsBehavior
 			],
 
-			_entityFetched: function(entity) {
+			_onEntityChanged: function(entity) {
 				this._name = entity.properties.name;
 				this._levelsHref = this._getLevelsLink(entity);
 				this._criteriaHref = this._getCriteriaLink(entity);

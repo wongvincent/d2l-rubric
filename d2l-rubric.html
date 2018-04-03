@@ -1,10 +1,10 @@
 <link rel="import" href="../polymer/polymer.html">
-<link rel="import" href="../d2l-fetch-siren-entity-behavior/d2l-fetch-siren-entity-behavior.html">
 <link rel="import" href="../d2l-fetch/d2l-fetch.html">
 <link rel="import" href="./d2l-rubric-criteria-groups.html">
 <link rel="import" href="../d2l-hm-constants-behavior/d2l-hm-constants-behavior.html">
 <link rel="import" href="../d2l-typography/d2l-typography-shared-styles.html">
 <link rel="import" href="./localize-behavior.html">
+<link rel="import" href="./siren-entity-behavior.html">
 
 <!--
 `d2l-rubric`
@@ -43,58 +43,28 @@ Polymer Web-Component to display rubrics
 
 	<script>
 		Polymer({
-
 			is: 'd2l-rubric',
 
 			properties: {
-				/**
-				 * The href of the rubric
-				 */
-				href: String,
-
-				/**
-				 * The user access token
-				 */
-				token: String,
-
-				/**
-				 * Siren entity that represents the rubric
-				 */
-				entity: {
-					type: Object,
-					observer: '_onEntityChanged',
-					value: null
-				},
-
 				_criteriaGroups: {
 					type: Object
 				}
 			},
 
 			behaviors: [
-				D2L.PolymerBehaviors.FetchSirenEntityBehavior,
+				D2L.PolymerBehaviors.Rubric.SirenEntityBehavior,
 				window.D2L.Hypermedia.HMConstantsBehavior,
 				D2L.PolymerBehaviors.Rubric.LocalizeBehavior
 			],
 
 			observers: [
-				'_fetchEntity(href, token)'
+				'_onEntityChanged(entity)'
 			],
 
 			_onEntityChanged: function(entity) {
-				if (!entity) {
-					return;
-				}
-				if (entity.hasLinkByRel(this.HypermediaRels.Rubrics.criteriaGroups)) {
+				if (entity && entity.hasLinkByRel(this.HypermediaRels.Rubrics.criteriaGroups)) {
 					this._criteriaGroups = entity.getLinkByRel(this.HypermediaRels.Rubrics.criteriaGroups);
 				}
-			},
-
-			_fetchEntity: function(href, token) {
-				this._fetchEntityWithToken(href, function() { return Promise.resolve(token); })
-					.then(function(entity) {
-						this.entity = entity;
-					}.bind(this));
 			},
 
 			_getHref: function(link) {
@@ -104,7 +74,6 @@ Polymer Web-Component to display rubrics
 			_hasOutOf: function(entity) {
 				return entity && entity.properties.outOf;
 			}
-
 		});
 	</script>
 </dom-module>

@@ -139,11 +139,11 @@
 			],
 
 			observers: [
-				'_entityFetched(entity)',
+				'_onEntityChanged(entity)',
 				'_getSelectedProperties(_levelEntities, selected)'
 			],
 
-			_entityFetched: function(entity) {
+			_onEntityChanged: function(entity) {
 				this.total = entity.properties.total;
 				this._levelEntities = entity.getSubEntitiesByClass(this.HypermediaClasses.rubrics.level);
 			},

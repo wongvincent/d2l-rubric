@@ -1,5 +1,5 @@
 <link rel="import" href="../polymer/polymer.html">
-<link rel="import" href="../d2l-fetch-siren-entity-behavior/d2l-fetch-siren-entity-behavior.html">
+<link rel="import" href="./siren-entity-behavior.html">
 <link rel="import" href="../d2l-fetch/d2l-fetch.html">
 <link rel="import" href="./d2l-rubric-criteria-group.html">
 <link rel="import" href="./d2l-rubric-criteria-group-mobile.html">
@@ -34,54 +34,25 @@
 			is: 'd2l-rubric-criteria-groups',
 
 			properties: {
-				/**
-				 * The siren entity that represents the rubric groups
-				 */
-				entity: {
-					type: Object,
-					observer: '_onEntityChanged'
-				},
-
 				_groups: {
 					type: Array,
 					value: function() { return []; }
 				},
 
-				/**
-				 * The href of the rubric groups
-				 */
-				href: String,
-
-				/**
-				 * The user access token
-				 */
-				token: String,
-
 				_largeScreen: Boolean
-
 			},
 
 			behaviors: [
-				D2L.PolymerBehaviors.FetchSirenEntityBehavior,
+				D2L.PolymerBehaviors.Rubric.SirenEntityBehavior,
 				window.D2L.Hypermedia.HMConstantsBehavior
 			],
 
 			observers: [
-				'_fetchEntity(href, token)'
+				'_onEntityChanged(entity)'
 			],
 
 			_onEntityChanged: function(entity) {
-				this.entity = entity;
 				this._groups = entity.getSubEntitiesByClass(this.HypermediaClasses.rubrics.criteriaGroup);
-			},
-
-			_fetchEntity: function(href, token) {
-				if (href && token) {
-					this._fetchEntityWithToken(href, function() { return Promise.resolve(token); })
-						.then(function(entity) {
-							this.entity = entity;
-						}.bind(this));
-				}
 			},
 
 			_getSelfLink: function(entity) {
