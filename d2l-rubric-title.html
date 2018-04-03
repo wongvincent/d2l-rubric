@@ -1,9 +1,9 @@
 <link rel="import" href="../polymer/polymer.html">
-<link rel="import" href="../d2l-fetch-siren-entity-behavior/d2l-fetch-siren-entity-behavior.html">
+<link rel="import" href="./siren-entity-behavior.html">
 <link rel="import" href="../d2l-fetch/d2l-fetch.html">
 
 <dom-module id="d2l-rubric-title">
-	<template>
+	<template strip-whitespace>
 		<style>
 			:host {
 				display: block;
@@ -16,35 +16,20 @@
 			is: 'd2l-rubric-title',
 
 			properties: {
-				_title: {
-					type: String
-				},
-
-				/**
-				 * The href of the rubric
-				 */
-				href: String,
-
-				/**
-				 * The user access token
-				 */
-				token: String
+				_title: String
 			},
 
 			behaviors: [
-				D2L.PolymerBehaviors.FetchSirenEntityBehavior
+				D2L.PolymerBehaviors.Rubric.SirenEntityBehavior
 			],
 
 			observers: [
-				'_fetchEntity(href, token)'
+				'_onEntityChanged(entity)'
 			],
 
-			_fetchEntity: function(href, token) {
-				this._fetchEntityWithToken(href, function() { return Promise.resolve(token); })
-					.then(function(entity) {
-						this._title = entity.properties.name;
-					}.bind(this));
-			},
+			_onEntityChanged: function(entity) {
+				this._title = entity.properties.name;
+			}
 		});
 	</script>
 </dom-module>
