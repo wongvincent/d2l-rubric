@@ -62,17 +62,51 @@
 			}
 			.criterion-middle {
 				display: block;
-				width: 100%;
+				flex-grow: 1;
+				flex-shrink: 1;
 			}
-			.criterion-prev-next-container {
+			.criterion-prev-container {
 				position: relative;
-				width: 42px;
+				width: 23px;
+				flex: 0 0 23px;
+				margin-right: 12px;
+				border-top-left-radius: 8px;
+				border-bottom-left-radius: 8px;
+				cursor: pointer;
 			}
-			.criterion-prev-next {
+			.criterion-prev-container:hover {
+				background-color: var(--d2l-color-gypsum);				
+			}
+			.criterion-prev-container:focus, .criterion-prev-container:focus-within {
+				background-color: var(--d2l-color-gypsum);	
+				outline: none;
+				box-shadow: 0 0 0 4px rgba(0, 111, 191, 0.4);
+			}
+			.criterion-prev, .criterion-next {
 				position: absolute;
 				top: 50%;
 				left: 50%;
 				transform: translate(-50%, -50%);
+			}
+			.criterion-next-container {
+				position: relative;
+				width: 23px;
+				flex: 0 0 23px;
+				margin-left: 12px;
+				border-top-right-radius: 8px;
+				border-bottom-right-radius: 8px;
+				cursor: pointer;
+			}
+			.criterion-next-container:hover {
+				background-color: var(--d2l-color-gypsum);				
+			}
+			.criterion-next-container:focus, .criterion-next-container:focus-within {
+				background-color: var(--d2l-color-gypsum);	
+				outline: none;				
+				box-shadow: 0 0 0 4px rgba(0, 111, 191, 0.4);
+			}
+			d2l-icon-button .d2l-icon-button:focus > d2l-icon.d2l-icon-button {
+				color: var(--d2l-color-ferrite);
 			}
 			.level-name {
 				font-weight: 700;
@@ -93,8 +127,8 @@
 		</d2l-rubric-levels-mobile>
 
 		<div class="criterion-description-container">
-			<div hidden="[[_maxLevelSelected(_selected)]]" class="criterion-prev-next-container" on-tap="_handleTapLeft">
-				<div class="criterion-prev-next">
+			<div class="criterion-prev-container" hidden="[[_maxLevelSelected(_selected)]]" on-tap="_handleTapLeft">
+				<div class="criterion-prev">
 					<d2l-icon-button
 						icon="d2l-tier1:chevron-left"
 					></d2l-icon-button>
@@ -108,8 +142,8 @@
 					[[_selectedCriterionText]]
 				</div>
 			</div>
-			<div hidden="[[_minLevelSelected(_selected)]]" class="criterion-prev-next-container" on-tap="_handleTapRight">
-				<div class="criterion-prev-next">
+			<div class="criterion-next-container" hidden="[[_minLevelSelected(_selected)]]" on-tap="_handleTapRight">
+				<div class="criterion-next">
 					<d2l-icon-button
 						icon="d2l-tier1:chevron-right"
 					></d2l-icon-button>
