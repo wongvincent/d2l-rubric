@@ -41,6 +41,9 @@
 			],
 
 			_onEntityChanged: function(entity) {
+				if (!entity) {
+					return;
+				}
 				this._name = entity.properties.name;
 				this._levelsHref = this._getLevelsLink(entity);
 				this._criteriaHref = this._getCriteriaLink(entity);

@@ -144,6 +144,9 @@
 			],
 
 			_onEntityChanged: function(entity) {
+				if (!entity) {
+					return;
+				}
 				this.total = entity.properties.total;
 				this._levelEntities = entity.getSubEntitiesByClass(this.HypermediaClasses.rubrics.level);
 			},
