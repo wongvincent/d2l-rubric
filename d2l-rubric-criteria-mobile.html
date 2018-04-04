@@ -48,6 +48,9 @@
 			],
 
 			_onEntityChanged: function(entity) {
+				if (!entity) {
+					return;
+				}
 				this._criteria = entity.getSubEntitiesByClass(this.HypermediaClasses.rubrics.criterion);
 			},
 

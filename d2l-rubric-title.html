@@ -28,6 +28,9 @@
 			],
 
 			_onEntityChanged: function(entity) {
+				if (!entity) {
+					return;
+				}
 				this._title = entity.properties.name;
 			}
 		});

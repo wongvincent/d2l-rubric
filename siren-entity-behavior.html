@@ -26,12 +26,11 @@
 			/**
 			 * The fetched siren entity
 			 */
-			entity: Object
+			entity: {
+				type: Object,
+				value: null
+			}
 		},
-
-		behaviors: [
-			D2L.PolymerBehaviors.FetchSirenEntityBehavior
-		],
 
 		observers: [
 			'_fetchEntity(href, token)'
@@ -41,7 +40,7 @@
 			if (!href) {
 				return;
 			}
-			this._fetchEntityWithToken(href, function() { return Promise.resolve(token); })
+			D2L.PolymerBehaviors.FetchSirenEntityBehavior._fetchEntityWithToken(href, function() { return Promise.resolve(token); })
 				.then(function(entity) {
 					this.entity = entity;
 				}.bind(this));

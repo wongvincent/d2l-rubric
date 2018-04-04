@@ -164,6 +164,9 @@
 			],
 
 			_onEntityChanged: function(entity) {
+				if (!entity) {
+					return;
+				}
 				this._name = entity.properties.name;
 				this._outOf = entity.properties.outOf;
 				this._criterionCells = entity.getSubEntitiesByClass(this.HypermediaClasses.rubrics.criterionCell);

@@ -130,6 +130,9 @@
 			],
 
 			_onEntityChanged: function(entity) {
+				if (!entity) {
+					return;
+				}
 				this._levelsHref = this._getLevelsLink(entity);
 				this._criteriaCollectionHref = this._getCriteriaLink(entity);
 			},
