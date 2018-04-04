@@ -8,6 +8,7 @@
 <link rel="import" href="./siren-entity-behavior.html">
 <link rel="import" href="../d2l-hm-constants-behavior/d2l-hm-constants-behavior.html">
 <link rel="import" href="../d2l-colors/d2l-colors.html">
+<link rel="import" href="./d2l-rubric-loading.html">
 <link rel="import" href="./localize-behavior.html">
 <link rel="import" href="../iron-resizable-behavior/iron-resizable-behavior.html">
 <link rel="import" href="../d2l-offscreen/d2l-offscreen.html">
@@ -54,7 +55,10 @@
 			}
 			.
 		</style>
-		<d2l-table>
+
+		<d2l-rubric-loading hidden$="[[_showContent]]"></d2l-rubric-loading>
+
+		<d2l-table hidden$="[[!_showContent]]">
 			<d2l-offscreen>
 				[[localize('rubricSummaryA11y')]]
 			</d2l-offscreen>
@@ -112,7 +116,11 @@
 				_levels: Array,
 				_criteriaCollectionHref: String,
 				_criteriaCollectionEntity: Object,
-				_criteriaEntities: Array
+				_criteriaEntities: Array,
+				_showContent: {
+					type: Boolean,
+					value: false
+				},
 			},
 
 			behaviors: [
@@ -166,6 +174,7 @@
 					this._fetchEntityWithToken(href, function() { return Promise.resolve(token); })
 						.then(function(entity) {
 							this._criteriaCollectionEntity = entity;
+							this._showContent = true;
 						}.bind(this));
 				}
 			},

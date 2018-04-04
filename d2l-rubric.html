@@ -1,6 +1,7 @@
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../d2l-fetch/d2l-fetch.html">
 <link rel="import" href="./d2l-rubric-criteria-groups.html">
+<link rel="import" href="./d2l-rubric-loading.html">
 <link rel="import" href="../d2l-hm-constants-behavior/d2l-hm-constants-behavior.html">
 <link rel="import" href="../d2l-typography/d2l-typography-shared-styles.html">
 <link rel="import" href="./localize-behavior.html">
@@ -31,14 +32,25 @@ Polymer Web-Component to display rubrics
 				margin-top: 0.5rem;
 				margin-bottom: 0.5rem;
 			}
+			.out-of-loader {
+				margin-top: 24px;
+				border: 1px solid var(--d2l-color-mica);
+				border-radius: 8px;
+				text-align: right;
+				height: 30px;
+			}
 		</style>
 		<slot></slot>
-		<d2l-rubric-criteria-groups href="[[_getHref(_criteriaGroups)]]" token="[[token]]"></d2l-rubric-criteria-groups>
+		<d2l-rubric-loading hidden$="[[_showContent]]"></d2l-rubric-loading>
+		<div hidden$="[[_showContent]]" class="out-of-loader"></div>
+		<div hidden$="[[!_showContent]]">
+			<d2l-rubric-criteria-groups href="[[_getHref(_criteriaGroups)]]" token="[[token]]"></d2l-rubric-criteria-groups>
 			<div class="out-of-container" hidden="[[!_hasOutOf(entity)]]">
 				<div class="out-of-text">
 					[[localize('total')]] &nbsp &nbsp / [[entity.properties.outOf]]
 				</div>
 			</div>
+		</div>
 	</template>
 
 	<script>
@@ -48,6 +60,10 @@ Polymer Web-Component to display rubrics
 			properties: {
 				_criteriaGroups: {
 					type: Object
+				},
+				_showContent: {
+					type: Boolean,
+					value: false
 				}
 			},
 
@@ -63,6 +79,7 @@ Polymer Web-Component to display rubrics
 
 			_onEntityChanged: function(entity) {
 				if (entity && entity.hasLinkByRel(this.HypermediaRels.Rubrics.criteriaGroups)) {
+					this._showContent = true;
 					this._criteriaGroups = entity.getLinkByRel(this.HypermediaRels.Rubrics.criteriaGroups);
 				}
 			},
