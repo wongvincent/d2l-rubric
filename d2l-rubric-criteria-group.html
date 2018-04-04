@@ -63,11 +63,12 @@
 					<d2l-td class="group-name">
 						[[entity.properties.name]]
 					</d2l-td>
-					<template is="dom-repeat" items="[[_levels]]">
+					<template is="dom-repeat" items="[[_levels]]" as="level">
 						<d2l-th>
 							<div>
-								<div class="level-name">[[item.properties.name]]</div>
-								<div hidden="[[!item.properties.points]]">[[localize('points', 'number', item.properties.points)]]</div>
+								<div class="level-name">[[level.properties.name]]</div>
+								<div hidden="[[!_isNumeric(entity, level)]]">[[_localizeLevelOutOf( 'points', level.properties.points )]]</div>
+								<div hidden="[[!_isHolistic(entity, level)]]">[[_localizeLevelOutOf( 'percentage', level.properties.points )]]</div>
 							</div>
 						</d2l-th>
 					</template>
@@ -206,6 +207,22 @@
 
 			_hasOutOf: function(entity) {
 				return entity && entity.hasClass(this.HypermediaClasses.rubrics.numeric);
+			},
+
+			_isHolistic: function(entity, level) {
+				var hasPoints = level.properties.points !== null;
+				var isHolistic = entity && entity.hasClass(this.HypermediaClasses.rubrics.percentage);
+				return hasPoints && isHolistic;
+			},
+
+			_isNumeric: function(entity, level) {
+				var hasPoints = level.properties.points;
+				var isNumeric = entity && entity.hasClass(this.HypermediaClasses.rubrics.numeric);
+				return hasPoints && isNumeric;
+			},
+
+			_localizeLevelOutOf: function(type, points) {
+				return this.localize(type, 'number', points.toString());
 			}
 		});
 	</script>

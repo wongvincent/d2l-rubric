@@ -18,7 +18,7 @@
 		</style>
 		<hr class="line"></hr>
 		<template is="dom-repeat" items="[[_criteria]]" as="criterion">
-			<d2l-rubric-criterion-mobile href="[[_getSelfLink(criterion)]]" levels-href="[[levelsHref]]" token="[[token]]">
+			<d2l-rubric-criterion-mobile href="[[_getSelfLink(criterion)]]" levels-href="[[levelsHref]]" token="[[token]]" is-holistic="[[isHolistic]]">
 			</d2l-rubric-criterion-mobile>
 			<hr class="line"></hr>
 		</template>
@@ -35,7 +35,8 @@
 				/**
 				 * The href of the rubric criteria
 				 */
-				levelsHref: String
+				levelsHref: String,
+				isHolistic: Boolean
 			},
 
 			behaviors: [

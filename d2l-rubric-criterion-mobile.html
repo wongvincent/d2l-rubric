@@ -127,6 +127,8 @@
 				 */
 				levelsHref: String,
 
+				isHolistic: Boolean,
+
 				_name: String,
 
 				_outOf: {
@@ -221,6 +223,10 @@
 
 				if (points === undefined || points === null) {
 					return levelTitle;
+				}
+
+				if (this.isHolistic) {
+					return this.localize('levelNameAndPercentage', 'levelName', levelTitle, 'number', points);
 				}
 				return this.localize('levelNameAndPoints', 'levelName', levelTitle, 'number', points);
 			}
