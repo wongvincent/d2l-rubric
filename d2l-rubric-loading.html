@@ -1,0 +1,54 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../d2l-typography/d2l-typography-shared-styles.html">
+<!--
+`d2l-rubric-loading`
+Polymer Web-Component to display a loading rubric
+
+-->
+
+<dom-module id="d2l-rubric-loading">
+	<template strip-whitespace>
+		<style>
+		.out-of-container {
+			margin-top: 24px;
+			border: 1px solid var(--d2l-color-mica);
+			border-radius: 8px;
+			text-align: right;
+		}
+
+		.spinner-container {
+			border: 1px solid var(--d2l-color-mica);
+			border-radius: 8px;
+		}
+		.spinner-top {
+			border-bottom: transparent;
+			background-color: var(--d2l-color-regolith);
+			height: 40px;
+		}
+		.spinner-bottom {
+			align-content: center;
+			height: 140px;
+			text-align: center;
+			vertical-align: middle;
+		}
+		.spinner {
+			padding-top: 20px;
+		}
+		</style>
+		<div class="spinner-container">
+				<div class="spinner-top"></div>
+				<div class="spinner-bottom">
+					<d2l-loading-spinner class="spinner" size="100"/>
+				</div>
+		</div>
+	</div>
+	</template>
+
+	<script>
+		Polymer({
+
+			is: 'd2l-rubric-loading'
+
+		});
+	</script>
+</dom-module>
