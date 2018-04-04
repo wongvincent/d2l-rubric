@@ -12,6 +12,7 @@
 <link rel="import" href="../iron-resizable-behavior/iron-resizable-behavior.html">
 <link rel="import" href="../d2l-offscreen/d2l-offscreen.html">
 <link rel="import" href="../d2l-typography/d2l-typography-shared-styles.html">
+<link rel="import" href="../s-html/s-html.html">
 
 <dom-module id="d2l-rubric-criteria-group">
 	<template strip-whitespace>
@@ -52,7 +53,9 @@
 				color: var(--d2l-color-galena);
 				margin-bottom: 0.5rem;
 			}
-			.
+			.criterion-description-richtext {
+				display: block;
+			}
 		</style>
 		<d2l-table>
 			<d2l-offscreen>
@@ -86,7 +89,7 @@
 									<div class="points custom-points" hidden=[[!_hasCustomPoints(criterionCell)]]>
 										[[localize('points', 'number', criterionCell.properties.points)]]
 									</div>
-									<span>[[_getDescription(criterionCell)]]</span>
+									<s-html class="criterion-description-richtext" html="[[_getDescription(criterionCell)]]"></s-html>
 								</div>
 							</d2l-td>
 						</template>
@@ -190,7 +193,7 @@
 
 			_getDescription: function(entity) {
 				var description = entity && entity.getSubEntityByClass(this.HypermediaClasses.rubrics.description);
-				return description && description.properties && description.properties.text || '';
+				return description && description.properties && description.properties.html || '';
 			},
 
 			_getFeedback: function(entity) {
