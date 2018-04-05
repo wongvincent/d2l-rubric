@@ -235,6 +235,9 @@
 			},
 
 			_localizeLevelOutOf: function(type, points) {
+				if (points === undefined || points === null) {
+					return;
+				}
 				return this.localize(type, 'number', points.toString());
 			}
 		});
