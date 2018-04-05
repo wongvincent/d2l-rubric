@@ -47,7 +47,7 @@ Polymer Web-Component to display rubrics
 			<d2l-rubric-criteria-groups href="[[_getHref(_criteriaGroups)]]" token="[[token]]"></d2l-rubric-criteria-groups>
 			<div class="out-of-container" hidden="[[!_hasOutOf(entity)]]">
 				<div class="out-of-text">
-					[[localize('total')]] &nbsp &nbsp / [[entity.properties.outOf]]
+					[[localize('totalOutOf', 'outOf', entity.properties.outOf)]]
 				</div>
 			</div>
 		</div>
