@@ -6,6 +6,7 @@
 <link rel="import" href="./d2l-rubric-levels-mobile.html">
 <link rel="import" href="../d2l-hm-constants-behavior/d2l-hm-constants-behavior.html">
 <link rel="import" href="./siren-entity-behavior.html">
+<link rel="import" href="../s-html/s-html.html">
 
 <dom-module id="d2l-rubric-criterion-mobile">
 	<template strip-whitespace>
@@ -27,6 +28,10 @@
 			}
 			.criterion-description {
 				padding-top: 0.33rem;
+			}
+			.criterion-description-html {
+				display: block;
+				overflow-x: hidden;
 			}
 			@keyframes slide-from-right-animation {
 				from {
@@ -105,7 +110,7 @@
 					[[_getSelectedLevelText(_selectedLevelName, _selected, _criterionCells)]]
 				</div>
 				<div hidden=[[!_selectedCriterionText]] class="criterion-description">
-					[[_selectedCriterionText]]
+					<s-html class="criterion-description-html" html="[[_selectedCriterionText]]"></s-html>
 				</div>
 			</div>
 			<div hidden="[[_minLevelSelected(_selected)]]" class="criterion-prev-next-container" on-tap="_handleTapRight">
@@ -179,7 +184,7 @@
 				if (!criterionCells) {
 					return;
 				}
-				this._selectedCriterionText = criterionCells[selected].getSubEntityByClass(this.HypermediaClasses.rubrics.description).properties.text;
+				this._selectedCriterionText = criterionCells[selected].getSubEntityByClass(this.HypermediaClasses.text.description).properties.html;
 			},
 
 			_selectedChanged: function(newValue, oldValue) {
