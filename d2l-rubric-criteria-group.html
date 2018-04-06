@@ -36,6 +36,8 @@
 			}
 			.group-name {
 				@apply --d2l-body-standard-text;
+				font-size: 16px;
+				font-weight: bold;
 				text-align: left;
 				background-color: var(--d2l-table-header-background-color);
 			}
@@ -101,7 +103,7 @@
 						</template>
 						<template is="dom-if" if="[[_hasOutOf(entity)]]">
 							<d2l-td class="out-of">
-								<div>/[[item.properties.outOf]]</div>
+								<div> [[localize('outOf', 'outOf', item.properties.outOf)]] </div>
 							</d2l-td>
 						</template>
 					</d2l-tr>
