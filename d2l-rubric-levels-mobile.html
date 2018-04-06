@@ -28,14 +28,21 @@
 				overflow: hidden;
 				text-align: center;
 				color: var(--d2l-color-galena);
+				outline: none;				
 			}
 			.level:hover {
 				cursor: pointer;
+				background-color: var(--d2l-color-gypsum);
 			}
 			.level.selected {
 				background-color: var(--d2l-color-regolith);
 				border: solid 1px var(--d2l-color-galena);
 				box-shadow: inset 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+			}
+			.level:focus, .level.selected:focus {
+				background-color: var(--d2l-color-gypsum);
+				box-shadow: 0 0 0 4px rgba(0, 111, 191, 0.4);
+				z-index: 0;
 			}
 			.level.selected + .level {
 				border-left: none;
@@ -83,9 +90,9 @@
 			}
 		</style>
 		<div class="levels-container">
-			<div class="levels">
+			<div class="levels" role="tablist">
 				<template is="dom-repeat" items="[[_levelEntities]]">
-					<div class$="[[_getLevelClassName(index, selected)]]" on-tap="_selectLevel" data-index="[[index]]">
+					<div class$="[[_getLevelClassName(index, selected)]]" on-tap="_selectLevel" data-index="[[index]]" role="tab" on-keydown="_onKeyDown" tabindex="0">
 						<div class$="[[_getLevelTextClassName(index, selected)]]">
 							[[item.properties.name]]
 						</div>
@@ -156,6 +163,26 @@
 				'_onEntityChanged(entity)',
 				'_getSelectedProperties(_levelEntities, selected)'
 			],
+
+			_onKeyDown: function (event) {
+				switch (event.keyCode) {
+					case 13:
+						this.selected = event.currentTarget.dataIndex
+						break;
+					case 37:
+						if (event.currentTarget.dataIndex !== 0) {
+							event.currentTarget.previousSibling.focus();
+							event.preventDefault();							
+						}
+						break;
+					case 39:
+						if (event.currentTarget.dataIndex !== this.total - 1) {
+							event.currentTarget.nextSibling.focus()
+							event.preventDefault();				
+						}
+						break;
+				}
+			},
 
 			_onEntityChanged: function(entity) {
 				if (!entity) {
