@@ -62,7 +62,11 @@
 
 		<d2l-rubric-loading hidden$="[[_showContent]]"></d2l-rubric-loading>
 
-		<d2l-table hidden$="[[!_showContent]]">
+		<d2l-table
+			aria-colcount$="[[_getColumnCount(_levels, entity)]]"
+			aria-rowcount$="[[_getRowCount(_criteriaEntities)]]"
+			hidden$="[[!_showContent]]"
+		>
 			<d2l-offscreen>
 				[[localize('rubricSummaryA11y')]]
 			</d2l-offscreen>
@@ -239,6 +243,23 @@
 					return;
 				}
 				return this.localize(type, 'number', points.toString());
+			},
+
+			_getRowCount: function(criteria) {
+				if (!criteria) {
+					return 0;
+				}
+				return criteria.length + 1; // criteria + levels row
+			},
+
+			_getColumnCount: function(levels, entity) {
+				if (!levels) {
+					return 0;
+				}
+				if (this._hasOutOf(entity)) {
+					return levels.length + 2; // levels + outof + criteria
+				}
+				return levels.length + 1; // levels + criteria
 			}
 		});
 	</script>
