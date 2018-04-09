@@ -1,6 +1,6 @@
 {
   "name": "d2l-rubric",
-  "version": "0.24.0",
+  "version": "0.25.0",
   "description": "Polymer-based web components for D2L Rubrics",
   "private": true,
   "directories": {
