@@ -92,7 +92,15 @@
 		<div class="levels-container">
 			<div class="levels" role="tablist">
 				<template is="dom-repeat" items="[[_levelEntities]]">
-					<div class$="[[_getLevelClassName(index, selected)]]" on-tap="_selectLevel" data-index="[[index]]" role="tab" on-keydown="_onKeyDown" tabindex="0" aria-selected$="{{_isSelected(index, selected)}}">
+					<div
+						class$="[[_getLevelClassName(index, selected)]]"
+						on-tap="_selectLevel"
+						data-index="[[index]]"
+						role="tab"
+						on-keydown="_onKeyDown"
+						tabindex="0"
+						aria-selected$="[[_isSelected(index, selected)]]"
+					>
 						<div class$="[[_getLevelTextClassName(index, selected)]]">
 							[[item.properties.name]]
 						</div>
@@ -170,10 +178,6 @@
 				RIGHT: 39
 			},
 
-			_isSelected: function(index, selected) {
-				return index === selected;
-			},
-
 			_onKeyDown: function(event) {
 				switch (event.keyCode) {
 					case this._keyCodes.ENTER:
@@ -192,6 +196,10 @@
 						}
 						break;
 				}
+			},
+
+			_isSelected: function(index, selected) {
+				return index === selected;
 			},
 
 			_onEntityChanged: function(entity) {
