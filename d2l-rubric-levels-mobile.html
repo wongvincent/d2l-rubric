@@ -92,7 +92,7 @@
 		<div class="levels-container">
 			<div class="levels" role="tablist">
 				<template is="dom-repeat" items="[[_levelEntities]]">
-					<div class$="[[_getLevelClassName(index, selected)]]" on-tap="_selectLevel" data-index="[[index]]" role="tab" on-keydown="_onKeyDown" tabindex="0">
+					<div class$="[[_getLevelClassName(index, selected)]]" on-tap="_selectLevel" data-index="[[index]]" role="tab" on-keydown="_onKeyDown" tabindex="0" aria-selected$="{{_isSelected(index, selected)}}">
 						<div class$="[[_getLevelTextClassName(index, selected)]]">
 							[[item.properties.name]]
 						</div>
@@ -164,21 +164,31 @@
 				'_getSelectedProperties(_levelEntities, selected)'
 			],
 
-			_onKeyDown: function (event) {
+			_keyCodes: {
+				ENTER: 13,
+				LEFT: 37,
+				RIGHT: 39
+			},
+
+			_isSelected: function(index, selected) {
+				return index === selected;
+			},
+
+			_onKeyDown: function(event) {
 				switch (event.keyCode) {
-					case 13:
-						this.selected = event.currentTarget.dataIndex
+					case this._keyCodes.ENTER:
+						this.selected = event.currentTarget.dataIndex;
 						break;
-					case 37:
+					case this._keyCodes.LEFT:
 						if (event.currentTarget.dataIndex !== 0) {
 							event.currentTarget.previousSibling.focus();
-							event.preventDefault();							
+							event.preventDefault();
 						}
 						break;
-					case 39:
+					case this._keyCodes.RIGHT:
 						if (event.currentTarget.dataIndex !== this.total - 1) {
-							event.currentTarget.nextSibling.focus()
-							event.preventDefault();				
+							event.currentTarget.nextSibling.focus();
+							event.preventDefault();
 						}
 						break;
 				}
