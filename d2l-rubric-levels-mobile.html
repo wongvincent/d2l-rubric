@@ -28,14 +28,21 @@
 				overflow: hidden;
 				text-align: center;
 				color: var(--d2l-color-galena);
+				outline: none;				
 			}
 			.level:hover {
 				cursor: pointer;
+				background-color: var(--d2l-color-gypsum);
 			}
 			.level.selected {
 				background-color: var(--d2l-color-regolith);
 				border: solid 1px var(--d2l-color-galena);
 				box-shadow: inset 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+			}
+			.level:focus, .level.selected:focus {
+				background-color: var(--d2l-color-gypsum);
+				box-shadow: 0 0 0 4px rgba(0, 111, 191, 0.4);
+				z-index: 0;
 			}
 			.level.selected + .level {
 				border-left: none;
@@ -65,8 +72,8 @@
 			.out-of {
 				border-radius: 6px;
 				border: solid 1px var(--d2l-color-mica);
-				width: 60px;
-				min-width: 60px;
+				width: 40px;
+				min-width: 40px;
 				margin-left: 15px;
 				margin-right: 5px;
 			}
@@ -76,15 +83,24 @@
 			}
 			.out-of:hover {
 				cursor: default;
+				background-color: transparent;
 			}
 			[hidden] {
 				display: none !important;
 			}
 		</style>
 		<div class="levels-container">
-			<div class="levels">
+			<div class="levels" role="tablist">
 				<template is="dom-repeat" items="[[_levelEntities]]">
-					<div class$="[[_getLevelClassName(index, selected)]]" on-tap="_selectLevel" data-index="[[index]]">
+					<div
+						class$="[[_getLevelClassName(index, selected)]]"
+						on-tap="_selectLevel"
+						data-index="[[index]]"
+						role="tab"
+						on-keydown="_onKeyDown"
+						tabindex="0"
+						aria-selected$="[[_isSelected(index, selected)]]"
+					>
 						<div class$="[[_getLevelTextClassName(index, selected)]]">
 							[[item.properties.name]]
 						</div>
@@ -155,6 +171,36 @@
 				'_onEntityChanged(entity)',
 				'_getSelectedProperties(_levelEntities, selected)'
 			],
+
+			_keyCodes: {
+				ENTER: 13,
+				LEFT: 37,
+				RIGHT: 39
+			},
+
+			_onKeyDown: function(event) {
+				switch (event.keyCode) {
+					case this._keyCodes.ENTER:
+						this.selected = event.currentTarget.dataIndex;
+						break;
+					case this._keyCodes.LEFT:
+						if (event.currentTarget.dataIndex !== 0) {
+							event.currentTarget.previousSibling.focus();
+							event.preventDefault();
+						}
+						break;
+					case this._keyCodes.RIGHT:
+						if (event.currentTarget.dataIndex !== this.total - 1) {
+							event.currentTarget.nextSibling.focus();
+							event.preventDefault();
+						}
+						break;
+				}
+			},
+
+			_isSelected: function(index, selected) {
+				return index === selected;
+			},
 
 			_onEntityChanged: function(entity) {
 				if (!entity) {
