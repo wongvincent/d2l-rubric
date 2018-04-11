@@ -17,11 +17,6 @@ Polymer Web-Component to display rubrics
 
 <dom-module id="d2l-rubric">
 	<template strip-whitespace>
-		<template is="dom-repeat" items="[[_alerts]]">
-			<d2l-alert type="[[item.alertType]]">
-				[[item.alertMessage]]
-			</d2l-alert>
-		</template>
 		<style>
 			:host {
 				display: block;
@@ -46,6 +41,11 @@ Polymer Web-Component to display rubrics
 				height: 30px;
 			}
 		</style>
+		<template is="dom-repeat" items="[[_alerts]]">
+			<d2l-alert type="[[item.alertType]]">
+				[[item.alertMessage]]
+			</d2l-alert>
+		</template>
 		<slot></slot>
 		<d2l-rubric-loading hidden$="[[_hideLoading(_showContent,_hasAlerts)]]"></d2l-rubric-loading>
 		<div hidden$="[[_hideLoading(_showContent,_hasAlerts)]]" class="out-of-loader"></div>
