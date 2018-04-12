@@ -22,7 +22,6 @@ Polymer Web-Component to display rubrics
 				display: block;
 			}
 			.out-of-container {
-				margin-top: 24px;
 				border: 1px solid var(--d2l-color-mica);
 				border-radius: 8px;
 				text-align: right;
@@ -49,6 +48,11 @@ Polymer Web-Component to display rubrics
 			.right {
 				width: 100%;
 				text-align: right;
+			}
+			@media screen and (max-width: 614px) {
+				.out-of-container {
+					margin-top: 24px;
+				}
 			}
 		</style>
 		<template is="dom-repeat" items="[[_alerts]]">

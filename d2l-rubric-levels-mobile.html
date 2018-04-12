@@ -28,28 +28,37 @@
 				overflow: hidden;
 				text-align: center;
 				color: var(--d2l-color-galena);
-				outline: none;				
+				outline: none;
+				flex: 1;
 			}
 			.level:hover {
 				cursor: pointer;
 				background-color: var(--d2l-color-gypsum);
 			}
 			.level.selected {
-				background-color: var(--d2l-color-regolith);
-				border: solid 1px var(--d2l-color-galena);
-				box-shadow: inset 0 1px 3px 0 rgba(0, 0, 0, 0.1);
-			}
-			.level:focus, .level.selected:focus {
 				background-color: var(--d2l-color-gypsum);
-				box-shadow: 0 0 0 4px rgba(0, 111, 191, 0.4);
-				z-index: 0;
+				border: solid 1px var(--d2l-color-galena);
 			}
-			.level.selected + .level {
+			.level.selected + .level:not(:focus) {
 				border-left: none;
+			}
+			.level:focus {
+				background-color: var(--d2l-color-gypsum);
+				box-shadow: 0 0 0 4px rgb(178, 211, 235);
+				z-index: 0;
+				border: solid 1px rgba(0, 111, 191, 0.4);
+			}
+			.level.selected:focus {
+				background-color: var(--d2l-color-gypsum);
+				box-shadow: 0 0 0 4px rgb(178, 211, 235);
+				z-index: 0;
+				border: solid 1px rgba(0, 111, 191, 0.4);
 			}
 			.level-name {
 				@apply --d2l-body-small-text;
-				margin: 5px;
+				margin: 5px auto 5px auto;
+				padding-left: 5px;
+				padding-right: 5px;
 				word-break: break-all;
 				overflow: hidden;
 			}
@@ -61,6 +70,9 @@
 				border-top-right-radius: 6px;
 				border-bottom-right-radius: 6px;
 				border-right: solid 1px var(--d2l-color-mica);
+			}
+			.level.last:focus {
+				border: solid 1px rgba(0, 111, 191, 0.4);
 			}
 			.level.last.selected {
 				border: solid 1px var(--d2l-color-galena);
@@ -78,8 +90,7 @@
 				margin-right: 5px;
 			}
 			.out-of .level-name {
-				margin-left: auto;
-				margin-right: auto;
+				padding: 0;
 			}
 			.out-of:hover {
 				cursor: default;
