@@ -45,7 +45,12 @@ Polymer Web-Component to display rubrics
 				text-align: left;
 				padding-left: 20px;
 			}
-			:host-context([dir='rtl']) .left, :host(:dir(rtl)) .left {
+			:host-context([dir='rtl']) .left {
+				text-align: right;
+				padding-left: 0;				
+				padding-right: 20px;
+			}
+			:host(:dir(rtl)) .left {
 				text-align: right;
 				padding-left: 0;				
 				padding-right: 20px;
@@ -54,7 +59,11 @@ Polymer Web-Component to display rubrics
 				width: 100%;
 				text-align: right;
 			}
-			:host-context([dir='rtl']) .right, :host(:dir(rtl)) .right {
+			:host-context([dir='rtl']) .right {
+				text-align: left;
+				padding-left: 20px;
+			}
+			:host(:dir(rtl)) .right {
 				text-align: left;
 				padding-left: 20px;
 			}
