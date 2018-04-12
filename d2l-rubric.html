@@ -45,9 +45,18 @@ Polymer Web-Component to display rubrics
 				text-align: left;
 				padding-left: 20px;
 			}
+			:host-context([dir='rtl']) .left, :host(:dir(rtl)) .left {
+				text-align: right;
+				padding-left: 0;				
+				padding-right: 20px;
+			}
 			.right {
 				width: 100%;
 				text-align: right;
+			}
+			:host-context([dir='rtl']) .right, :host(:dir(rtl)) .right {
+				text-align: left;
+				padding-left: 20px;
 			}
 			@media screen and (max-width: 614px) {
 				.out-of-container {
