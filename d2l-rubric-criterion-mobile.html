@@ -80,10 +80,10 @@
 				cursor: pointer;
 			}
 			.criterion-prev-container:hover {
-				background-color: var(--d2l-color-gypsum);				
+				background-color: var(--d2l-color-gypsum);
 			}
 			.criterion-prev-container:focus, .criterion-prev-container:focus-within {
-				background-color: var(--d2l-color-gypsum);	
+				background-color: var(--d2l-color-gypsum);
 				outline: none;
 				box-shadow: 0 0 0 4px rgba(0, 111, 191, 0.4);
 			}
@@ -103,11 +103,11 @@
 				cursor: pointer;
 			}
 			.criterion-next-container:hover {
-				background-color: var(--d2l-color-gypsum);				
+				background-color: var(--d2l-color-gypsum);
 			}
 			.criterion-next-container:focus, .criterion-next-container:focus-within {
-				background-color: var(--d2l-color-gypsum);	
-				outline: none;				
+				background-color: var(--d2l-color-gypsum);
+				outline: none;
 				box-shadow: 0 0 0 4px rgba(0, 111, 191, 0.4);
 			}
 			d2l-icon-button .d2l-icon-button:focus > d2l-icon.d2l-icon-button {
@@ -115,6 +115,9 @@
 			}
 			.level-name {
 				font-weight: 700;
+			}
+			[aria-hidden], [hidden] {
+				display: none !important;
 			}
 		</style>
 		<div class="criterion-name">
@@ -124,8 +127,7 @@
 			href="[[levelsHref]]"
 			token="[[token]]"
 			selected="{{_selected}}"
-			selected-name="{{_selectedLevelName}}"
-			selected-points="{{_selectedLevelPoints}}"
+			level-entities="{{_levelEntities}}"
 			total="{{_total}}"
 			out-of="[[_outOf]]"
 		>
@@ -139,14 +141,23 @@
 					></d2l-icon-button>
 				</div>
 			</div>
-			<div class="criterion-middle" id="animate">
-				<div class="level-name">
-					[[_getSelectedLevelText(_selectedLevelName, _selected, _criterionCells)]]
+			<template is="dom-repeat" items="[[_criterionCells]]" as="criterionCell" indexAs="index">
+				<div
+					id="level-description-panel[[index]]"
+					class="criterion-middle"
+					aria-labelledby$="level-tab[[index]]"
+					role="tabpanel"
+					aria-hidden$="[[!_isLevelSelected(index, _selected)]]"
+					hidden="[[!_isLevelSelected(index, _selected)]]"
+				>
+					<div class="level-name">
+						[[_getSelectedLevelText(_selected, _levelEntities, criterionCell)]]
+					</div>
+					<div hidden=[[!_hasDescription(criterionCell)]] class="criterion-description">
+						<s-html class="criterion-description-html" html="[[_getCriterionCellText(criterionCell)]]"></s-html>
+					</div>
 				</div>
-				<div hidden=[[!_selectedCriterionText]] class="criterion-description">
-					<s-html class="criterion-description-html" html="[[_selectedCriterionText]]"></s-html>
-				</div>
-			</div>
+			</template>
 			<div class="criterion-next-container" hidden="[[_minLevelSelected(_selected)]]" on-tap="_handleTapRight">
 				<div class="criterion-next">
 					<d2l-icon-button
@@ -166,6 +177,8 @@
 				 */
 				levelsHref: String,
 
+				_levelEntities: Object,
+
 				isHolistic: Boolean,
 
 				_name: String,
@@ -181,17 +194,9 @@
 					observer: '_selectedChanged'
 				},
 
-				_selectedLevelName: String,
-
-				_selectedLevelPoints: Number,
-
-				_selectedCriterionText: String,
-
 				_total: Number,
 
-				_criterionCells: Array,
-
-				_selectedCustomPoints: Number
+				_criterionCells: Array
 			},
 
 			behaviors: [
@@ -201,8 +206,7 @@
 			],
 
 			observers: [
-				'_onEntityChanged(entity)',
-				'_selectedCriterion(_criterionCells, _selected)'
+				'_onEntityChanged(entity)'
 			],
 
 			_onEntityChanged: function(entity) {
@@ -214,11 +218,8 @@
 				this._criterionCells = entity.getSubEntitiesByClass(this.HypermediaClasses.rubrics.criterionCell);
 			},
 
-			_selectedCriterion: function(criterionCells, selected) {
-				if (!criterionCells) {
-					return;
-				}
-				this._selectedCriterionText = criterionCells[selected].getSubEntityByClass(this.HypermediaClasses.text.description).properties.html;
+			_hasDescription: function(criterionCell) {
+				return !!criterionCell.getSubEntityByClass(this.HypermediaClasses.text.description).properties.html;
 			},
 
 			_selectedChanged: function(newValue, oldValue) {
@@ -226,7 +227,7 @@
 					return;
 				}
 
-				this._handledDescriptionAnimation(newValue > oldValue ? 'slide-from-right' : 'slide-from-left');
+				this._handledDescriptionAnimation(newValue > oldValue ? 'slide-from-right' : 'slide-from-left', newValue);
 			},
 
 			_handleTapLeft: function() {
@@ -241,8 +242,8 @@
 				}
 			},
 
-			_handledDescriptionAnimation: function(animation) {
-				var element = this.$.animate;
+			_handledDescriptionAnimation: function(animation, selected) {
+				var element = this.shadowRoot.querySelector('#' + 'level-description-panel' + selected);
 				element.classList.remove('slide-from-right');
 				element.classList.remove('slide-from-left');
 				void element.offsetWidth; // triggers a reflow
@@ -257,16 +258,17 @@
 				return selected === this._total - 1;
 			},
 
-			_getSelectedLevelText: function(levelTitle, selected, criterionCells) {
-				if (!levelTitle) {
+			_getSelectedLevelText: function(selected, levels, criterionCell) {
+				if (!levels) {
 					return null;
 				}
 				// check for overrides
-				var points = this._selectedLevelPoints;
-				if (criterionCells && criterionCells[selected] && criterionCells[selected].hasClass(this.HypermediaClasses.rubrics.overridden)) {
-					points = criterionCells[selected].properties.points;
+				var points = levels[selected].properties.points;
+				if (criterionCell && criterionCell.hasClass(this.HypermediaClasses.rubrics.overridden)) {
+					points = criterionCell.properties.points;
 				}
 
+				var levelTitle = levels[selected].properties.name;
 				if (points === undefined || points === null) {
 					return levelTitle;
 				}
@@ -275,6 +277,14 @@
 					return this.localize('levelNameAndPercentage', 'levelName', levelTitle, 'number', points);
 				}
 				return this.localize('levelNameAndPoints', 'levelName', levelTitle, 'number', points);
+			},
+
+			_getCriterionCellText: function(criterionCell) {
+				return criterionCell.getSubEntityByClass(this.HypermediaClasses.text.description).properties.html;
+			},
+
+			_isLevelSelected: function(levelIndex, selected) {
+				return levelIndex === selected;
 			}
 
 		});
