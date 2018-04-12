@@ -29,6 +29,16 @@
 			entity: {
 				type: Object,
 				value: null
+			},
+
+			_alerts: {
+				type: Array,
+				value: function() { return []; }
+			},
+
+			_hasAlerts: {
+				type: Boolean,
+				value: false
 			}
 		},
 
@@ -40,11 +50,40 @@
 			if (!href) {
 				return;
 			}
-			D2L.PolymerBehaviors.FetchSirenEntityBehavior._fetchEntityWithToken(href, function() { return Promise.resolve(token); })
-				.then(function(entity) {
+			D2L.PolymerBehaviors.FetchSirenEntityBehavior._fetchEntityWithToken(
+				href,
+				function() { return Promise.resolve(token); }
+			).then(
+				function(entity) {
 					this.entity = entity;
-				}.bind(this));
+				}.bind(this)
+			).catch(
+				function() {
+					this._addAlert(
+						'error',
+						'failedToLoadRubric',
+						this.localize('rubricLoadingErrorMessage')
+					);
+				}.bind(this)
+			);
 		},
+		_addAlert: function(type, name, message) {
+			if (this._alerts) {
+				this.push('_alerts', {
+					alertType: type,
+					alertName: name,
+					alertMessage: message
+				});
+			}
+			this._hasAlerts = this._hasAlert();
+		},
+		_hasAlert: function() {
+			if (!this._alerts || this._alerts.length <= 0) {
+				return false;
+			}
+			return true;
+		}
+
 	};
 
 	/** @polymerBehavior */
