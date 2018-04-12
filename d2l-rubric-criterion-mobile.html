@@ -133,7 +133,7 @@
 		>
 		</d2l-rubric-levels-mobile>
 
-		<div class="criterion-description-container">
+		<div id="description" class="criterion-description-container">
 			<div class="criterion-prev-container" hidden="[[_maxLevelSelected(_selected)]]" on-tap="_handleTapLeft">
 				<div class="criterion-prev">
 					<d2l-icon-button
@@ -243,7 +243,7 @@
 			},
 
 			_handledDescriptionAnimation: function(animation, selected) {
-				var element = this.shadowRoot.querySelector('#' + 'level-description-panel' + selected);
+				var element = this.$.description.querySelector('#' + 'level-description-panel' + selected);
 				element.classList.remove('slide-from-right');
 				element.classList.remove('slide-from-left');
 				void element.offsetWidth; // triggers a reflow
