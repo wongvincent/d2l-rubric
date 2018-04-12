@@ -116,7 +116,7 @@
 			.level-name {
 				font-weight: 700;
 			}
-			[aria-hidden], [hidden] {
+			[hidden] {
 				display: none !important;
 			}
 		</style>
@@ -147,7 +147,6 @@
 					class="criterion-middle"
 					aria-labelledby$="level-tab[[index]]"
 					role="tabpanel"
-					aria-hidden$="[[!_isLevelSelected(index, _selected)]]"
 					hidden="[[!_isLevelSelected(index, _selected)]]"
 				>
 					<div class="level-name">
@@ -246,7 +245,6 @@
 				var element = this.$.description.querySelector('#' + 'level-description-panel' + selected);
 				element.classList.remove('slide-from-right');
 				element.classList.remove('slide-from-left');
-				void element.offsetWidth; // triggers a reflow
 				element.classList.add(animation);
 			},
 
