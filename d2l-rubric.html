@@ -32,6 +32,7 @@ Polymer Web-Component to display rubrics
 				margin-right: 1rem;
 				margin-top: 0.5rem;
 				margin-bottom: 0.5rem;
+				display: flex;
 			}
 			.out-of-loader {
 				margin-top: 24px;
@@ -39,6 +40,15 @@ Polymer Web-Component to display rubrics
 				border-radius: 8px;
 				text-align: right;
 				height: 30px;
+			}
+			.left {
+				width: 100%;
+				text-align: left;
+				padding-left: 20px;
+			}
+			.right {
+				width: 100%;
+				text-align: right;
 			}
 		</style>
 		<template is="dom-repeat" items="[[_alerts]]">
@@ -53,7 +63,7 @@ Polymer Web-Component to display rubrics
 			<d2l-rubric-criteria-groups href="[[_getHref(_criteriaGroups)]]" token="[[token]]"></d2l-rubric-criteria-groups>
 			<div class="out-of-container" hidden="[[!_hasOutOf(entity)]]">
 				<div class="out-of-text">
-					[[localize('totalOutOf', 'outOf', entity.properties.outOf)]]
+					<div class="left">[[localize('total')]]</div><div class="right">[[localize('dashOutOf', 'outOf', entity.properties.outOf)]]</div>
 				</div>
 			</div>
 		</div>
