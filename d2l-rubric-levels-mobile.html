@@ -102,8 +102,9 @@
 		</style>
 		<div class="levels-container">
 			<div class="levels" role="tablist">
-				<template is="dom-repeat" items="[[_levelEntities]]">
+				<template is="dom-repeat" items="[[levelEntities]]">
 					<div
+						id="level-tab[[index]]"
 						class$="[[_getLevelClassName(index, selected)]]"
 						on-tap="_selectLevel"
 						data-index="[[index]]"
@@ -111,6 +112,7 @@
 						on-keydown="_onKeyDown"
 						tabindex="0"
 						aria-selected$="[[_isSelected(index, selected)]]"
+						aria-controls$="level-description-panel[[index]]"
 					>
 						<div class$="[[_getLevelTextClassName(index, selected)]]">
 							[[item.properties.name]]
@@ -147,29 +149,16 @@
 				},
 
 				/**
-				 * The selected level name
-				 */
-				selectedName: {
-					type: String,
-					notify: true
-				},
-
-				/**
-				 * The selected level points
-				 */
-				selectedPoints: {
-					type: Number,
-					notify: true
-				},
-
-				/**
 				 * The maximum number of points for any level
 				 */
 				outOf: {
 					type: Number
 				},
 
-				_levelEntities: Array
+				levelEntities: {
+					type: Array,
+					notify: true
+				}
 			},
 
 			behaviors: [
@@ -179,8 +168,7 @@
 			],
 
 			observers: [
-				'_onEntityChanged(entity)',
-				'_getSelectedProperties(_levelEntities, selected)'
+				'_onEntityChanged(entity)'
 			],
 
 			_keyCodes: {
@@ -218,17 +206,7 @@
 					return;
 				}
 				this.total = entity.properties.total;
-				this._levelEntities = entity.getSubEntitiesByClass(this.HypermediaClasses.rubrics.level);
-			},
-
-			_getSelectedProperties: function(levelEntities, selectedLevel) {
-				if (!levelEntities) {
-					return;
-				}
-				if (levelEntities[selectedLevel].properties.points) {
-					this.selectedPoints = levelEntities[selectedLevel].properties.points;
-				}
-				this.selectedName = levelEntities[selectedLevel].properties.name;
+				this.levelEntities = entity.getSubEntitiesByClass(this.HypermediaClasses.rubrics.level);
 			},
 
 			_getLevelClassName: function(index, selected) {
