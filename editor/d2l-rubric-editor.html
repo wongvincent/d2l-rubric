@@ -1,0 +1,140 @@
+<link rel="import" href="../../polymer/polymer.html">
+<link rel="import" href="../../d2l-fetch/d2l-fetch.html">
+<link rel="import" href="../../d2l-hm-constants-behavior/d2l-hm-constants-behavior.html">
+<link rel="import" href="../../d2l-typography/d2l-typography-shared-styles.html">
+<link rel="import" href="../../d2l-alert/d2l-alert.html">
+<link rel="import" href="../d2l-rubric-criteria-groups.html">
+<link rel="import" href="../d2l-rubric-loading.html">
+<link rel="import" href="../localize-behavior.html">
+<link rel="import" href="../siren-entity-behavior.html">
+
+<!--
+`d2l-rubric-editor`
+Creates and edits a rubric
+
+@demo demo/d2l-rubric-editor.html
+-->
+
+<dom-module id="d2l-rubric-editor">
+	<template strip-whitespace>
+		<style>
+			:host {
+				display: block;
+			}
+			.out-of-container {
+				border: 1px solid var(--d2l-color-mica);
+				border-radius: 8px;
+				text-align: right;
+			}
+			.out-of-text {
+				@apply --d2l-body-compact-text;
+				margin-right: 1rem;
+				margin-top: 0.5rem;
+				margin-bottom: 0.5rem;
+				display: flex;
+			}
+			.out-of-loader {
+				margin-top: 24px;
+				border: 1px solid var(--d2l-color-mica);
+				border-radius: 8px;
+				text-align: right;
+				height: 30px;
+			}
+			.left {
+				width: 100%;
+				text-align: left;
+				padding-left: 20px;
+			}
+			:host-context([dir='rtl']) .left {
+				text-align: right;
+				padding-left: 0;
+				padding-right: 20px;
+			}
+			:host(:dir(rtl)) .left {
+				text-align: right;
+				padding-left: 0;
+				padding-right: 20px;
+			}
+			.right {
+				width: 100%;
+				text-align: right;
+			}
+			:host-context([dir='rtl']) .right {
+				text-align: left;
+				padding-left: 20px;
+			}
+			:host(:dir(rtl)) .right {
+				text-align: left;
+				padding-left: 20px;
+			}
+			@media screen and (max-width: 614px) {
+				.out-of-container {
+					margin-top: 24px;
+				}
+			}
+		</style>
+		<template is="dom-repeat" items="[[_alerts]]">
+			<d2l-alert type="[[item.alertType]]">
+				[[item.alertMessage]]
+			</d2l-alert>
+		</template>
+		<slot></slot>
+		<d2l-rubric-loading hidden$="[[_hideLoading(_showContent,_hasAlerts)]]"></d2l-rubric-loading>
+		<div hidden$="[[_hideLoading(_showContent,_hasAlerts)]]" class="out-of-loader"></div>
+		<div hidden$="[[_hideOutOf(_showContent,_hasAlerts)]]">
+			<d2l-rubric-criteria-groups href="[[_getHref(_criteriaGroups)]]" token="[[token]]"></d2l-rubric-criteria-groups>
+			<div class="out-of-container" hidden="[[!_hasOutOf(entity)]]">
+				<div class="out-of-text">
+					<div class="left">[[localize('total')]]</div><div class="right">[[localize('dashOutOf', 'outOf', entity.properties.outOf)]]</div>
+				</div>
+			</div>
+		</div>
+	</template>
+
+	<script>
+		Polymer({
+			is: 'd2l-rubric-editor',
+
+			properties: {
+				_criteriaGroups: {
+					type: Object
+				},
+				_showContent: {
+					type: Boolean,
+					value: false
+				}
+			},
+
+			behaviors: [
+				D2L.PolymerBehaviors.Rubric.SirenEntityBehavior,
+				window.D2L.Hypermedia.HMConstantsBehavior,
+				D2L.PolymerBehaviors.Rubric.LocalizeBehavior
+			],
+
+			observers: [
+				'_onEntityChanged(entity)'
+			],
+
+			_onEntityChanged: function(entity) {
+				if (entity && entity.hasLinkByRel(this.HypermediaRels.Rubrics.criteriaGroups)) {
+					this._showContent = true;
+					this._criteriaGroups = entity.getLinkByRel(this.HypermediaRels.Rubrics.criteriaGroups);
+				}
+			},
+
+			_getHref: function(link) {
+				return link.href;
+			},
+
+			_hasOutOf: function(entity) {
+				return entity && entity.properties.outOf;
+			},
+			_hideLoading: function(showContent, hasAlerts) {
+				return showContent || hasAlerts;
+			},
+			_hideOutOf: function(showContent, hasAlerts) {
+				return !showContent || hasAlerts;
+			}
+		});
+	</script>
+</dom-module>
