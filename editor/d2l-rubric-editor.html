@@ -3,10 +3,10 @@
 <link rel="import" href="../../d2l-hm-constants-behavior/d2l-hm-constants-behavior.html">
 <link rel="import" href="../../d2l-typography/d2l-typography-shared-styles.html">
 <link rel="import" href="../../d2l-alert/d2l-alert.html">
-<link rel="import" href="../d2l-rubric-criteria-groups.html">
 <link rel="import" href="../d2l-rubric-loading.html">
 <link rel="import" href="../localize-behavior.html">
 <link rel="import" href="../siren-entity-behavior.html">
+<link rel="import" href="./d2l-rubric-criteria-groups-editor.html">
 
 <!--
 `d2l-rubric-editor`
@@ -82,7 +82,7 @@ Creates and edits a rubric
 		<d2l-rubric-loading hidden$="[[_hideLoading(_showContent,_hasAlerts)]]"></d2l-rubric-loading>
 		<div hidden$="[[_hideLoading(_showContent,_hasAlerts)]]" class="out-of-loader"></div>
 		<div hidden$="[[_hideOutOf(_showContent,_hasAlerts)]]">
-			<d2l-rubric-criteria-groups href="[[_getHref(_criteriaGroups)]]" token="[[token]]"></d2l-rubric-criteria-groups>
+			<d2l-rubric-criteria-groups-editor href="[[_getHref(_criteriaGroups)]]" token="[[token]]"></d2l-rubric-criteria-groups-editor>
 			<div class="out-of-container" hidden="[[!_hasOutOf(entity)]]">
 				<div class="out-of-text">
 					<div class="left">[[localize('total')]]</div><div class="right">[[localize('dashOutOf', 'outOf', entity.properties.outOf)]]</div>

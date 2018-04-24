@@ -1,0 +1,78 @@
+<link rel="import" href="../../polymer/polymer.html">
+<link rel="import" href="../../d2l-fetch/d2l-fetch.html">
+<link rel="import" href="../../d2l-hm-constants-behavior/d2l-hm-constants-behavior.html">
+<link rel="import" href="../../iron-media-query/iron-media-query.html">
+
+<link rel="import" href="./../siren-entity-behavior.html">
+<link rel="import" href="./../d2l-rubric-criteria-group-mobile.html">
+<link rel="import" href="./../d2l-rubric-loading.html">
+
+<link rel="import" href="./d2l-rubric-criteria-group-editor.html">
+
+<dom-module id="d2l-rubric-criteria-groups-editor">
+	<template strip-whitespace>
+		<style>
+			:host {
+				display: block;
+			}
+			d2l-rubric-criteria-group-editor {
+				padding-bottom: 24px;
+			}
+		</style>
+
+		<d2l-rubric-loading hidden$="[[_showContent]]"></d2l-rubric-loading>
+
+		<iron-media-query query="(min-width: 615px)" query-matches="{{_largeScreen}}"></iron-media-query>
+		<template is="dom-if" if="[[_largeScreen]]">
+			<template is="dom-repeat" items="[[_groups]]">
+				<d2l-rubric-criteria-group-editor hidden$="[[!_showContent]]" href="[[_getSelfLink(item)]]" token="[[token]]"></d2l-rubric-criteria-group-editor>
+			</template>
+		</template>
+		<template is="dom-if" if="[[!_largeScreen]]">
+			<template is="dom-repeat" items="[[_groups]]">
+				<d2l-rubric-criteria-group-mobile hidden$="[[!_showContent]]" href="[[_getSelfLink(item)]]" token="[[token]]"></d2l-rubric-criteria-group-mobile>
+			</template>
+		</template>
+	</template>
+
+	<script>
+		Polymer({
+			is: 'd2l-rubric-criteria-groups-editor',
+
+			properties: {
+				_groups: {
+					type: Array,
+					value: function() { return []; }
+				},
+
+				_largeScreen: Boolean,
+
+				_showContent: {
+					type: Boolean,
+					value: false
+				}
+			},
+
+			behaviors: [
+				D2L.PolymerBehaviors.Rubric.SirenEntityBehavior,
+				window.D2L.Hypermedia.HMConstantsBehavior
+			],
+
+			observers: [
+				'_onEntityChanged(entity)'
+			],
+
+			_onEntityChanged: function(entity) {
+				if (!entity) {
+					return;
+				}
+				this._groups = entity.getSubEntitiesByClass(this.HypermediaClasses.rubrics.criteriaGroup);
+				this._showContent = true;
+			},
+
+			_getSelfLink: function(entity) {
+				return entity && (entity.getLinkByRel('self') || {}).href || '';
+			}
+		});
+	</script>
+</dom-module>

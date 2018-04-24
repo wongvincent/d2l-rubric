@@ -1,0 +1,270 @@
+<link rel="import" href="../../polymer/polymer.html">
+<link rel="import" href="../../d2l-table/d2l-table.html">
+<link rel="import" href="../../d2l-table/d2l-td.html">
+<link rel="import" href="../../d2l-table/d2l-tr.html">
+<link rel="import" href="../../d2l-table/d2l-thead.html">
+<link rel="import" href="../../d2l-table/d2l-tbody.html">
+<link rel="import" href="../../d2l-table/d2l-th.html">
+<link rel="import" href="../../d2l-hm-constants-behavior/d2l-hm-constants-behavior.html">
+<link rel="import" href="../../d2l-colors/d2l-colors.html">
+<link rel="import" href="../../iron-resizable-behavior/iron-resizable-behavior.html">
+<link rel="import" href="../../d2l-offscreen/d2l-offscreen.html">
+<link rel="import" href="../../d2l-typography/d2l-typography-shared-styles.html">
+<link rel="import" href="../../s-html/s-html.html">
+<link rel="import" href="../../d2l-textarea/d2l-textarea.html">
+
+<link rel="import" href="./../siren-entity-behavior.html">
+<link rel="import" href="./../d2l-rubric-loading.html">
+<link rel="import" href="./../localize-behavior.html">
+
+<dom-module id="d2l-rubric-criteria-group-editor">
+	<template strip-whitespace>
+		<style include="d2l-table-style">
+			:host {
+				display: block;
+			}
+			d2l-td {
+				min-width: 130px;
+			}
+			d2l-td.out-of {
+				text-align: right;
+				min-width: 0;
+			}
+			d2l-th  {
+				text-align: center;
+			}
+			.level-name {
+				font-weight: 700;
+			}
+			.group-name {
+				@apply --d2l-body-compact-text;
+				font-weight: bold;
+				text-align: left;
+				background-color: var(--d2l-table-header-background-color);
+			}
+			.criteria {
+				@apply --d2l-body-compact-text;
+				text-align: left;
+				background-color: var(--d2l-table-header-background-color);
+				vertical-align: text-top;
+			}
+			.criterion-cell {
+				@apply --d2l-body-compact-text;
+				vertical-align: text-top;
+			}
+			.custom-points {
+				font-weight: 700;
+				color: var(--d2l-color-galena);
+				margin-bottom: 0.5rem;
+			}
+			.criterion-description-richtext {
+				display: block;
+				overflow-x: hidden;
+			}
+		</style>
+
+		<d2l-rubric-loading hidden$="[[_showContent]]"></d2l-rubric-loading>
+
+		<d2l-table
+			aria-colcount$="[[_getColumnCount(_levels, entity)]]"
+			aria-rowcount$="[[_getRowCount(_criteriaEntities)]]"
+			hidden$="[[!_showContent]]"
+		>
+			<d2l-offscreen>
+				[[localize('rubricSummaryA11y')]]
+			</d2l-offscreen>
+			<d2l-thead>
+				<d2l-tr>
+					<d2l-td class="group-name">
+						[[entity.properties.name]]
+					</d2l-td>
+					<template is="dom-repeat" items="[[_levels]]" as="level">
+						<d2l-th>
+							<div>
+								<div class="level-name">[[level.properties.name]]</div>
+								<div hidden="[[!_isNumeric(entity, level)]]">[[_localizeLevelOutOf('points', level.properties.points)]]</div>
+								<div hidden="[[!_isHolistic(entity, level)]]">[[_localizeLevelOutOf('percentage', level.properties.points)]]</div>
+							</div>
+						</d2l-th>
+					</template>
+					<template is="dom-if" if="[[_hasOutOf(entity)]]">
+						<d2l-th class="out-of"></d2l-th>
+					</template>
+				</d2l-tr>
+			</d2l-thead>
+			<d2l-tbody>
+				<template is="dom-repeat" items="[[_criteriaEntities]]">
+					<d2l-tr>
+						<d2l-td class="criteria">[[item.properties.name]]</d2l-td>
+						<template is="dom-repeat" as="criterionCell" items="[[_getCriterionCells(item)]]">
+							<d2l-td class="criterion-cell">
+								<div >
+									<div class="points custom-points" hidden=[[!_hasCustomPoints(criterionCell)]]>
+										[[localize('points', 'number', criterionCell.properties.points)]]
+									</div>
+									<!-- <s-html class="criterion-description-richtext" html="[[_getDescription(criterionCell)]]"></s-html> -->
+									<d2l-textarea value=[[_getDescription(criterionCell)]]></d2l-textarea>
+								</div>
+							</d2l-td>
+						</template>
+						<template is="dom-if" if="[[_hasOutOf(entity)]]">
+							<d2l-td class="out-of">
+								<div> [[localize('outOf', 'outOf', item.properties.outOf)]] </div>
+							</d2l-td>
+						</template>
+					</d2l-tr>
+				</template>
+			</d2l-tbody>
+		</d2l-table>
+	</template>
+
+	<script>
+		Polymer({
+			is: 'd2l-rubric-criteria-group-editor',
+
+			properties: {
+				_levelsHref: String,
+				_levelsEntity: Object,
+				_levels: Array,
+				_criteriaCollectionHref: String,
+				_criteriaCollectionEntity: Object,
+				_criteriaEntities: Array,
+				_showContent: {
+					type: Boolean,
+					value: false
+				},
+			},
+
+			behaviors: [
+				D2L.PolymerBehaviors.Rubric.SirenEntityBehavior,
+				window.D2L.Hypermedia.HMConstantsBehavior,
+				D2L.PolymerBehaviors.Rubric.LocalizeBehavior,
+				Polymer.IronResizableBehavior
+			],
+
+			observers: [
+				'_onEntityChanged(entity)',
+				'_fetchLevels(_levelsHref, token)',
+				'_fetchCriteria(_criteriaCollectionHref, token)',
+				'_onLevelsEntityChanged(_levelsEntity)',
+				'_onCriteriaCollectionEntityChanged(_criteriaCollectionEntity)'
+			],
+
+			_onEntityChanged: function(entity) {
+				if (!entity) {
+					return;
+				}
+				this._levelsHref = this._getLevelsLink(entity);
+				this._criteriaCollectionHref = this._getCriteriaLink(entity);
+			},
+
+			_onLevelsEntityChanged: function(levelsEntity) {
+				this._levels = levelsEntity.getSubEntitiesByClass(this.HypermediaClasses.rubrics.level);
+				// trigger a resize event so that the table resizes with the new levels
+				if (Polymer.Element) {
+					Polymer.RenderStatus.beforeNextRender(this, function() {
+						this.notifyResize();
+					});
+				} else {
+					requestAnimationFrame(function() {
+						this.notifyResize();
+					}.bind(this));
+				}
+			},
+
+			_fetchLevels: function(href, token) {
+				if (href && token) {
+					this._fetchEntityWithToken(href, function() { return Promise.resolve(token); })
+						.then(function(entity) {
+							this._levelsEntity = entity;
+						}.bind(this));
+				}
+			},
+
+			_fetchCriteria: function(href, token) {
+				if (href && token) {
+					this._fetchEntityWithToken(href, function() { return Promise.resolve(token); })
+						.then(function(entity) {
+							this._criteriaCollectionEntity = entity;
+							this._showContent = true;
+						}.bind(this));
+				}
+			},
+
+			_onCriteriaCollectionEntityChanged: function(entity) {
+				this._criteriaEntities = entity.getSubEntitiesByClass(this.HypermediaClasses.rubrics.criterion);
+			},
+
+			_getCriteriaLink: function(entity) {
+				var link = entity && entity.getLinkByRel(this.HypermediaRels.Rubrics.criteria);
+				return link && link.href || '';
+			},
+
+			_getLevelsLink: function(entity) {
+				var link = entity && entity.getLinkByRel(this.HypermediaRels.Rubrics.levels);
+				return link && link.href || '';
+			},
+
+			_getCriterionCells: function(entity) {
+				var entities = entity && entity.getSubEntitiesByClass(this.HypermediaClasses.rubrics.criterionCell);
+				return entities || [];
+			},
+
+			_getDescription: function(entity) {
+				var description = entity && entity.getSubEntityByClass(this.HypermediaClasses.rubrics.description);
+				return description && description.properties && description.properties.html || '';
+			},
+
+			_getFeedback: function(entity) {
+				var feedback = entity && entity.getSubEntityByClass(this.HypermediaClasses.rubrics.feedback);
+				return feedback && feedback.properties && feedback.properties.text || '';
+			},
+
+			_hasCustomPoints: function(criterionCell) {
+				// TODO: The API currently returns 0 points for cells without custom points, this will be null soon.
+				// TODO: Once we get null then remove the > 0 compare
+				return criterionCell.properties && criterionCell.properties.points > 0;
+			},
+
+			_hasOutOf: function(entity) {
+				return entity && entity.hasClass(this.HypermediaClasses.rubrics.numeric);
+			},
+
+			_isHolistic: function(entity, level) {
+				var hasPoints = level.properties.points !== null;
+				var isHolistic = entity && entity.hasClass(this.HypermediaClasses.rubrics.percentage);
+				return hasPoints && isHolistic;
+			},
+
+			_isNumeric: function(entity, level) {
+				var hasPoints = level.properties.points;
+				var isNumeric = entity && entity.hasClass(this.HypermediaClasses.rubrics.numeric);
+				return hasPoints && isNumeric;
+			},
+
+			_localizeLevelOutOf: function(type, points) {
+				if (points === undefined || points === null) {
+					return;
+				}
+				return this.localize(type, 'number', points.toString());
+			},
+
+			_getRowCount: function(criteria) {
+				if (!criteria) {
+					return 0;
+				}
+				return criteria.length + 1; // criteria + levels row
+			},
+
+			_getColumnCount: function(levels, entity) {
+				if (!levels) {
+					return 0;
+				}
+				if (this._hasOutOf(entity)) {
+					return levels.length + 2; // levels + outof + criteria
+				}
+				return levels.length + 1; // levels + criteria
+			}
+		});
+	</script>
+</dom-module>
