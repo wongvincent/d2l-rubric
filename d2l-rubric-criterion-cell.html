@@ -1,0 +1,88 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../d2l-fetch/d2l-fetch.html">
+<link rel="import" href="../d2l-typography/d2l-typography-shared-styles.html">
+<link rel="import" href="./localize-behavior.html">
+<link rel="import" href="../d2l-hm-constants-behavior/d2l-hm-constants-behavior.html">
+<link rel="import" href="./siren-entity-behavior.html">
+<link rel="import" href="../s-html/s-html.html">
+
+<dom-module id="d2l-rubric-criterion-cell">
+	<template strip-whitespace>
+		<style>
+			:host {
+				display: block;
+			}
+
+			.criterion-description-richtext {
+				display: block;
+				overflow-x: hidden;
+			}
+			.custom-points {
+				font-weight: 700;
+				color: var(--d2l-color-galena);
+				margin-bottom: 0.5rem;
+			}
+			.check-icon {
+				color: #005694;
+				text-align: center;
+			}
+		</style>
+
+			<div>
+				<div class="points custom-points" hidden=[[!_hasCustomPoints(criterionCell)]]>
+					[[localize('points', 'number', criterionCell.properties.points)]]
+				</div>
+				<template is="dom-if" if="[[showSelectedIcon]]">
+						<d2l-icon class="check-icon" icon='d2l-tier1:check'></d2l-icon>
+				</template>
+				<s-html class="criterion-description-richtext" html="[[_getDescription(criterionCell)]]"></s-html>
+			</div>
+
+	</template>
+	<script>
+		Polymer({
+			is: 'd2l-rubric-criterion-cell',
+
+			properties: {
+				/**
+					* The href of the levels for this criteria group
+					*/
+				criterionCell: Object,
+				showSelectedIcon: {
+					type: Boolean,
+
+				}
+			},
+
+			behaviors: [
+				D2L.PolymerBehaviors.Rubric.SirenEntityBehavior,
+				D2L.PolymerBehaviors.Rubric.LocalizeBehavior,
+				window.D2L.Hypermedia.HMConstantsBehavior
+			],
+
+			observers: [
+				'_onEntityChanged(entity)',
+			],
+
+
+			_hasCustomPoints: function(criterionCell) {
+				// TODO: The API currently returns 0 points for cells without custom points, this will be null soon.
+				// TODO: Once we get null then remove the > 0 compare
+				return criterionCell.properties && criterionCell.properties.points > 0;
+			},
+
+			_onEntityChanged: function(entity) {
+				if (!entity) {
+					return;
+				}
+				this.criterionCell = entity;
+			},
+
+			_getDescription: function(entity) {
+				var description = entity && entity.getSubEntityByClass(this.HypermediaClasses.rubrics.description);
+				return description && description.properties && description.properties.html || '';
+			},
+
+		});
+	</script>
+</dom-module>

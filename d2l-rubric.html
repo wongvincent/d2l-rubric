@@ -47,12 +47,12 @@ Polymer Web-Component to display rubrics
 			}
 			:host-context([dir='rtl']) .left {
 				text-align: right;
-				padding-left: 0;				
+				padding-left: 0;
 				padding-right: 20px;
 			}
 			:host(:dir(rtl)) .left {
 				text-align: right;
-				padding-left: 0;				
+				padding-left: 0;
 				padding-right: 20px;
 			}
 			.right {
@@ -82,7 +82,7 @@ Polymer Web-Component to display rubrics
 		<d2l-rubric-loading hidden$="[[_hideLoading(_showContent,_hasAlerts)]]"></d2l-rubric-loading>
 		<div hidden$="[[_hideLoading(_showContent,_hasAlerts)]]" class="out-of-loader"></div>
 		<div hidden$="[[_hideOutOf(_showContent,_hasAlerts)]]">
-			<d2l-rubric-criteria-groups href="[[_getHref(_criteriaGroups)]]" token="[[token]]"></d2l-rubric-criteria-groups>
+			<d2l-rubric-criteria-groups href="[[_getHref(_criteriaGroups)]]" assessments-href="[[assessmentsHref]]" token="[[token]]"></d2l-rubric-criteria-groups>
 			<div class="out-of-container" hidden="[[!_hasOutOf(entity)]]">
 				<div class="out-of-text">
 					<div class="left">[[localize('total')]]</div><div class="right">[[localize('dashOutOf', 'outOf', entity.properties.outOf)]]</div>
@@ -102,6 +102,12 @@ Polymer Web-Component to display rubrics
 				_showContent: {
 					type: Boolean,
 					value: false
+				},
+				_score: {
+					type: String
+				},
+				assessmentsHref: {
+					type: String
 				}
 			},
 
@@ -112,18 +118,30 @@ Polymer Web-Component to display rubrics
 			],
 
 			observers: [
-				'_onEntityChanged(entity)'
+				'_onEntityChanged(entity, token)'
 			],
 
-			_onEntityChanged: function(entity) {
-				if (entity && entity.hasLinkByRel(this.HypermediaRels.Rubrics.criteriaGroups)) {
-					this._showContent = true;
+			_onEntityChanged: function(entity, token) {
+				if(entity) {
 					this._criteriaGroups = entity.getLinkByRel(this.HypermediaRels.Rubrics.criteriaGroups);
+					this._showContent = true;
+					if( this.assessmentsHref ) {
+						this._fetchEntityWithToken( this.assessmentsHref, function() { return Promise.resolve(token); })
+						.then(function(assessmentEntity) {
+							this.assessmentsHref = this._getSelfLink(assessmentEntity);
+							this._score = assessmentEntity.properties.score;
+						}.bind(this));
+					}
+
 				}
 			},
 
 			_getHref: function(link) {
 				return link.href;
+			},
+
+			_getSelfLink: function(entity) {
+				return entity && (entity.getLinkByRel('self') || {}).href || '';
 			},
 
 			_hasOutOf: function(entity) {

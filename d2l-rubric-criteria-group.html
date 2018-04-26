@@ -13,7 +13,7 @@
 <link rel="import" href="../iron-resizable-behavior/iron-resizable-behavior.html">
 <link rel="import" href="../d2l-offscreen/d2l-offscreen.html">
 <link rel="import" href="../d2l-typography/d2l-typography-shared-styles.html">
-<link rel="import" href="../s-html/s-html.html">
+<link rel="import" href="./d2l-rubric-criterion-cell.html">
 
 <dom-module id="d2l-rubric-criteria-group">
 	<template strip-whitespace>
@@ -59,6 +59,24 @@
 				display: block;
 				overflow-x: hidden;
 			}
+			.selected {
+				border-color: var(--d2l-color-celestine);
+				background-color: var(--d2l-color-celestine-plus-2);
+				text-decoration-color: var(--d2l-color-celestine-minus-1);
+				color: var(--d2l-color-celestine-minus-1);
+				border-left: 1px solid var(--d2l-color-celestine);
+				border-bottom: 1px solid var(--d2l-color-celestine);
+			}
+
+			.selected-icon {
+				border-color: var(--d2l-color-celestine);
+				background-color: var(--d2l-color-celestine-plus-2);
+				text-decoration-color: var(--d2l-color-celestine-minus-1);
+				border-left: 1px solid var(--d2l-color-celestine);
+				border-bottom: 1px solid var(--d2l-color-celestine) !important;
+				color: var(--d2l-color-celestine-minus-1);
+				text-align: center;
+			}
 		</style>
 
 		<d2l-rubric-loading hidden$="[[_showContent]]"></d2l-rubric-loading>
@@ -92,25 +110,20 @@
 			</d2l-thead>
 			<d2l-tbody>
 				<template is="dom-repeat" items="[[_criteriaEntities]]">
-					<d2l-tr>
-						<d2l-td class="criteria">[[item.properties.name]]</d2l-td>
-						<template is="dom-repeat" as="criterionCell" items="[[_getCriterionCells(item)]]">
-							<d2l-td class="criterion-cell">
-								<div >
-									<div class="points custom-points" hidden=[[!_hasCustomPoints(criterionCell)]]>
-										[[localize('points', 'number', criterionCell.properties.points)]]
-									</div>
-									<s-html class="criterion-description-richtext" html="[[_getDescription(criterionCell)]]"></s-html>
-								</div>
-							</d2l-td>
-						</template>
-						<template is="dom-if" if="[[_hasOutOf(entity)]]">
-							<d2l-td class="out-of">
-								<div> [[localize('outOf', 'outOf', item.properties.outOf)]] </div>
-							</d2l-td>
-						</template>
-					</d2l-tr>
-				</template>
+						<d2l-tr>
+							<d2l-td class="criteria">[[item.properties.name]]</d2l-td>
+							<template is="dom-repeat" as="criterionCell" items="[[_getCriterionCells(item)]]">
+								<d2l-td class$="[[_getCriteriaClassName(criterionCell)]]">
+									<d2l-rubric-criterion-cell href="[[_getSelfLink(criterionCell)]]" show-selected-icon="[[_showSelectedIcon(criterionCell)]]" token="[[token]]"/>
+								</d2l-td>
+							</template>
+							<template is="dom-if" if="[[_hasOutOf(entity)]]">
+								<d2l-td class="out-of">
+									<div>[[_getScore(item)]]/[[item.properties.outOf]]</div>
+								</d2l-td>
+							</template>
+						</d2l-tr>
+					</template>
 			</d2l-tbody>
 		</d2l-table>
 	</template>
@@ -130,6 +143,12 @@
 					type: Boolean,
 					value: false
 				},
+				assessmentsHref: {
+					type: String
+				},
+				_assessmentResult: {
+					type: Object
+				}
 			},
 
 			behaviors: [
@@ -144,7 +163,8 @@
 				'_fetchLevels(_levelsHref, token)',
 				'_fetchCriteria(_criteriaCollectionHref, token)',
 				'_onLevelsEntityChanged(_levelsEntity)',
-				'_onCriteriaCollectionEntityChanged(_criteriaCollectionEntity)'
+				'_onCriteriaCollectionEntityChanged(_criteriaCollectionEntity)',
+				'_fetchAssessments(entity, token)'
 			],
 
 			_onEntityChanged: function(entity) {
@@ -217,6 +237,19 @@
 				return feedback && feedback.properties && feedback.properties.text || '';
 			},
 
+			_getSelfLink: function(entity) {
+				return entity && (entity.getLinkByRel('self') || {}).href || '';
+			},
+
+			_getScore: function ( item ) {
+				if(this.assessmentsHref) {
+					const selfLink = item.getLinkByRel('self');
+					if( this._assessmentResult[selfLink.href] ) {
+						return this._assessmentResult[selfLink.href];
+					}
+				}
+			},
+
 			_hasCustomPoints: function(criterionCell) {
 				// TODO: The API currently returns 0 points for cells without custom points, this will be null soon.
 				// TODO: Once we get null then remove the > 0 compare
@@ -261,6 +294,69 @@
 					return levels.length + 2; // levels + outof + criteria
 				}
 				return levels.length + 1; // levels + criteria
+			},
+
+			_showSelectedIcon: function(criterionCell) {
+				if( this.assessmentsHref ) {
+
+					var descriptionEntity = criterionCell && criterionCell.getSubEntityByClass(this.HypermediaClasses.rubrics.description);
+					var descriptionText = descriptionEntity && descriptionEntity.properties && descriptionEntity.properties.text || '';
+					const selfLink = criterionCell.getLinkByRel('self');
+					if( selfLink.href && this._assessmentResult[selfLink.href] ) {
+						return descriptionText === '';
+					}
+					return false;
+				}
+				return false;
+			},
+
+			_fetchAssessments(entity, token) {
+				if( this.assessmentsHref ) {
+					this._fetchEntityWithToken(this.assessmentsHref, function() { return Promise.resolve(token); })
+						.then(function(assessmentEntity) {
+							this._assessmentResult = this._buildAssessmentsMap(assessmentEntity);
+						}.bind(this));
+				}
+
+			},
+
+			_buildAssessmentsMap(entity) {
+				var assessmentMap = {}
+				for( var i = 0; i < entity.entities.length; i++){
+					var subEntity = entity.entities[i];
+					for(var j = 0; j < subEntity.entities.length; j++) {
+						var criterion = subEntity.entities[j];
+						if( criterion.class.indexOf('selected') !== -1 ){
+							const link = criterion.getLinkByRel('https://rubrics.api.brightspace.com/rels/criterion-cell');
+							const rowLink = criterion.getLinkByRel('https://rubrics.api.brightspace.com/rels/criterion');
+
+							if( link.href ) {
+								assessmentMap[link.href] = criterion.properties.score;
+								assessmentMap[rowLink.href] = criterion.properties.score;
+							}
+						}
+					}
+				}
+				return assessmentMap;
+			},
+
+			_getCriteriaClassName: function(criterionCell) {
+				if( !this.assessmentsHref ){
+					return 'criterion-cell';
+				}
+				var descriptionEntity = criterionCell && criterionCell.getSubEntityByClass(this.HypermediaClasses.rubrics.description);
+				var descriptionText = descriptionEntity && descriptionEntity.properties && descriptionEntity.properties.text || '';
+				const selfLink = criterionCell.getLinkByRel('self');
+
+				if( selfLink.href){
+					if( this._assessmentResult[selfLink.href]){
+						if( descriptionText === '' ){
+							return 'criterion-cell selected-icon';
+						}
+						return 'criterion-cell selected';
+					}
+				}
+				return 'criterion-cell';
 			}
 		});
 	</script>
