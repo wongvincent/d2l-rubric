@@ -1,6 +1,6 @@
 {
   "name": "d2l-rubric",
-  "version": "0.34.0",
+  "version": "0.35.0",
   "description": "Polymer-based web components for D2L Rubrics",
   "private": true,
   "directories": {
@@ -8,7 +8,7 @@
   },
   "scripts": {
     "postinstall": "polymer install --variants",
-    "regenerate_data":"cd test/regen_api_data && node regenerate_api_data.js",
+    "regenerate_data": "cd test/regen_api_data && node regenerate_api_data.js",
     "serve": "polymer analyze > analysis.json && polymer serve",
     "test": "npm run test:lint && npm run test:wct",
     "test:lint": "npm run test:lint:wc && npm run test:lint:html",
