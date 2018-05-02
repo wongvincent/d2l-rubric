@@ -8,6 +8,7 @@
   },
   "scripts": {
     "postinstall": "polymer install --variants",
+    "regenerate_data":"cd test/regen_api_data && node regenerate_api_data.js",
     "serve": "polymer analyze > analysis.json && polymer serve",
     "test": "npm run test:lint && npm run test:wct",
     "test:lint": "npm run test:lint:wc && npm run test:lint:html",
@@ -34,6 +35,7 @@
     "eslint-plugin-html": "^4.0.1",
     "frau-ci": "^1.33.2",
     "polymer-cli": "^1.5.7",
+    "python-shell": "^0.5.0",
     "web-component-tester-istanbul": "^0.10.0"
   }
 }
