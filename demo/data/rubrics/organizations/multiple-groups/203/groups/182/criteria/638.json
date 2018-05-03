@@ -1,0 +1,311 @@
+{
+    "class": [
+        "criterion",
+        "numeric"
+    ],
+    "properties": {
+        "name": "Criterion 1",
+        "outOf": 5.0
+    },
+    "entities": [
+        {
+            "class": [
+                "criterion-cell"
+            ],
+            "rel": [
+                "item",
+                "https://rubrics.api.brightspace.com/rels/criterion-cell"
+            ],
+            "entities": [
+                {
+                    "class": [
+                        "richtext",
+                        "description"
+                    ],
+                    "rel": [
+                        "item"
+                    ],
+                    "properties": {
+                        "text": "",
+                        "html": ""
+                    }
+                },
+                {
+                    "class": [
+                        "richtext",
+                        "feedback"
+                    ],
+                    "rel": [
+                        "item"
+                    ],
+                    "properties": {
+                        "text": "",
+                        "html": ""
+                    }
+                }
+            ],
+            "links": [
+                {
+                    "rel": [
+                        "https://rubrics.api.brightspace.com/rels/level"
+                    ],
+                    "href": "data/rubrics/organizations/multiple-groups/203/groups/182/levels/1526.json"
+                },
+                {
+                    "rel": [
+                        "self"
+                    ],
+                    "href": "data/rubrics/organizations/multiple-groups/203/groups/182/criteria/638/0.json"
+                },
+                {
+                    "rel": [
+                        "up"
+                    ],
+                    "href": "data/rubrics/organizations/multiple-groups/203/groups/182/criteria/638.json"
+                }
+            ]
+        },
+        {
+            "class": [
+                "criterion-cell"
+            ],
+            "rel": [
+                "item",
+                "https://rubrics.api.brightspace.com/rels/criterion-cell"
+            ],
+            "entities": [
+                {
+                    "class": [
+                        "richtext",
+                        "description"
+                    ],
+                    "rel": [
+                        "item"
+                    ],
+                    "properties": {
+                        "text": "",
+                        "html": ""
+                    }
+                },
+                {
+                    "class": [
+                        "richtext",
+                        "feedback"
+                    ],
+                    "rel": [
+                        "item"
+                    ],
+                    "properties": {
+                        "text": "",
+                        "html": ""
+                    }
+                }
+            ],
+            "links": [
+                {
+                    "rel": [
+                        "https://rubrics.api.brightspace.com/rels/level"
+                    ],
+                    "href": "data/rubrics/organizations/multiple-groups/203/groups/182/levels/1527.json"
+                },
+                {
+                    "rel": [
+                        "self"
+                    ],
+                    "href": "data/rubrics/organizations/multiple-groups/203/groups/182/criteria/638/1.json"
+                },
+                {
+                    "rel": [
+                        "up"
+                    ],
+                    "href": "data/rubrics/organizations/multiple-groups/203/groups/182/criteria/638.json"
+                }
+            ]
+        },
+        {
+            "class": [
+                "criterion-cell"
+            ],
+            "rel": [
+                "item",
+                "https://rubrics.api.brightspace.com/rels/criterion-cell"
+            ],
+            "entities": [
+                {
+                    "class": [
+                        "richtext",
+                        "description"
+                    ],
+                    "rel": [
+                        "item"
+                    ],
+                    "properties": {
+                        "text": "",
+                        "html": ""
+                    }
+                },
+                {
+                    "class": [
+                        "richtext",
+                        "feedback"
+                    ],
+                    "rel": [
+                        "item"
+                    ],
+                    "properties": {
+                        "text": "",
+                        "html": ""
+                    }
+                }
+            ],
+            "links": [
+                {
+                    "rel": [
+                        "https://rubrics.api.brightspace.com/rels/level"
+                    ],
+                    "href": "data/rubrics/organizations/multiple-groups/203/groups/182/levels/1528.json"
+                },
+                {
+                    "rel": [
+                        "self"
+                    ],
+                    "href": "data/rubrics/organizations/multiple-groups/203/groups/182/criteria/638/2.json"
+                },
+                {
+                    "rel": [
+                        "up"
+                    ],
+                    "href": "data/rubrics/organizations/multiple-groups/203/groups/182/criteria/638.json"
+                }
+            ]
+        },
+        {
+            "class": [
+                "criterion-cell"
+            ],
+            "rel": [
+                "item",
+                "https://rubrics.api.brightspace.com/rels/criterion-cell"
+            ],
+            "entities": [
+                {
+                    "class": [
+                        "richtext",
+                        "description"
+                    ],
+                    "rel": [
+                        "item"
+                    ],
+                    "properties": {
+                        "text": "",
+                        "html": ""
+                    }
+                },
+                {
+                    "class": [
+                        "richtext",
+                        "feedback"
+                    ],
+                    "rel": [
+                        "item"
+                    ],
+                    "properties": {
+                        "text": "",
+                        "html": ""
+                    }
+                }
+            ],
+            "links": [
+                {
+                    "rel": [
+                        "https://rubrics.api.brightspace.com/rels/level"
+                    ],
+                    "href": "data/rubrics/organizations/multiple-groups/203/groups/182/levels/1529.json"
+                },
+                {
+                    "rel": [
+                        "self"
+                    ],
+                    "href": "data/rubrics/organizations/multiple-groups/203/groups/182/criteria/638/3.json"
+                },
+                {
+                    "rel": [
+                        "up"
+                    ],
+                    "href": "data/rubrics/organizations/multiple-groups/203/groups/182/criteria/638.json"
+                }
+            ]
+        },
+        {
+            "class": [
+                "criterion-cell"
+            ],
+            "rel": [
+                "item",
+                "https://rubrics.api.brightspace.com/rels/criterion-cell"
+            ],
+            "entities": [
+                {
+                    "class": [
+                        "richtext",
+                        "description"
+                    ],
+                    "rel": [
+                        "item"
+                    ],
+                    "properties": {
+                        "text": "",
+                        "html": ""
+                    }
+                },
+                {
+                    "class": [
+                        "richtext",
+                        "feedback"
+                    ],
+                    "rel": [
+                        "item"
+                    ],
+                    "properties": {
+                        "text": "",
+                        "html": ""
+                    }
+                }
+            ],
+            "links": [
+                {
+                    "rel": [
+                        "https://rubrics.api.brightspace.com/rels/level"
+                    ],
+                    "href": "data/rubrics/organizations/multiple-groups/203/groups/182/levels/1530.json"
+                },
+                {
+                    "rel": [
+                        "self"
+                    ],
+                    "href": "data/rubrics/organizations/multiple-groups/203/groups/182/criteria/638/4.json"
+                },
+                {
+                    "rel": [
+                        "up"
+                    ],
+                    "href": "data/rubrics/organizations/multiple-groups/203/groups/182/criteria/638.json"
+                }
+            ]
+        }
+    ],
+    "links": [
+        {
+            "rel": [
+                "self"
+            ],
+            "href": "data/rubrics/organizations/multiple-groups/203/groups/182/criteria/638.json"
+        },
+        {
+            "rel": [
+                "up"
+            ],
+            "href": "data/rubrics/organizations/multiple-groups/203/groups/182/criteria.json"
+        }
+    ]
+}

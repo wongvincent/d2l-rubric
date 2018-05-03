@@ -1,0 +1,36 @@
+{
+    "class": [
+        "criteria-group",
+        "numeric"
+    ],
+    "properties": {
+        "name": "Criteria Group 2",
+        "outOf": 6.0
+    },
+    "links": [
+        {
+            "rel": [
+                "https://rubrics.api.brightspace.com/rels/criteria"
+            ],
+            "href": "data/rubrics/organizations/multiple-groups/203/groups/181/criteria.json"
+        },
+        {
+            "rel": [
+                "https://rubrics.api.brightspace.com/rels/levels"
+            ],
+            "href": "data/rubrics/organizations/multiple-groups/203/groups/181/levels.json"
+        },
+        {
+            "rel": [
+                "self"
+            ],
+            "href": "data/rubrics/organizations/multiple-groups/203/groups/181.json"
+        },
+        {
+            "rel": [
+                "up"
+            ],
+            "href": "data/rubrics/organizations/multiple-groups/203/groups.json"
+        }
+    ]
+}
