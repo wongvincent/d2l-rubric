@@ -4,7 +4,6 @@
 <link rel="import" href="../../iron-media-query/iron-media-query.html">
 
 <link rel="import" href="./../siren-entity-behavior.html">
-<link rel="import" href="./../d2l-rubric-criteria-group-mobile.html">
 <link rel="import" href="./../d2l-rubric-loading.html">
 
 <link rel="import" href="./d2l-rubric-criteria-group-editor.html">
@@ -22,16 +21,8 @@
 
 		<d2l-rubric-loading hidden$="[[_showContent]]"></d2l-rubric-loading>
 
-		<iron-media-query query="(min-width: 615px)" query-matches="{{_largeScreen}}"></iron-media-query>
-		<template is="dom-if" if="[[_largeScreen]]">
-			<template is="dom-repeat" items="[[_groups]]">
-				<d2l-rubric-criteria-group-editor hidden$="[[!_showContent]]" href="[[_getSelfLink(item)]]" token="[[token]]"></d2l-rubric-criteria-group-editor>
-			</template>
-		</template>
-		<template is="dom-if" if="[[!_largeScreen]]">
-			<template is="dom-repeat" items="[[_groups]]">
-				<d2l-rubric-criteria-group-mobile hidden$="[[!_showContent]]" href="[[_getSelfLink(item)]]" token="[[token]]"></d2l-rubric-criteria-group-mobile>
-			</template>
+		<template is="dom-repeat" items="[[_groups]]">
+			<d2l-rubric-criteria-group-editor hidden$="[[!_showContent]]" href="[[_getSelfLink(item)]]" token="[[token]]"></d2l-rubric-criteria-group-editor>
 		</template>
 	</template>
 
@@ -44,8 +35,6 @@
 					type: Array,
 					value: function() { return []; }
 				},
-
-				_largeScreen: Boolean,
 
 				_showContent: {
 					type: Boolean,

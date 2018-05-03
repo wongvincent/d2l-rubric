@@ -1,10 +1,5 @@
 <link rel="import" href="../../polymer/polymer.html">
-<link rel="import" href="../../d2l-table/d2l-table.html">
-<link rel="import" href="../../d2l-table/d2l-td.html">
-<link rel="import" href="../../d2l-table/d2l-tr.html">
-<link rel="import" href="../../d2l-table/d2l-thead.html">
-<link rel="import" href="../../d2l-table/d2l-tbody.html">
-<link rel="import" href="../../d2l-table/d2l-th.html">
+<link rel="import" href="../../d2l-table/d2l-table-shared-styles.html">
 <link rel="import" href="../../d2l-hm-constants-behavior/d2l-hm-constants-behavior.html">
 <link rel="import" href="../../d2l-colors/d2l-colors.html">
 <link rel="import" href="../../iron-resizable-behavior/iron-resizable-behavior.html">
@@ -12,6 +7,7 @@
 <link rel="import" href="../../d2l-typography/d2l-typography-shared-styles.html">
 <link rel="import" href="../../s-html/s-html.html">
 <link rel="import" href="../../d2l-textarea/d2l-textarea.html">
+<link rel="import" href="../../d2l-text-input/d2l-text-input.html">
 
 <link rel="import" href="./../siren-entity-behavior.html">
 <link rel="import" href="./../d2l-rubric-loading.html">
@@ -19,103 +15,193 @@
 
 <dom-module id="d2l-rubric-criteria-group-editor">
 	<template strip-whitespace>
-		<style include="d2l-table-style">
+		<style>
 			:host {
+
 				display: block;
+
+				--d2l-textarea: {
+					display: block;
+					height: 100%;
+					overflow: hidden;
+					hyphens: auto;
+				};
 			}
-			d2l-td {
-				min-width: 130px;
+
+			* {
+				box-sizing: border-box;
 			}
-			d2l-td.out-of {
-				text-align: right;
-				min-width: 0;
+
+			d2l-textarea {
+				display: block;
+				flex-grow: 1;
+				width: 100%;
 			}
-			d2l-th  {
+
+			.criteria-group {
+				border: var(--d2l-table-border);
+				border-radius: var(--d2l-table-border-radius);
+				width: 100%;
+			}
+
+			.header, .footer {
+				border: none;
+			}
+
+			.header, .footer, .criterion-feedback-header {
+				background-color: var(--d2l-table-header-background-color);
+			}
+
+			.header {
+				border-top-left-radius: var(--d2l-table-border-radius);
+				border-top-right-radius: var(--d2l-table-border-radius);
+			}
+
+			.footer {
+				border-bottom-left-radius: var(--d2l-table-border-radius);
+				border-bottom-right-radius: var(--d2l-table-border-radius);
+			}
+
+			.row {
+				display: flex;
+				flex-direction: row;
+				justify-content: space-between;
+				overflow: hidden;
+				border-bottom: var(--d2l-table-border);
+			}
+
+			.inner-row {
+				border-bottom: var(--d2l-table-border);
+			}
+
+			.row:last-of-type, .inner-row:last-of-type {
+				border-bottom: none;
+			}
+
+			.row .cell {
+				border-left: var(--d2l-table-border);
+				padding: 1rem;
+				flex: 1 1 0%;
+			}
+
+			:host-context([dir="rtl"]) .row .cell {
+				border-left: none;
+				border-right: var(--d2l-table-border);
+			}
+
+			.row > .cell:first-of-type {
+				border-left: none;
+			}
+
+			:host-context([dir="rtl"]) .row > .cell:first-of-type {
+				border-right: none;
+			}
+
+			.criterion .criterion-name {
+				display: flex;
+				flex-direction: column;
+			}
+
+			.criterion-detail {
+				display: flex;
+				flex-grow: 1;
+				flex-direction: column;
+			}
+
+			.criterion-detail .inner-row .cell {
+				display: flex;
+				flex-direction: column;
+			}
+
+			.criterion-text, .criterion-feedback {
+				display: flex;
+				flex-direction: row;
+			}
+
+			.criterion-text {
+				flex: 2 1 auto;
+			}
+
+			.criterion-feedback {
+				flex: 1 1 auto;
+			}
+
+			.criterion-detail .cell {
+				padding: 0;
+			}
+
+			.criterion-detail .inner-row.criterion-feedback-header {
+				@apply --d2l-body-compact-text;
+				flex: 0 0 auto;
+				padding: 0.3rem;
+				font-weight: 700;
+			}
+
+			.row .col-first {
+				flex-shrink: 0;
+				flex-grow: 0;
+				flex-basis: 15%;
+				min-width: 7rem;
+				padding: 0;
+			}
+
+			.row .col-last {
+				flex-shrink: 0;
+				flex-grow: 0;
+				flex-basis: 5%;
+				min-width: 5rem;
+			}
+
+			.col-last.points d2l-text-input {
+				width: 1.5rem;
+			}
+
+			d2l-text-input {
+				width: 100%;
+			}
+
+			.footer {
 				text-align: center;
-			}
-			.level-name {
-				font-weight: 700;
-			}
-			.group-name {
-				@apply --d2l-body-compact-text;
-				font-weight: bold;
-				text-align: left;
-				background-color: var(--d2l-table-header-background-color);
-			}
-			.criteria {
-				@apply --d2l-body-compact-text;
-				text-align: left;
-				background-color: var(--d2l-table-header-background-color);
-				vertical-align: text-top;
-			}
-			.criterion-cell {
-				@apply --d2l-body-compact-text;
-				vertical-align: text-top;
-			}
-			.custom-points {
-				font-weight: 700;
-				color: var(--d2l-color-galena);
-				margin-bottom: 0.5rem;
-			}
-			.criterion-description-richtext {
-				display: block;
-				overflow-x: hidden;
 			}
 		</style>
 
 		<d2l-rubric-loading hidden$="[[_showContent]]"></d2l-rubric-loading>
 
-		<d2l-table
-			aria-colcount$="[[_getColumnCount(_levels, entity)]]"
-			aria-rowcount$="[[_getRowCount(_criteriaEntities)]]"
-			hidden$="[[!_showContent]]"
-		>
-			<d2l-offscreen>
-				[[localize('rubricSummaryA11y')]]
-			</d2l-offscreen>
-			<d2l-thead>
-				<d2l-tr>
-					<d2l-td class="group-name">
-						[[entity.properties.name]]
-					</d2l-td>
-					<template is="dom-repeat" items="[[_levels]]" as="level">
-						<d2l-th>
-							<div>
-								<div class="level-name">[[level.properties.name]]</div>
-								<div hidden="[[!_isNumeric(entity, level)]]">[[_localizeLevelOutOf('points', level.properties.points)]]</div>
-								<div hidden="[[!_isHolistic(entity, level)]]">[[_localizeLevelOutOf('percentage', level.properties.points)]]</div>
-							</div>
-						</d2l-th>
-					</template>
-					<template is="dom-if" if="[[_hasOutOf(entity)]]">
-						<d2l-th class="out-of"></d2l-th>
-					</template>
-				</d2l-tr>
-			</d2l-thead>
-			<d2l-tbody>
-				<template is="dom-repeat" items="[[_criteriaEntities]]">
-					<d2l-tr>
-						<d2l-td class="criteria">[[item.properties.name]]</d2l-td>
-						<template is="dom-repeat" as="criterionCell" items="[[_getCriterionCells(item)]]">
-							<d2l-td class="criterion-cell">
-								<div >
-									<div class="points custom-points" hidden=[[!_hasCustomPoints(criterionCell)]]>
-										[[localize('points', 'number', criterionCell.properties.points)]]
-									</div>
-									<!-- <s-html class="criterion-description-richtext" html="[[_getDescription(criterionCell)]]"></s-html> -->
-									<d2l-textarea value=[[_getDescription(criterionCell)]]></d2l-textarea>
-								</div>
-							</d2l-td>
-						</template>
-						<template is="dom-if" if="[[_hasOutOf(entity)]]">
-							<d2l-td class="out-of">
-								<div> [[localize('outOf', 'outOf', item.properties.outOf)]] </div>
-							</d2l-td>
-						</template>
-					</d2l-tr>
+		<div class="criteria-group">
+			<div class="row header">
+				<div class="cell col-first"></div>
+				<template is="dom-repeat" items="[[_levels]]" as="level">
+					<div class="cell"><d2l-text-input value="[[level.properties.name]]"></d2l-text-input></div>
 				</template>
-			</d2l-tbody>
-		</d2l-table>
+				<template is="dom-if" if="[[_hasOutOf(entity)]]">
+					<div class="cell col-last"></div>
+				</template>
+			</div>
+			<template is="dom-repeat" items="[[_criteriaEntities]]">
+				<div class="row criterion">
+					<div class="cell col-first criterion-name"><d2l-textarea no-border value=[[item.properties.name]] placeholder=[[localize('criterionPlaceholder')]]></d2l-textarea></div>
+					<div class="criterion-detail">
+						<div class="inner-row criterion-text">
+							<template is="dom-repeat" as="criterionCell" items="[[_getCriterionCells(item)]]">
+								<div class="cell"><d2l-textarea no-border value=[[_getDescription(criterionCell)]]></d2l-textarea></div>
+							</template>
+						</div>
+						<div class="inner-row cell criterion-feedback-header">Predefined Feedback</div>
+						<div class="inner-row criterion-feedback">
+							<template is="dom-repeat" as="criterionCell" items="[[_getCriterionCells(item)]]">
+								<div class="cell"><d2l-textarea no-border></d2l-textarea></div>
+							</template>
+						</div>
+					</div>
+					<template is="dom-if" if="[[_hasOutOf(entity)]]">
+						<div class="cell col-last points">/ <d2l-text-input value=""></d2l-text-input></div>
+					</template>
+				</div>
+			</template>
+			<div class="row footer">
+				<div class="cell">+ ADD CRITERION</div>
+			</div>
+		</div>
 	</template>
 
 	<script>
