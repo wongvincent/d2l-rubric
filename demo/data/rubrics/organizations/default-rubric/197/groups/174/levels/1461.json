@@ -1,0 +1,35 @@
+{
+    "class": [
+        "level"
+    ],
+    "properties": {
+        "name": "Level 3",
+        "points": 3.0
+    },
+    "links": [
+        {
+            "rel": [
+                "self"
+            ],
+            "href": "data/rubrics/organizations/default-rubric/197/groups/174/levels/1461.json"
+        },
+        {
+            "rel": [
+                "up"
+            ],
+            "href": "data/rubrics/organizations/default-rubric/197/groups/174/levels.json"
+        },
+        {
+            "rel": [
+                "prev"
+            ],
+            "href": "data/rubrics/organizations/default-rubric/197/groups/174/levels/1461.json"
+        },
+        {
+            "rel": [
+                "next"
+            ],
+            "href": "data/rubrics/organizations/default-rubric/197/groups/174/levels/1462.json"
+        }
+    ]
+}
