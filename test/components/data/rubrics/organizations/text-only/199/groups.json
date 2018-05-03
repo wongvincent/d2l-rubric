@@ -1,0 +1,60 @@
+{
+    "class": [
+        "collection",
+        "criteria-groups"
+    ],
+    "entities": [
+        {
+            "class": [
+                "criteria-group"
+            ],
+            "rel": [
+                "https://rubrics.api.brightspace.com/rels/criteria",
+                "item"
+            ],
+            "properties": {
+                "name": "Criteria"
+            },
+            "links": [
+                {
+                    "rel": [
+                        "https://rubrics.api.brightspace.com/rels/criteria"
+                    ],
+                    "href": "data/rubrics/organizations/text-only/199/groups/176/criteria.json"
+                },
+                {
+                    "rel": [
+                        "https://rubrics.api.brightspace.com/rels/levels"
+                    ],
+                    "href": "data/rubrics/organizations/text-only/199/groups/176/levels.json"
+                },
+                {
+                    "rel": [
+                        "self"
+                    ],
+                    "href": "data/rubrics/organizations/text-only/199/groups/176.json"
+                },
+                {
+                    "rel": [
+                        "up"
+                    ],
+                    "href": "data/rubrics/organizations/text-only/199/groups.json"
+                }
+            ]
+        }
+    ],
+    "links": [
+        {
+            "rel": [
+                "self"
+            ],
+            "href": "data/rubrics/organizations/text-only/199/groups.json"
+        },
+        {
+            "rel": [
+                "up"
+            ],
+            "href": "data/rubrics/organizations/text-only/199.json"
+        }
+    ]
+}

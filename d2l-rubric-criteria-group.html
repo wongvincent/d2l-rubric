@@ -164,7 +164,7 @@
 				'_fetchCriteria(_criteriaCollectionHref, token)',
 				'_onLevelsEntityChanged(_levelsEntity)',
 				'_onCriteriaCollectionEntityChanged(_criteriaCollectionEntity)',
-				'_fetchAssessments(entity, token)'
+				'_fetchAssessments(assessmentsHref, token)'
 			],
 
 			_onEntityChanged: function(entity) {
@@ -310,7 +310,7 @@
 				return false;
 			},
 
-			_fetchAssessments(entity, token) {
+			_fetchAssessments(assessmentsHref, token) {
 				if( this.assessmentsHref ) {
 					this._fetchEntityWithToken(this.assessmentsHref, function() { return Promise.resolve(token); })
 						.then(function(assessmentEntity) {
