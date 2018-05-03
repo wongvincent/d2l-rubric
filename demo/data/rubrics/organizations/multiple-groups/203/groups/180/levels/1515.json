@@ -1,0 +1,29 @@
+{
+    "class": [
+        "level"
+    ],
+    "properties": {
+        "name": "Level 4",
+        "points": 4.0
+    },
+    "links": [
+        {
+            "rel": [
+                "self"
+            ],
+            "href": "data/rubrics/organizations/multiple-groups/203/groups/180/levels/1515.json"
+        },
+        {
+            "rel": [
+                "up"
+            ],
+            "href": "data/rubrics/organizations/multiple-groups/203/groups/180/levels.json"
+        },
+        {
+            "rel": [
+                "next"
+            ],
+            "href": "data/rubrics/organizations/multiple-groups/203/groups/180/levels/1516.json"
+        }
+    ]
+}

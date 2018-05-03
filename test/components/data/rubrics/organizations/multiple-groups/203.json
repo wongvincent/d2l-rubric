@@ -1,0 +1,59 @@
+{
+    "class": [
+        "rubric",
+        "published",
+        "numeric",
+        "analytic"
+    ],
+    "properties": {
+        "name": "Many Groups Rubric",
+        "outOf": 41.0
+    },
+    "entities": [
+        {
+            "class": [
+                "richtext",
+                "description"
+            ],
+            "rel": [
+                "item"
+            ],
+            "properties": {
+                "text": "",
+                "html": ""
+            }
+        }
+    ],
+    "links": [
+        {
+            "rel": [
+                "self"
+            ],
+            "href": "data/rubrics/organizations/multiple-groups/203.json"
+        },
+        {
+            "rel": [
+                "up"
+            ],
+            "href": "data/rubrics/organizations/multiple-groups.json"
+        },
+        {
+            "rel": [
+                "https://rubrics.api.brightspace.com/rels/criteria-groups"
+            ],
+            "href": "data/rubrics/organizations/multiple-groups/203/groups.json"
+        },
+        {
+            "rel": [
+                "https://api.brightspace.com/rels/organization"
+            ],
+            "href": "data/rubrics/organizations/multiple-groups.json"
+        },
+        {
+            "rel": [
+                "https://rubrics.api.brightspace.com/rels/overall-levels"
+            ],
+            "href": "data/rubrics/organizations/multiple-groups/203/overallLevels.json"
+        }
+    ]
+}

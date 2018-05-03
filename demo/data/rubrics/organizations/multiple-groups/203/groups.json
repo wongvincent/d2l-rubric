@@ -1,0 +1,182 @@
+{
+    "class": [
+        "collection",
+        "criteria-groups"
+    ],
+    "entities": [
+        {
+            "class": [
+                "criteria-group",
+                "numeric"
+            ],
+            "rel": [
+                "https://rubrics.api.brightspace.com/rels/criteria",
+                "item"
+            ],
+            "properties": {
+                "name": "Criteria",
+                "outOf": 12.0
+            },
+            "links": [
+                {
+                    "rel": [
+                        "https://rubrics.api.brightspace.com/rels/criteria"
+                    ],
+                    "href": "data/rubrics/organizations/multiple-groups/203/groups/180/criteria.json"
+                },
+                {
+                    "rel": [
+                        "https://rubrics.api.brightspace.com/rels/levels"
+                    ],
+                    "href": "data/rubrics/organizations/multiple-groups/203/groups/180/levels.json"
+                },
+                {
+                    "rel": [
+                        "self"
+                    ],
+                    "href": "data/rubrics/organizations/multiple-groups/203/groups/180.json"
+                },
+                {
+                    "rel": [
+                        "up"
+                    ],
+                    "href": "data/rubrics/organizations/multiple-groups/203/groups.json"
+                }
+            ]
+        },
+        {
+            "class": [
+                "criteria-group",
+                "numeric"
+            ],
+            "rel": [
+                "https://rubrics.api.brightspace.com/rels/criteria",
+                "item"
+            ],
+            "properties": {
+                "name": "Criteria Group 2",
+                "outOf": 6.0
+            },
+            "links": [
+                {
+                    "rel": [
+                        "https://rubrics.api.brightspace.com/rels/criteria"
+                    ],
+                    "href": "data/rubrics/organizations/multiple-groups/203/groups/181/criteria.json"
+                },
+                {
+                    "rel": [
+                        "https://rubrics.api.brightspace.com/rels/levels"
+                    ],
+                    "href": "data/rubrics/organizations/multiple-groups/203/groups/181/levels.json"
+                },
+                {
+                    "rel": [
+                        "self"
+                    ],
+                    "href": "data/rubrics/organizations/multiple-groups/203/groups/181.json"
+                },
+                {
+                    "rel": [
+                        "up"
+                    ],
+                    "href": "data/rubrics/organizations/multiple-groups/203/groups.json"
+                }
+            ]
+        },
+        {
+            "class": [
+                "criteria-group",
+                "numeric"
+            ],
+            "rel": [
+                "https://rubrics.api.brightspace.com/rels/criteria",
+                "item"
+            ],
+            "properties": {
+                "name": "Criteria Group 3",
+                "outOf": 20.0
+            },
+            "links": [
+                {
+                    "rel": [
+                        "https://rubrics.api.brightspace.com/rels/criteria"
+                    ],
+                    "href": "data/rubrics/organizations/multiple-groups/203/groups/182/criteria.json"
+                },
+                {
+                    "rel": [
+                        "https://rubrics.api.brightspace.com/rels/levels"
+                    ],
+                    "href": "data/rubrics/organizations/multiple-groups/203/groups/182/levels.json"
+                },
+                {
+                    "rel": [
+                        "self"
+                    ],
+                    "href": "data/rubrics/organizations/multiple-groups/203/groups/182.json"
+                },
+                {
+                    "rel": [
+                        "up"
+                    ],
+                    "href": "data/rubrics/organizations/multiple-groups/203/groups.json"
+                }
+            ]
+        },
+        {
+            "class": [
+                "criteria-group",
+                "numeric"
+            ],
+            "rel": [
+                "https://rubrics.api.brightspace.com/rels/criteria",
+                "item"
+            ],
+            "properties": {
+                "name": "Criteria Group 4",
+                "outOf": 3.0
+            },
+            "links": [
+                {
+                    "rel": [
+                        "https://rubrics.api.brightspace.com/rels/criteria"
+                    ],
+                    "href": "data/rubrics/organizations/multiple-groups/203/groups/183/criteria.json"
+                },
+                {
+                    "rel": [
+                        "https://rubrics.api.brightspace.com/rels/levels"
+                    ],
+                    "href": "data/rubrics/organizations/multiple-groups/203/groups/183/levels.json"
+                },
+                {
+                    "rel": [
+                        "self"
+                    ],
+                    "href": "data/rubrics/organizations/multiple-groups/203/groups/183.json"
+                },
+                {
+                    "rel": [
+                        "up"
+                    ],
+                    "href": "data/rubrics/organizations/multiple-groups/203/groups.json"
+                }
+            ]
+        }
+    ],
+    "links": [
+        {
+            "rel": [
+                "self"
+            ],
+            "href": "data/rubrics/organizations/multiple-groups/203/groups.json"
+        },
+        {
+            "rel": [
+                "up"
+            ],
+            "href": "data/rubrics/organizations/multiple-groups/203.json"
+        }
+    ]
+}
