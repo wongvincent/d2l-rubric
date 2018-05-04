@@ -9,6 +9,7 @@
 <link rel="import" href="../d2l-hm-constants-behavior/d2l-hm-constants-behavior.html">
 <link rel="import" href="../d2l-colors/d2l-colors.html">
 <link rel="import" href="./d2l-rubric-loading.html">
+<link rel="import" href="./d2l-rubric-feedback.html">
 <link rel="import" href="./localize-behavior.html">
 <link rel="import" href="../iron-resizable-behavior/iron-resizable-behavior.html">
 <link rel="import" href="../d2l-offscreen/d2l-offscreen.html">
@@ -79,26 +80,6 @@
 				color: var(--d2l-color-celestine-minus-1);
 				text-align: center;
 			}
-            .feedback-arrow {
-               margin-top: -45px;
-               margin-left: 20px;
-               width: 0;
-               height: 0;
-               border-top: 12px solid var(--d2l-table-header-background-color);
-               border-left: 12px solid var(--d2l-table-header-background-color);
-               border-right: 12px solid var(--d2l-table-header-background-color);
-               border-bottom: 12px solid lightgray;
-           }
-           .feedback-arrow-inner {
-               position: relative;
-               top: 1px;
-               left: -12px;
-               width: 0;
-               height: 0;
-               border-left: 12px solid transparent;
-               border-right: 12px solid transparent;
-               border-bottom: 12px solid white;
-           }
 		</style>
 
 		<d2l-rubric-loading hidden$="[[_showContent]]"></d2l-rubric-loading>
@@ -148,12 +129,9 @@
 
 					<template is="dom-if" if="[[_hasFeedback(item)]]">
 						<d2l-tspan>
-							<div class="feedback-arrow">
-								<div class="feedback-arrow-inner"></div>
-							</div>
-							<div style="padding-top: 30px; border: none">
-								[[item.properties.feedback]]
-							</div>
+							<d2l-rubric-feedback style="border:none">
+								 [[item.properties.feedback]]
+							</d2l-rubric-feedback>
 						</d2l-tspan>
 					</template>
 				</template>

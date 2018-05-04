@@ -1,0 +1,37 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="./siren-entity-behavior.html">
+<link rel="import" href="../d2l-colors/d2l-colors.html">
+
+<dom-module id="d2l-rubric-feedback">
+	<template strip-whitespace>
+		<style>
+			:host {
+				display: block;
+			}
+            .feedback-arrow {
+               margin-top: -45px;
+               width: 0;
+               height: 0;
+               border: 12px solid var(--d2l-table-header-background-color);
+               border-bottom-color: var(--d2l-table-border-color);
+           }
+           .feedback-arrow-inner {
+               position: relative;
+               top: 1px;
+               left: -12px;
+               width: 0;
+               height: 0;
+               border-left: 12px solid transparent;
+               border-right: 12px solid transparent;
+               border-bottom: 12px solid white;
+           }
+		</style>
+		
+		<div class="feedback-arrow">
+			<div class="feedback-arrow-inner"></div>
+		</div>
+		<div style="padding-top: 30px; border: none">
+			<slot></slot>
+		</div>
+	</template>
+</dom-module>
