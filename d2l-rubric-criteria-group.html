@@ -69,6 +69,36 @@
 				border-left: 1px solid var(--d2l-color-celestine);
 				border-bottom: 1px solid var(--d2l-color-celestine);
 			}
+
+			.selected-icon {
+				border-color: var(--d2l-color-celestine);
+				background-color: var(--d2l-color-celestine-plus-2);
+				text-decoration-color: var(--d2l-color-celestine-minus-1);
+				border-left: 1px solid var(--d2l-color-celestine);
+				border-bottom: 1px solid var(--d2l-color-celestine) !important;
+				color: var(--d2l-color-celestine-minus-1);
+				text-align: center;
+			}
+            .feedback-arrow {
+               margin-top: -45px;
+               margin-left: 20px;
+               width: 0;
+               height: 0;
+               border-top: 12px solid var(--d2l-table-header-background-color);
+               border-left: 12px solid var(--d2l-table-header-background-color);
+               border-right: 12px solid var(--d2l-table-header-background-color);
+               border-bottom: 12px solid lightgray;
+           }
+           .feedback-arrow-inner {
+               position: relative;
+               top: 1px;
+               left: -12px;
+               width: 0;
+               height: 0;
+               border-left: 12px solid transparent;
+               border-right: 12px solid transparent;
+               border-bottom: 12px solid white;
+           }
 		</style>
 
 		<d2l-rubric-loading hidden$="[[_showContent]]"></d2l-rubric-loading>
@@ -115,7 +145,18 @@
 								</d2l-td>
 							</template>
 						</d2l-tr>
+
+					<template is="dom-if" if="[[_hasFeedback(item)]]">
+						<d2l-tspan>
+							<div class="feedback-arrow">
+								<div class="feedback-arrow-inner"></div>
+							</div>
+							<div style="padding-top: 30px; border: none">
+								[[item.properties.feedback]]
+							</div>
+						</d2l-tspan>
 					</template>
+				</template>
 			</d2l-tbody>
 		</d2l-table>
 	</template>
@@ -216,6 +257,31 @@
 				return entities || [];
 			},
 
+<<<<<<< HEAD
+=======
+			_getDescription: function(entity) {
+				var description = entity && entity.getSubEntityByClass(this.HypermediaClasses.rubrics.description);
+				return description && description.properties && description.properties.html || '';
+			},
+
+			_getFeedback: function(entity) {
+				var feedback = entity && entity.getSubEntityByClass(this.HypermediaClasses.rubrics.feedback);
+				return feedback && feedback.properties && feedback.properties.text || '';
+			},
+
+			_getScore: function(criterionEntity, assessmentResult) {
+				if (!criterionEntity || !assessmentResult) {
+					return;
+				}
+				var score = this.getAssessedScore(criterionEntity, assessmentResult);
+				if (score !== undefined) {
+					return score.toString();
+				}
+			_hasFeedback: function(entity) {
+				return entity && entity.properties && entity.properties.feedback;
+			},
+
+>>>>>>> Rubric feedback: first draft
 			_hasCustomPoints: function(criterionCell) {
 				// TODO: The API currently returns 0 points for cells without custom points, this will be null soon.
 				// TODO: Once we get null then remove the > 0 compare
