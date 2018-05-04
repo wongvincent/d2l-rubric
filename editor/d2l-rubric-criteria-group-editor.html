@@ -82,6 +82,11 @@
 				border-left: var(--d2l-table-border);
 				padding: 1rem;
 				flex: 1 1 0%;
+				/*
+				text-input min width is 2rem + 1em, so adding cell padding to this  to give cell in width
+				This is needed to enforce the same min-width on text input and text area cell
+				*/
+				min-width: calc(2rem + 1em + 2rem);
 			}
 
 			:host-context([dir="rtl"]) .row .cell {
@@ -146,10 +151,8 @@
 			}
 
 			.row .col-last {
-				flex-shrink: 0;
-				flex-grow: 0;
-				flex-basis: 5%;
-				min-width: 5rem;
+				flex: 0 0 auto;
+				min-width: 6rem;
 			}
 
 			.col-last.points d2l-text-input {
@@ -173,9 +176,7 @@
 				<template is="dom-repeat" items="[[_levels]]" as="level">
 					<div class="cell"><d2l-text-input value="[[level.properties.name]]"></d2l-text-input></div>
 				</template>
-				<template is="dom-if" if="[[_hasOutOf(entity)]]">
-					<div class="cell col-last"></div>
-				</template>
+				<div hidden=[[!_hasOutOf(entity)]] class="cell col-last"></div>
 			</div>
 			<template is="dom-repeat" items="[[_criteriaEntities]]">
 				<div class="row criterion">
@@ -193,13 +194,11 @@
 							</template>
 						</div>
 					</div>
-					<template is="dom-if" if="[[_hasOutOf(entity)]]">
-						<div class="cell col-last points">/ <d2l-text-input value=""></d2l-text-input></div>
-					</template>
+					<div hidden=[[!_hasOutOf(entity)]] class="cell col-last points">/ <d2l-text-input value=""></d2l-text-input></div>
 				</div>
 			</template>
 			<div class="row footer">
-				<div class="cell">+ ADD CRITERION</div>
+				<div class="cell">+ [[localize('addCriterion')]]</div>
 			</div>
 		</div>
 	</template>
@@ -306,50 +305,8 @@
 				return feedback && feedback.properties && feedback.properties.text || '';
 			},
 
-			_hasCustomPoints: function(criterionCell) {
-				// TODO: The API currently returns 0 points for cells without custom points, this will be null soon.
-				// TODO: Once we get null then remove the > 0 compare
-				return criterionCell.properties && criterionCell.properties.points > 0;
-			},
-
 			_hasOutOf: function(entity) {
 				return entity && entity.hasClass(this.HypermediaClasses.rubrics.numeric);
-			},
-
-			_isHolistic: function(entity, level) {
-				var hasPoints = level.properties.points !== null;
-				var isHolistic = entity && entity.hasClass(this.HypermediaClasses.rubrics.percentage);
-				return hasPoints && isHolistic;
-			},
-
-			_isNumeric: function(entity, level) {
-				var hasPoints = level.properties.points;
-				var isNumeric = entity && entity.hasClass(this.HypermediaClasses.rubrics.numeric);
-				return hasPoints && isNumeric;
-			},
-
-			_localizeLevelOutOf: function(type, points) {
-				if (points === undefined || points === null) {
-					return;
-				}
-				return this.localize(type, 'number', points.toString());
-			},
-
-			_getRowCount: function(criteria) {
-				if (!criteria) {
-					return 0;
-				}
-				return criteria.length + 1; // criteria + levels row
-			},
-
-			_getColumnCount: function(levels, entity) {
-				if (!levels) {
-					return 0;
-				}
-				if (this._hasOutOf(entity)) {
-					return levels.length + 2; // levels + outof + criteria
-				}
-				return levels.length + 1; // levels + criteria
 			}
 		});
 	</script>
