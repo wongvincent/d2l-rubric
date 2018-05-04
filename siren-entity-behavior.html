@@ -1,4 +1,5 @@
 <link rel="import" href="../d2l-fetch-siren-entity-behavior/d2l-fetch-siren-entity-behavior.html">
+<link rel="import" href="./localize-behavior.html">
 
 <script>
 	'use strict';
@@ -28,7 +29,8 @@
 			 */
 			entity: {
 				type: Object,
-				value: null
+				value: null,
+				notify: true
 			},
 
 			_alerts: {

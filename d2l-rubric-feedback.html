@@ -1,0 +1,28 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="./siren-entity-behavior.html">
+
+<dom-module id="d2l-rubric-feedback">
+	<template strip-whitespace>
+		<style>
+			:host{
+				display:block;
+			}
+		</style>
+		<div class="feedback">
+			I am the feedback! Some really really long feedback to see what it looks like across multiple cells.
+		</div>
+	</template>
+	<script>
+		Polymer({
+			is: 'd2l-rubric-feedback',
+
+			proerties: {
+				_feedback: String
+			},
+
+			behaviors: [
+				// D2L.PolymerBehaviors.Rubric.SirenEntityBehavior
+			]
+		})
+	</script>
+</dom-module>

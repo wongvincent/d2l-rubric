@@ -1,0 +1,16 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="./siren-entity-behavior.html">
+<link rel="import" href="./localize-behavior.html">
+
+<dom-module id="siren-entity">
+	<script>
+		Polymer({
+			is: 'siren-entity',
+
+			behaviors: [
+				D2L.PolymerBehaviors.Rubric.SirenEntityBehavior,
+				D2L.PolymerBehaviors.Rubric.LocalizeBehavior
+			]
+		})
+	</script>
+</dom-module>

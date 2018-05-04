@@ -1,0 +1,43 @@
+<script>
+	'use strict';
+	window.D2L = window.D2L || {};
+	window.D2L.PolymerBehaviors = window.D2L.PolymerBehaviors || {};
+	window.D2L.PolymerBehaviors.Rubric = window.D2L.PolymerBehaviors.Rubric || {};
+
+	/**
+	 * Behavior for computing assessment results from an assessment entity
+	 * @polymerBehavior
+	 */
+	D2L.PolymerBehaviors.Rubric.AssessmentResultBehavior = {
+		properties: {
+			assessmentEntity: Object,
+			assessmentResult: {
+				type: Object,
+				value: {},
+				computed: '_computeAssessmentResult(assessmentEntity)'
+			}
+		},
+
+		_computeAssessmentResult: function(assessmentEntity) {
+			if (!assessmentEntity) {
+				return;
+			}
+			var assessmentMap = {};
+			var criteriaEntities = assessmentEntity.getSubEntitiesByClass('criterion-cell-selector');
+			for( var i = 0; i < criteriaEntities.length; i++){
+				var criterionEntity = criteriaEntities[i];
+				var selectedCriterionCellEntity = criterionEntity.getSubEntityByClass('selected');
+				if( selectedCriterionCellEntity ){
+					const link = selectedCriterionCellEntity.getLinkByRel('https://rubrics.api.brightspace.com/rels/criterion-cell');
+					const rowLink = selectedCriterionCellEntity.getLinkByRel('https://rubrics.api.brightspace.com/rels/criterion');
+
+					if( link.href ) {
+						assessmentMap[link.href] = selectedCriterionCellEntity.properties.score;
+						assessmentMap[rowLink.href] = selectedCriterionCellEntity.properties.score;
+					}
+				}
+			}
+			return assessmentMap;
+		}
+	};
+</script>

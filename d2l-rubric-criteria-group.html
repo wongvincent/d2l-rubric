@@ -14,6 +14,8 @@
 <link rel="import" href="../d2l-offscreen/d2l-offscreen.html">
 <link rel="import" href="../d2l-typography/d2l-typography-shared-styles.html">
 <link rel="import" href="./d2l-rubric-criterion-cell.html">
+<link rel="import" href="./siren-entity.html">
+<link rel="import" href="./assessment-result-behavior.html">
 
 <dom-module id="d2l-rubric-criteria-group">
 	<template strip-whitespace>
@@ -80,7 +82,7 @@
 		</style>
 
 		<d2l-rubric-loading hidden$="[[_showContent]]"></d2l-rubric-loading>
-
+		<siren-entity href="[[assessmentHref]]" token="[[token]]" entity="{{assessmentEntity}}"></siren-entity>
 		<d2l-table
 			aria-colcount$="[[_getColumnCount(_levels, entity)]]"
 			aria-rowcount$="[[_getRowCount(_criteriaEntities)]]"
@@ -113,13 +115,13 @@
 						<d2l-tr>
 							<d2l-td class="criteria">[[item.properties.name]]</d2l-td>
 							<template is="dom-repeat" as="criterionCell" items="[[_getCriterionCells(item)]]">
-								<d2l-td class$="[[_getCriteriaClassName(criterionCell)]]">
-									<d2l-rubric-criterion-cell href="[[_getSelfLink(criterionCell)]]" show-selected-icon="[[_showSelectedIcon(criterionCell)]]" token="[[token]]"/>
+								<d2l-td class$="[[_getCriteriaClassName(criterionCell, assessmentResult)]]">
+									<d2l-rubric-criterion-cell href="[[_getSelfLink(criterionCell)]]" show-selected-icon="[[_showSelectedIcon(criterionCell, assessmentResult)]]" token="[[token]]"/>
 								</d2l-td>
 							</template>
 							<template is="dom-if" if="[[_hasOutOf(entity)]]">
 								<d2l-td class="out-of">
-									<div>[[_getScore(item)]]/[[item.properties.outOf]]</div>
+									<div>[[_getScore(item, assessmentResult)]]/[[item.properties.outOf]]</div>
 								</d2l-td>
 							</template>
 						</d2l-tr>
@@ -143,11 +145,8 @@
 					type: Boolean,
 					value: false
 				},
-				assessmentsHref: {
+				assessmentHref: {
 					type: String
-				},
-				_assessmentResult: {
-					type: Object
 				}
 			},
 
@@ -155,7 +154,8 @@
 				D2L.PolymerBehaviors.Rubric.SirenEntityBehavior,
 				window.D2L.Hypermedia.HMConstantsBehavior,
 				D2L.PolymerBehaviors.Rubric.LocalizeBehavior,
-				Polymer.IronResizableBehavior
+				Polymer.IronResizableBehavior,
+				D2L.PolymerBehaviors.Rubric.AssessmentResultBehavior
 			],
 
 			observers: [
@@ -163,8 +163,7 @@
 				'_fetchLevels(_levelsHref, token)',
 				'_fetchCriteria(_criteriaCollectionHref, token)',
 				'_onLevelsEntityChanged(_levelsEntity)',
-				'_onCriteriaCollectionEntityChanged(_criteriaCollectionEntity)',
-				'_fetchAssessments(assessmentsHref, token)'
+				'_onCriteriaCollectionEntityChanged(_criteriaCollectionEntity)'
 			],
 
 			_onEntityChanged: function(entity) {
@@ -241,11 +240,11 @@
 				return entity && (entity.getLinkByRel('self') || {}).href || '';
 			},
 
-			_getScore: function ( item ) {
-				if(this.assessmentsHref) {
+			_getScore: function ( item, assessmentResult ) {
+				if(assessmentResult) {
 					const selfLink = item.getLinkByRel('self');
-					if( this._assessmentResult[selfLink.href] ) {
-						return this._assessmentResult[selfLink.href];
+					if( assessmentResult[selfLink.href] ) {
+						return assessmentResult[selfLink.href];
 					}
 				}
 			},
@@ -296,60 +295,23 @@
 				return levels.length + 1; // levels + criteria
 			},
 
-			_showSelectedIcon: function(criterionCell) {
-				if( this.assessmentsHref ) {
-
-					var descriptionEntity = criterionCell && criterionCell.getSubEntityByClass(this.HypermediaClasses.rubrics.description);
-					var descriptionText = descriptionEntity && descriptionEntity.properties && descriptionEntity.properties.text || '';
-					const selfLink = criterionCell.getLinkByRel('self');
-					if( selfLink.href && this._assessmentResult[selfLink.href] ) {
-						return descriptionText === '';
-					}
-					return false;
+			_showSelectedIcon: function(criterionCell, assessmentResult) {
+				var descriptionEntity = criterionCell && criterionCell.getSubEntityByClass(this.HypermediaClasses.rubrics.description);
+				var descriptionText = descriptionEntity && descriptionEntity.properties && descriptionEntity.properties.text || '';
+				const selfLink = criterionCell && criterionCell.getLinkByRel('self');
+				if( selfLink && selfLink.href && assessmentResult && assessmentResult[selfLink.href] ) {
+					return descriptionText === '';
 				}
 				return false;
 			},
 
-			_fetchAssessments(assessmentsHref, token) {
-				if( this.assessmentsHref ) {
-					this._fetchEntityWithToken(this.assessmentsHref, function() { return Promise.resolve(token); })
-						.then(function(assessmentEntity) {
-							this._assessmentResult = this._buildAssessmentsMap(assessmentEntity);
-						}.bind(this));
-				}
-
-			},
-
-			_buildAssessmentsMap(entity) {
-				var assessmentMap = {}
-				for( var i = 0; i < entity.entities.length; i++){
-					var subEntity = entity.entities[i];
-					for(var j = 0; j < subEntity.entities.length; j++) {
-						var criterion = subEntity.entities[j];
-						if( criterion.class.indexOf('selected') !== -1 ){
-							const link = criterion.getLinkByRel('https://rubrics.api.brightspace.com/rels/criterion-cell');
-							const rowLink = criterion.getLinkByRel('https://rubrics.api.brightspace.com/rels/criterion');
-
-							if( link.href ) {
-								assessmentMap[link.href] = criterion.properties.score;
-								assessmentMap[rowLink.href] = criterion.properties.score;
-							}
-						}
-					}
-				}
-				return assessmentMap;
-			},
-
-			_getCriteriaClassName: function(criterionCell) {
-				if( !this.assessmentsHref ){
-					return 'criterion-cell';
-				}
+			_getCriteriaClassName: function(criterionCell, assessmentResult) {
 				var descriptionEntity = criterionCell && criterionCell.getSubEntityByClass(this.HypermediaClasses.rubrics.description);
 				var descriptionText = descriptionEntity && descriptionEntity.properties && descriptionEntity.properties.text || '';
-				const selfLink = criterionCell.getLinkByRel('self');
+				const selfLink = criterionCell && criterionCell.getLinkByRel('self');
 
-				if( selfLink.href){
-					if( this._assessmentResult[selfLink.href]){
+				if( selfLink && selfLink.href){
+					if(assessmentResult && assessmentResult[selfLink.href]){
 						if( descriptionText === '' ){
 							return 'criterion-cell selected-icon';
 						}

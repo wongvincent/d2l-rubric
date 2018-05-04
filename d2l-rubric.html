@@ -73,6 +73,7 @@ Polymer Web-Component to display rubrics
 				}
 			}
 		</style>
+		<siren-entity href="[[assessmentHref]]" token="[[token]]" entity="{{_assessmentEntity}}"></siren-entity>
 		<template is="dom-repeat" items="[[_alerts]]">
 			<d2l-alert type="[[item.alertType]]">
 				[[item.alertMessage]]
@@ -82,10 +83,12 @@ Polymer Web-Component to display rubrics
 		<d2l-rubric-loading hidden$="[[_hideLoading(_showContent,_hasAlerts)]]"></d2l-rubric-loading>
 		<div hidden$="[[_hideLoading(_showContent,_hasAlerts)]]" class="out-of-loader"></div>
 		<div hidden$="[[_hideOutOf(_showContent,_hasAlerts)]]">
-			<d2l-rubric-criteria-groups href="[[_getHref(_criteriaGroups)]]" assessments-href="[[assessmentsHref]]" token="[[token]]"></d2l-rubric-criteria-groups>
+			<d2l-rubric-criteria-groups href="[[_getHref(_criteriaGroups)]]" assessment-href="[[assessmentHref]]" token="[[token]]"></d2l-rubric-criteria-groups>
 			<div class="out-of-container" hidden="[[!_hasOutOf(entity)]]">
 				<div class="out-of-text">
-					<div class="left">[[localize('total')]]</div><div class="right">[[localize('dashOutOf', 'outOf', entity.properties.outOf)]]</div>
+					<div class="left">[[localize('total')]]</div>
+					<div hidden="[[_hasScore(_score)]]" class="right">[[localize('dashOutOf', 'outOf', entity.properties.outOf)]]</div>
+					<div hidden="[[!_hasScore(_score)]]" class="right">[[localize('scoreOutOf', 'score', _score, 'outOf', entity.properties.outOf)]]</div>
 				</div>
 			</div>
 		</div>
@@ -104,10 +107,15 @@ Polymer Web-Component to display rubrics
 					value: false
 				},
 				_score: {
+					type: String,
+					value: null
+				},
+				assessmentHref: {
 					type: String
 				},
-				assessmentsHref: {
-					type: String
+				_assessmentEntity: {
+					type: Object,
+					value: null
 				}
 			},
 
@@ -118,21 +126,20 @@ Polymer Web-Component to display rubrics
 			],
 
 			observers: [
-				'_onEntityChanged(entity, token)'
+				'_onEntityChanged(entity)',
+				'_onAssessmentEntityChanged(_assessmentEntity)'
 			],
 
-			_onEntityChanged: function(entity, token) {
+			_onEntityChanged: function(entity) {
 				if(entity) {
 					this._criteriaGroups = entity.getLinkByRel(this.HypermediaRels.Rubrics.criteriaGroups);
 					this._showContent = true;
-					if( this.assessmentsHref ) {
-						this._fetchEntityWithToken( this.assessmentsHref, function() { return Promise.resolve(token); })
-						.then(function(assessmentEntity) {
-							this.assessmentsHref = this._getSelfLink(assessmentEntity);
-							this._score = assessmentEntity.properties.score;
-						}.bind(this));
-					}
+				}
+			},
 
+			_onAssessmentEntityChanged: function(assessmentEntity) {
+				if (assessmentEntity) {
+					this._score = assessmentEntity.properties.score;
 				}
 			},
 
@@ -152,6 +159,9 @@ Polymer Web-Component to display rubrics
 			},
 			_hideOutOf: function(showContent, hasAlerts) {
 				return !showContent || hasAlerts;
+			},
+			_hasScore: function(score) {
+				return !!score || score === 0;
 			}
 		});
 	</script>

@@ -23,7 +23,7 @@
 		<iron-media-query query="(min-width: 615px)" query-matches="{{_largeScreen}}"></iron-media-query>
 		<template is="dom-if" if="[[_largeScreen]]">
 			<template is="dom-repeat" items="[[_groups]]">
-				<d2l-rubric-criteria-group hidden$="[[!_showContent]]" href="[[_getSelfLink(item)]]" assessments-href="[[assessmentsHref]]" token="[[token]]"></d2l-rubric-criteria-group>
+				<d2l-rubric-criteria-group hidden$="[[!_showContent]]" href="[[_getSelfLink(item)]]" assessment-href="[[assessmentHref]]" token="[[token]]"></d2l-rubric-criteria-group>
 			</template>
 		</template>
 		<template is="dom-if" if="[[!_largeScreen]]">
@@ -49,7 +49,7 @@
 					type: Boolean,
 					value: false
 				},
-				assessmentsHref: {
+				assessmentHref: {
 					type: String
 				}
 			},
