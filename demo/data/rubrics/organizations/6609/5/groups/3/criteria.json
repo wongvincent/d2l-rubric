@@ -266,8 +266,7 @@
 			],
 			"properties": {
 				"name": "Criterion 1",
-        "outOf": 8.00000000,
-		"feedback": "Great Work!"
+        "outOf": 8.00000000
 			},
 			"rel": [
 				"https://rubrics.api.brightspace.com/rels/criterion"
@@ -803,8 +802,7 @@
 			],
 			"properties": {
 				"name": "Criterion 3",
-        "outOf": 4.0000000,
-		"feedback": "You'll do better next time!"
+        "outOf": 4.0000000
 			},
 			"rel": [
 				"https://rubrics.api.brightspace.com/rels/criterion"

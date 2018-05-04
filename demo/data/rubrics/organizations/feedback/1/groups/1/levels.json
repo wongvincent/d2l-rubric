@@ -1,0 +1,125 @@
+{
+  "class": [
+    "collection",
+    "levels"
+  ],
+  "properties": {
+    "total": 4
+  },
+  "entities": [
+    {
+      "class": [
+        "level"
+      ],
+      "rel": [
+        "https://rubrics.api.brightspace.com/rels/level"
+      ],
+      "properties": {
+        "name": "Level 4"
+      },
+      "links": [
+        {
+          "rel": [
+            "self"
+          ],
+          "href": "data/rubrics/organizations/feedback/1/groups/1/levels/1.json"
+        },
+        {
+          "rel": [
+            "up"
+          ],
+          "href": "data/rubrics/organizations/feedback/1/groups/1/levels.json"
+        }
+      ]
+    },
+    {
+      "class": [
+        "level"
+      ],
+      "rel": [
+        "https://rubrics.api.brightspace.com/rels/level"
+      ],
+      "properties": {
+        "name": "Level 3"
+      },
+      "links": [
+        {
+          "rel": [
+            "self"
+          ],
+          "href": "data/rubrics/organizations/feedback/1/groups/1/levels/2.json"
+        },
+        {
+          "rel": [
+            "up"
+          ],
+          "href": "data/rubrics/organizations/feedback/1/groups/1/levels.json"
+        }
+      ]
+    },
+    {
+      "class": [
+        "level"
+      ],
+      "rel": [
+        "https://rubrics.api.brightspace.com/rels/level"
+      ],
+      "properties": {
+        "name": "Level 2"
+      },
+      "links": [
+        {
+          "rel": [
+            "self"
+          ],
+          "href": "data/rubrics/organizations/feedback/1/groups/1/levels/3.json"
+        },
+        {
+          "rel": [
+            "up"
+          ],
+          "href": "data/rubrics/organizations/feedback/1/groups/1/levels.json"
+        }
+      ]
+    },
+    {
+      "class": [
+        "level"
+      ],
+      "rel": [
+        "https://rubrics.api.brightspace.com/rels/level"
+      ],
+      "properties": {
+        "name": "Level 1"
+      },
+      "links": [
+        {
+          "rel": [
+            "self"
+          ],
+          "href": "data/rubrics/organizations/feedback/1/groups/1/levels/4.json"
+        },
+        {
+          "rel": [
+            "up"
+          ],
+          "href": "data/rubrics/organizations/feedback/1/groups/1/levels.json"
+        }
+      ]
+    }
+  ],
+  "links": [
+    {
+      "rel": [
+        "self"
+      ],
+      "href": "data/rubrics/organizations/feedback/1/groups/1/levels.json"
+    },
+    {
+      "rel": [
+        "up"
+      ],
+      "href": "data/rubrics/organizations/feedback/1/groups/1.json"
+    }
+  ]
+}
