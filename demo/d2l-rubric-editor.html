@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
 
-	<title>d2l-rubric demo</title>
+	<title>d2l-rubric-editor demo</title>
 
 	<script src="../../webcomponentsjs/webcomponents-lite.js"></script>
 	<script>
@@ -21,7 +21,7 @@
 
 	<link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
 	<link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
-	<link rel="import" href="../d2l-rubric.html">
+	<link rel="import" href="../editor/d2l-rubric-editor.html">
 	<link rel="import" href="../d2l-rubric-title.html">
 	<link rel="import" href="../../d2l-typography/d2l-typography.html">
 
@@ -40,33 +40,37 @@
 	</custom-style>
 </head>
 <body class="d2l-typography">
-<div class="vertical-section-container centered">
-	<h1>d2l-rubric demo</h1>
-	<h3>Rubric, text only</h3>
+<div class="vertical-section-container">
+	<h1>d2l-rubric-editor demo</h1>
+	<h3>Rubric Editor, text only</h3>
 	<demo-snippet>
-		<d2l-rubric href="data/rubrics/organizations/text-only/199.json" token="foozleberries"></d2l-rubric>
+		<d2l-rubric-editor href="data/rubrics/organizations/text-only/199.json" token="foozleberries"></d2l-rubric-editor>
 	</demo-snippet>
 
 	<h3>Rubric with a title</h3>
 	<demo-snippet>
-		<d2l-rubric href="data/rubrics/organizations/default-rubric/197.json" token="foozleberries">
+		<d2l-rubric-editor href="data/rubrics/organizations/default-rubric/197.json" token="foozleberries">
 			<h3 class="rubric-title">
 				<d2l-rubric-title href="data/rubrics/organizations/default-rubric/197.json" token="foozleberries"/>
 			</h3>
-		</d2l-rubric>
+		</d2l-rubric-editor>
 	</demo-snippet>
+
 	<h3>Rubric with custom points</h3>
 	<demo-snippet>
-		<d2l-rubric href="data/rubrics/organizations/custom-points/198.json" token="foozleberries"></d2l-rubric>
+		<d2l-rubric-editor href="data/rubrics/organizations/custom-points/198.json" token="foozleberries"></d2l-rubric-editor>
 	</demo-snippet>
+
 	<h3>Rubric with multiple criteria groups</h3>
 	<demo-snippet>
-		<d2l-rubric href="data/rubrics/organizations/multiple-groups/203.json" token="foozleberries"></d2l-rubric>
+		<d2l-rubric-editor href="data/rubrics/organizations/multiple-groups/203.json" token="foozleberries"></d2l-rubric-editor>
 	</demo-snippet>
+
 	<h3>Rubric loading</h3>
 	<demo-snippet>
 		<d2l-rubric-loading></d2l-rubric-loading>
 	</demo-snippet>
+
 </div>
 </body>
 </html>
