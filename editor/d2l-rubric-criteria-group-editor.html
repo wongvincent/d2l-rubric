@@ -25,21 +25,7 @@
 					height: 100%;
 					overflow: hidden;
 					hyphens: auto;
-					border: none;
-					border-radius: 0;
-					box-shadow: none;
-					padding: calc(0.4rem + 1px) calc(0.75rem + 1px);
-					transition-property: none;
-				}
-				;
-
-				--d2l-input-hover: {
-					border-color: var(--d2l-color-celestine);
-					border-width: 2px;
-					outline-width: 0;
-					padding: calc(0.4rem - 1px) calc(0.75rem - 1px);
-					border-style: solid;
-				}
+				};
 			}
 
 			* {
@@ -195,13 +181,13 @@
 			<template is="dom-repeat" items="[[_criteriaEntities]]">
 				<div class="row criterion">
 					<div class="cell col-first criterion-name">
-						<d2l-textarea value=[[item.properties.name]] placeholder=[[localize( 'criterionPlaceholder')]]></d2l-textarea>
+						<d2l-textarea no-border hover-styles value=[[item.properties.name]] placeholder=[[localize( 'criterionPlaceholder')]]></d2l-textarea>
 					</div>
 					<div class="criterion-detail">
 						<div class="inner-row criterion-text">
 							<template is="dom-repeat" as="criterionCell" items="[[_getCriterionCells(item)]]">
 								<div class="cell">
-									<d2l-textarea value=[[_getDescription(criterionCell)]]></d2l-textarea>
+									<d2l-textarea no-border hover-styles value=[[_getDescription(criterionCell)]]></d2l-textarea>
 								</div>
 							</template>
 						</div>
@@ -209,7 +195,7 @@
 						<div class="inner-row criterion-feedback">
 							<template is="dom-repeat" as="criterionCell" items="[[_getCriterionCells(item)]]">
 								<div class="cell">
-									<d2l-textarea></d2l-textarea>
+									<d2l-textarea no-border hover-styles></d2l-textarea>
 								</div>
 							</template>
 						</div>
