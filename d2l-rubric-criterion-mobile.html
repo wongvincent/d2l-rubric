@@ -7,6 +7,8 @@
 <link rel="import" href="../d2l-hm-constants-behavior/d2l-hm-constants-behavior.html">
 <link rel="import" href="./siren-entity-behavior.html">
 <link rel="import" href="../s-html/s-html.html">
+<link rel="import" href="./assessment-result-behavior.html">
+<link rel="import" href="./siren-entity.html">
 
 <dom-module id="d2l-rubric-criterion-mobile">
 	<template strip-whitespace>
@@ -122,6 +124,7 @@
 				display: none !important;
 			}
 		</style>
+		<siren-entity href="[[assessmentHref]]" token="[[token]]" entity="{{assessmentEntity}}"></siren-entity>
 		<div class="criterion-name">
 			[[_name]]
 		</div>
@@ -132,6 +135,8 @@
 			level-entities="{{_levelEntities}}"
 			total="{{_total}}"
 			out-of="[[_outOf]]"
+			score="[[_score]]"
+			assessed-level-href = "[[_assessedLevelHref]]"
 		>
 		</d2l-rubric-levels-mobile>
 
@@ -178,9 +183,13 @@
 				 */
 				levelsHref: String,
 
+				assessmentHref: String,
+
 				_levelEntities: Object,
 
 				isHolistic: Boolean,
+
+				_entity: Object,
 
 				_name: String,
 
@@ -197,17 +206,23 @@
 
 				_total: Number,
 
-				_criterionCells: Array
+				_criterionCells: Array,
+
+				_assessedLevelHref: String,
+
+				_score: String
 			},
 
 			behaviors: [
 				D2L.PolymerBehaviors.Rubric.SirenEntityBehavior,
 				D2L.PolymerBehaviors.Rubric.LocalizeBehavior,
+				D2L.PolymerBehaviors.Rubric.AssessmentResultBehavior,
 				window.D2L.Hypermedia.HMConstantsBehavior
 			],
 
 			observers: [
-				'_onEntityChanged(entity)'
+				'_onEntityChanged(entity)',
+				'_onAssessmentResultChanged(_entity, assessmentResult)'
 			],
 
 			_onEntityChanged: function(entity) {
@@ -217,6 +232,18 @@
 				this._name = entity.properties.name;
 				this._outOf = entity.properties.outOf;
 				this._criterionCells = entity.getSubEntitiesByClass(this.HypermediaClasses.rubrics.criterionCell);
+				this._entity = entity;
+			},
+
+			_onAssessmentResultChanged: function(entity, assessmentResult) {
+				if (!entity || !assessmentResult) {
+					return;
+				}
+				this._assessedLevelHref = this.getAssessedLevelHref(entity, assessmentResult);
+				var score = this.getAssessedScore(entity, assessmentResult);
+				if (score) {
+					this._score = score.toString();
+				}
 			},
 
 			_hasDescription: function(criterionCell) {

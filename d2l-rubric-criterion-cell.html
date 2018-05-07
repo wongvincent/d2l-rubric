@@ -5,6 +5,7 @@
 <link rel="import" href="../d2l-hm-constants-behavior/d2l-hm-constants-behavior.html">
 <link rel="import" href="./siren-entity-behavior.html">
 <link rel="import" href="../s-html/s-html.html">
+<link rel="import" href="../d2l-icons/d2l-icon.html">
 
 <dom-module id="d2l-rubric-criterion-cell">
 	<template strip-whitespace>
@@ -23,7 +24,7 @@
 				margin-bottom: 0.5rem;
 			}
 			.check-icon {
-				color: #005694;
+				color: var(--d2l-color-celestine-minus-1);
 				text-align: center;
 			}
 		</style>
@@ -33,7 +34,7 @@
 					[[localize('points', 'number', criterionCell.properties.points)]]
 				</div>
 				<template is="dom-if" if="[[showSelectedIcon]]">
-						<d2l-icon class="check-icon" icon='d2l-tier1:check'></d2l-icon>
+					<d2l-icon class="check-icon" icon='d2l-tier1:check'></d2l-icon>
 				</template>
 				<s-html class="criterion-description-richtext" html="[[_getDescription(criterionCell)]]"></s-html>
 			</div>

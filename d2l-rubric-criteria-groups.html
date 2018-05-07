@@ -28,7 +28,13 @@
 		</template>
 		<template is="dom-if" if="[[!_largeScreen]]">
 			<template is="dom-repeat" items="[[_groups]]">
-				<d2l-rubric-criteria-group-mobile hidden$="[[!_showContent]]" href="[[_getSelfLink(item)]]" token="[[token]]"></d2l-rubric-criteria-group-mobile>
+				<d2l-rubric-criteria-group-mobile
+					hidden$="[[!_showContent]]"
+					href="[[_getSelfLink(item)]]"
+					assessment-href="[[assessmentHref]]"
+					token="[[token]]"
+				>
+				</d2l-rubric-criteria-group-mobile>
 			</template>
 		</template>
 	</template>
