@@ -63,7 +63,7 @@
 		},
 		
 		getAssessmentFeedback: function(criterionEntity, assessmentResult) {
-			if (assessmentResult[this._getSelfLink(criterionEntity)]) {
+			if (assessmentResult && assessmentResult[this._getSelfLink(criterionEntity)]) {
 				return assessmentResult[this._getSelfLink(criterionEntity)].feedback;
 			}
 		},
