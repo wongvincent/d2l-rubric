@@ -116,7 +116,7 @@
 							<d2l-td class="criteria">[[item.properties.name]]</d2l-td>
 							<template is="dom-repeat" as="criterionCell" items="[[_getCriterionCells(item)]]">
 								<d2l-td class$="[[_getCriteriaClassName(criterionCell, assessmentResult)]]">
-									<d2l-rubric-criterion-cell href="[[_getSelfLink(criterionCell)]]" show-selected-icon="[[_showSelectedIcon(criterionCell, assessmentResult)]]" token="[[token]]"/>
+									<d2l-rubric-criterion-cell href="[[_getSelfLink(criterionCell)]]" token="[[token]]" assessment-href="[[assessmentHref]]"/>
 								</d2l-td>
 							</template>
 							<template is="dom-if" if="[[_hasOutOf(entity)]]">
@@ -292,19 +292,9 @@
 				return levels.length + 1; // levels + criteria
 			},
 
-			_showSelectedIcon: function(criterionCell, assessmentResult) {
-				var descriptionEntity = criterionCell && criterionCell.getSubEntityByClass(this.HypermediaClasses.rubrics.description);
-				var descriptionText = descriptionEntity && descriptionEntity.properties && descriptionEntity.properties.text || '';
-				var selfLink = this._getSelfLink(criterionCell);
-				if (selfLink && assessmentResult && assessmentResult[selfLink]) {
-					return descriptionText === '';
-				}
-				return false;
-			},
-
 			_getCriteriaClassName: function(criterionCell, assessmentResult) {
 				var descriptionEntity = criterionCell && criterionCell.getSubEntityByClass(this.HypermediaClasses.rubrics.description);
-				var descriptionText = descriptionEntity && descriptionEntity.properties && descriptionEntity.properties.text || '';
+				var descriptionText = descriptionEntity && descriptionEntity.properties && descriptionEntity.properties.html || '';
 				var selfLink = this._getSelfLink(criterionCell);
 
 				if (selfLink) {

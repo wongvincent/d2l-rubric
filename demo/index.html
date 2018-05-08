@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" dir="ltr">
+<html lang="en">
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
@@ -40,15 +40,40 @@
 	</custom-style>
 </head>
 <body class="d2l-typography">
-
-<h3>Assessed Rubric with multiple criteria groups</h3>
-<demo-snippet>
-	<d2l-rubric href="data/rubrics/organizations/multiple-groups/203.json" token="foozleberries" assessment-href="data/rubrics/organizations/multiple-groups/203/multiple-groups_assessment.json"></d2l-rubric>
-</demo-snippet>
-
-
-
+<div class="vertical-section-container centered">
+	<h1>d2l-rubric demo</h1>
+	<h3>Rubric, text only</h3>
+	<demo-snippet>
+		<d2l-rubric href="data/rubrics/organizations/text-only/199.json" token="foozleberries"></d2l-rubric>
+	</demo-snippet>
+	<h3>Rubric with a title</h3>
+	<demo-snippet>
+		<d2l-rubric href="data/rubrics/organizations/default-rubric/197.json" token="foozleberries">
+			<h3 class="rubric-title">
+				<d2l-rubric-title href="data/rubrics/organizations/default-rubric/197.json" token="foozleberries"/>
+			</h3>
+		</d2l-rubric>
+	</demo-snippet>
+	<h3>Rubric with custom points</h3>
+	<demo-snippet>
+		<d2l-rubric href="data/rubrics/organizations/custom-points/198.json" token="foozleberries"></d2l-rubric>
+	</demo-snippet>
+	<h3>Assessed custom points Rubric</h3>
+	<demo-snippet>
+		<d2l-rubric href="data/rubrics/organizations/custom-points/198.json" assessment-href="data/rubrics/organizations/custom-points/198/assessment.json" token="foozleberries" ></d2l-rubric>
+	</demo-snippet>
+	<h3>Rubric with multiple criteria groups</h3>
+	<demo-snippet>
+		<d2l-rubric href="data/rubrics/organizations/multiple-groups/203.json" token="foozleberries"></d2l-rubric>
+	</demo-snippet>
+	<h3>Assessed Rubric with multiple criteria groups</h3>
+	<demo-snippet>
+		<d2l-rubric href="data/rubrics/organizations/multiple-groups/203.json" token="foozleberries" assessment-href="data/rubrics/organizations/multiple-groups/203/multiple-groups_assessment.json"></d2l-rubric>
+	</demo-snippet>
+	<h3>Rubric loading</h3>
+	<demo-snippet>
+		<d2l-rubric-loading></d2l-rubric-loading>
+	</demo-snippet>
 </div>
-
 </body>
 </html>
