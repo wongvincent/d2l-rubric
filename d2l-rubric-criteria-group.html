@@ -236,16 +236,13 @@
 				return feedback && feedback.properties && feedback.properties.text || '';
 			},
 
-			_getSelfLink: function(entity) {
-				return entity && (entity.getLinkByRel('self') || {}).href || '';
-			},
-
-			_getScore: function ( item, assessmentResult ) {
-				if(assessmentResult) {
-					const selfLink = item.getLinkByRel('self');
-					if( assessmentResult[selfLink.href] ) {
-						return assessmentResult[selfLink.href].score.toString();
-					}
+			_getScore: function(criterionEntity, assessmentResult) {
+				if (!criterionEntity || !assessmentResult) {
+					return;
+				}
+				var score = this.getAssessedScore(criterionEntity, assessmentResult);
+				if (score !== undefined) {
+					return score.toString();
 				}
 			},
 
@@ -298,8 +295,8 @@
 			_showSelectedIcon: function(criterionCell, assessmentResult) {
 				var descriptionEntity = criterionCell && criterionCell.getSubEntityByClass(this.HypermediaClasses.rubrics.description);
 				var descriptionText = descriptionEntity && descriptionEntity.properties && descriptionEntity.properties.text || '';
-				const selfLink = criterionCell && criterionCell.getLinkByRel('self');
-				if( selfLink && selfLink.href && assessmentResult && assessmentResult[selfLink.href] ) {
+				var selfLink = this._getSelfLink(criterionCell);
+				if (selfLink && assessmentResult && assessmentResult[selfLink]) {
 					return descriptionText === '';
 				}
 				return false;
@@ -308,11 +305,11 @@
 			_getCriteriaClassName: function(criterionCell, assessmentResult) {
 				var descriptionEntity = criterionCell && criterionCell.getSubEntityByClass(this.HypermediaClasses.rubrics.description);
 				var descriptionText = descriptionEntity && descriptionEntity.properties && descriptionEntity.properties.text || '';
-				const selfLink = criterionCell && criterionCell.getLinkByRel('self');
+				var selfLink = this._getSelfLink(criterionCell);
 
-				if( selfLink && selfLink.href){
-					if(assessmentResult && assessmentResult[selfLink.href]){
-						if( descriptionText === '' ){
+				if (selfLink) {
+					if (assessmentResult && assessmentResult[selfLink]) {
+						if (descriptionText === '') {
 							return 'criterion-cell selected-icon';
 						}
 						return 'criterion-cell selected';

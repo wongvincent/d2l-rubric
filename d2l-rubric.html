@@ -131,7 +131,7 @@ Polymer Web-Component to display rubrics
 			],
 
 			_onEntityChanged: function(entity) {
-				if(entity) {
+				if (entity) {
 					this._criteriaGroups = entity.getLinkByRel(this.HypermediaRels.Rubrics.criteriaGroups);
 					this._showContent = true;
 				}
@@ -145,10 +145,6 @@ Polymer Web-Component to display rubrics
 
 			_getHref: function(link) {
 				return link.href;
-			},
-
-			_getSelfLink: function(entity) {
-				return entity && (entity.getLinkByRel('self') || {}).href || '';
 			},
 
 			_hasOutOf: function(entity) {

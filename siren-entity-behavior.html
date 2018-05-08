@@ -84,7 +84,11 @@
 				return false;
 			}
 			return true;
-		}
+		},
+
+		_getSelfLink: function(entity) {
+			return entity && (entity.getLinkByRel('self') || {}).href || '';
+		},
 
 	};
 

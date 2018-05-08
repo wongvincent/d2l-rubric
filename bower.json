@@ -29,7 +29,7 @@
     "d2l-colors": "^3.1.2",
     "d2l-fetch": "Brightspace/d2l-fetch#^1.8.0",
     "d2l-fetch-siren-entity-behavior": "Brightspace/d2l-fetch-siren-entity-behavior#^4.0.2",
-    "d2l-hm-constants-behavior": "git://github.com/Brightspace/d2l-hm-constants-behavior.git#^5.4.0",
+    "d2l-hm-constants-behavior": "git://github.com/Brightspace/d2l-hm-constants-behavior.git#^5.8.0",
     "d2l-icons": "^4.10.0",
     "d2l-loading-spinner": "^6.0.2",
     "d2l-localize-behavior": "^1.1.0",
