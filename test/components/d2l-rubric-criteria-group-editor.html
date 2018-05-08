@@ -1,0 +1,26 @@
+<!doctype html>
+
+<html>
+	<head>
+		<title>d2l-rubric-criteria-group-editor test</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
+		<script src="../../../webcomponentsjs/webcomponents-lite.js"></script>
+		<script src="../../../web-component-tester/browser.js"></script>
+
+		<link rel="import" href="../../editor/d2l-rubric-criteria-group-editor.html">
+	</head>
+	<body>
+		<test-fixture id="basic-criteria">
+			<template>
+				<d2l-rubric-criteria-group-editor></d2l-rubric-criteria-group-editor>
+			</template>
+		</test-fixture>
+		<script src="d2l-rubric-criteria-group-editor.js"></script>
+		<script>
+			// TODO: Can re-enable these two tests after aria 1.1 support in accessibility developer tools
+			// https://github.com/GoogleChrome/accessibility-developer-tools/pull/343
+			a11ySuite('basic-criteria', ['badAriaRole', 'ariaRoleNotScoped', 'badAriaAttribute']);
+		</script>
+	</body>
+</html>
