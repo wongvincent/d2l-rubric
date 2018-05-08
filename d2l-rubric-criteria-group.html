@@ -226,16 +226,6 @@
 				return entities || [];
 			},
 
-			_getDescription: function(entity) {
-				var description = entity && entity.getSubEntityByClass(this.HypermediaClasses.rubrics.description);
-				return description && description.properties && description.properties.html || '';
-			},
-
-			_getFeedback: function(entity) {
-				var feedback = entity && entity.getSubEntityByClass(this.HypermediaClasses.rubrics.feedback);
-				return feedback && feedback.properties && feedback.properties.text || '';
-			},
-
 			_getScore: function(criterionEntity, assessmentResult) {
 				if (!criterionEntity || !assessmentResult) {
 					return;
