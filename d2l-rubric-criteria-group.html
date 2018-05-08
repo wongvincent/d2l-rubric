@@ -34,6 +34,9 @@
 			d2l-th  {
 				text-align: center;
 			}
+			d2l-rubric-feedback {
+				border: none;
+			}
 			.level-name {
 				font-weight: 700;
 			}
@@ -126,11 +129,10 @@
 								</d2l-td>
 							</template>
 						</d2l-tr>
-
-					<template is="dom-if" if="[[_hasFeedback(item)]]">
+					<template is="dom-if" if="[[_hasFeedback(item, assessmentResult)]]">
 						<d2l-tspan>
 							<d2l-rubric-feedback style="border:none">
-								 [[item.properties.feedback]]
+								 [[getAssessmentFeedback(item, assessmentResult)]]
 							</d2l-rubric-feedback>
 						</d2l-tspan>
 					</template>
@@ -150,6 +152,7 @@
 				_criteriaCollectionHref: String,
 				_criteriaCollectionEntity: Object,
 				_criteriaEntities: Array,
+				_selectedCell: Object,
 				_showContent: {
 					type: Boolean,
 					value: false
@@ -242,9 +245,9 @@
 				return description && description.properties && description.properties.html || '';
 			},
 
-			_getFeedback: function(entity) {
-				var feedback = entity && entity.getSubEntityByClass(this.HypermediaClasses.rubrics.feedback);
-				return feedback && feedback.properties && feedback.properties.text || '';
+			_hasFeedback: function(entity, assessmentResult) {
+				var entityLink = this._getSelfLink(entity);
+				return assessmentResult && assessmentResult[entityLink].feedback;			
 			},
 
 			_getScore: function(criterionEntity, assessmentResult) {
@@ -255,9 +258,7 @@
 				if (score !== undefined) {
 					return score.toString();
 				}
-			_hasFeedback: function(entity) {
-				return entity && entity.properties && entity.properties.feedback;
-			},
+			},	
 
 >>>>>>> Rubric feedback: first draft
 			_hasCustomPoints: function(criterionCell) {

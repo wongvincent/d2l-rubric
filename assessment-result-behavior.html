@@ -37,11 +37,13 @@
 					if (link.href) {
 						var assessment = {
 							score: selectedCriterionCellEntity.properties.score,
-							level: selectedCriterionCellEntity.getLinkByRel(this.HypermediaRels.Rubrics.level)
+							level: selectedCriterionCellEntity.getLinkByRel(this.HypermediaRels.Rubrics.level),
+							feedback: selectedCriterionCellEntity.getSubEntityByClass('feedback').properties.text
 						};
 						assessmentMap[link.href] = assessment;
 						assessmentMap[rowLink.href] = assessment;
 					}
+					
 				}
 			}
 			return assessmentMap;
@@ -57,7 +59,18 @@
 			if (assessmentResult[this._getSelfLink(criterionEntity)]) {
 				return assessmentResult[this._getSelfLink(criterionEntity)].score;
 			}
-		}
+
+		},
+		
+		getAssessmentFeedback: function(criterionEntity, assessmentResult) {
+			if (assessmentResult[this._getSelfLink(criterionEntity)]) {
+				return assessmentResult[this._getSelfLink(criterionEntity)].feedback;
+			}
+		},
+
+		_getSelfLink: function(entity) {
+			return entity && (entity.getLinkByRel('self') || {}).href || '';
+		},
 	};
 
 	/** @polymerBehavior */

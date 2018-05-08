@@ -25,12 +25,18 @@
                border-right: 12px solid transparent;
                border-bottom: 12px solid white;
            }
+		   .feedback-heading {
+				padding-top: 18px
+		   }
 		</style>
 		
 		<div class="feedback-arrow">
 			<div class="feedback-arrow-inner"></div>
 		</div>
-		<div style="padding-top: 30px; border: none">
+		<div class="feedback-heading">
+			<b>Feedback</b>
+		</div>
+		<div>
 			<slot></slot>
 		</div>
 	</template>
