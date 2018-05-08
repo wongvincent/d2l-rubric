@@ -69,16 +69,6 @@
 				border-left: 1px solid var(--d2l-color-celestine);
 				border-bottom: 1px solid var(--d2l-color-celestine);
 			}
-
-			.selected-icon {
-				border-color: var(--d2l-color-celestine);
-				background-color: var(--d2l-color-celestine-plus-2);
-				text-decoration-color: var(--d2l-color-celestine-minus-1);
-				border-left: 1px solid var(--d2l-color-celestine);
-				border-bottom: 1px solid var(--d2l-color-celestine) !important;
-				color: var(--d2l-color-celestine-minus-1);
-				text-align: center;
-			}
 		</style>
 
 		<d2l-rubric-loading hidden$="[[_showContent]]"></d2l-rubric-loading>
@@ -286,16 +276,13 @@
 				var descriptionEntity = criterionCell && criterionCell.getSubEntityByClass(this.HypermediaClasses.rubrics.description);
 				var descriptionText = descriptionEntity && descriptionEntity.properties && descriptionEntity.properties.html || '';
 				var selfLink = this._getSelfLink(criterionCell);
-
+				var className = 'criterion-cell';
 				if (selfLink) {
 					if (assessmentResult && assessmentResult[selfLink]) {
-						if (descriptionText === '') {
-							return 'criterion-cell selected-icon';
-						}
-						return 'criterion-cell selected';
+						className += ' selected';
 					}
 				}
-				return 'criterion-cell';
+				return className;
 			}
 		});
 	</script>

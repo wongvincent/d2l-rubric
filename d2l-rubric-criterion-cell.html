@@ -28,6 +28,7 @@
 			.check-icon {
 				color: var(--d2l-color-celestine-minus-1);
 				text-align: center;
+				margin: auto;
 			}
 		</style>
 		<siren-entity href="[[assessmentHref]]" token="[[token]]" entity="{{assessmentEntity}}"></siren-entity>
@@ -35,7 +36,7 @@
 			<div class="points custom-points" hidden=[[!_hasCustomPoints(entity)]]>
 				[[localize('points', 'number', entity.properties.points)]]
 			</div>
-			<div hidden="[[!_showSelectedIcon(entity, assessmentResult)]]">
+			<div class="check-icon" hidden="[[!_showSelectedIcon(entity, assessmentResult)]]">
 				<d2l-icon class="check-icon" icon='d2l-tier1:check'></d2l-icon>
 			</div>
 			<s-html class="criterion-description-richtext" html="[[_getDescription(entity)]]"></s-html>
