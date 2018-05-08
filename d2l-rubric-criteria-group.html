@@ -273,8 +273,6 @@
 			},
 
 			_getCriteriaClassName: function(criterionCell, assessmentResult) {
-				var descriptionEntity = criterionCell && criterionCell.getSubEntityByClass(this.HypermediaClasses.rubrics.description);
-				var descriptionText = descriptionEntity && descriptionEntity.properties && descriptionEntity.properties.html || '';
 				var selfLink = this._getSelfLink(criterionCell);
 				var className = 'criterion-cell';
 				if (selfLink) {
