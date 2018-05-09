@@ -26,6 +26,10 @@
 				padding: 18px;
 				padding-bottom: 24px;
 			}
+			.feedback-heading {
+				@apply --d2l-body-small-text;
+				font-weight: 700;
+			}
 			.feedback-text {
 				@apply --d2l-body-compact-text;
 		   }
@@ -37,7 +41,7 @@
 			</d2l-rubric-criterion-mobile>
 			<div hidden="[[!_hasFeedback(criterion, assessmentResult)]]">
 				<div class="feedback-container">
-					<small><b>[[localize('feedback')]]</b></small>
+					<div class="feedback-heading">[[localize('feedback')]]</div>
 					<div class="feedback-text">
 						[[getAssessmentFeedback(criterion,assessmentResult)]]
 					</div>
