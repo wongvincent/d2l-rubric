@@ -69,16 +69,6 @@
 				border-left: 1px solid var(--d2l-color-celestine);
 				border-bottom: 1px solid var(--d2l-color-celestine);
 			}
-
-			.selected-icon {
-				border-color: var(--d2l-color-celestine);
-				background-color: var(--d2l-color-celestine-plus-2);
-				text-decoration-color: var(--d2l-color-celestine-minus-1);
-				border-left: 1px solid var(--d2l-color-celestine);
-				border-bottom: 1px solid var(--d2l-color-celestine) !important;
-				color: var(--d2l-color-celestine-minus-1);
-				text-align: center;
-			}
 		</style>
 
 		<d2l-rubric-loading hidden$="[[_showContent]]"></d2l-rubric-loading>
@@ -148,7 +138,6 @@
 				_criteriaCollectionHref: String,
 				_criteriaCollectionEntity: Object,
 				_criteriaEntities: Array,
-				_selectedCell: Object,
 				_showContent: {
 					type: Boolean,
 					value: false
