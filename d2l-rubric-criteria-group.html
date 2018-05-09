@@ -276,10 +276,8 @@
 			_getCriteriaClassName: function(criterionCell, assessmentResult) {
 				var selfLink = this._getSelfLink(criterionCell);
 				var className = 'criterion-cell';
-				if (selfLink) {
-					if (assessmentResult && assessmentResult[selfLink]) {
-						className += ' selected';
-					}
+				if (selfLink && assessmentResult && assessmentResult[selfLink]) {
+					className += ' selected';
 				}
 				return className;
 			}
