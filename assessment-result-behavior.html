@@ -44,7 +44,7 @@
 						assessmentMap[link.href] = assessment;
 						assessmentMap[rowLink.href] = assessment;
 					}
-					
+
 				}
 			}
 			return assessmentMap;
@@ -62,7 +62,7 @@
 			}
 
 		},
-		
+
 		getAssessmentFeedback: function(criterionEntity, assessmentResult) {
 			if (assessmentResult && assessmentResult[this._getSelfLink(criterionEntity)]) {
 				return assessmentResult[this._getSelfLink(criterionEntity)].feedback;

@@ -84,7 +84,7 @@
 			_getSelfLink: function(entity) {
 				return entity && (entity.getLinkByRel('self') || {}).href || '';
 			},
-			
+
 			_hasFeedback: function(entity, assessmentResult) {
 				var entityLink = this._getSelfLink(entity);
 				return assessmentResult && assessmentResult[entityLink].feedback;
