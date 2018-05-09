@@ -35,10 +35,11 @@
 					var rowLink = selectedCriterionCellEntity.getLinkByRel(this.HypermediaRels.Rubrics.criterion);
 
 					if (link.href) {
+						var feedback = selectedCriterionCellEntity.getSubEntityByClass('feedback');
 						var assessment = {
 							score: selectedCriterionCellEntity.properties.score,
 							level: selectedCriterionCellEntity.getLinkByRel(this.HypermediaRels.Rubrics.level),
-							feedback: selectedCriterionCellEntity.getSubEntityByClass('feedback').properties.text
+							feedback: feedback && feedback.properties && feedback.properties.html
 						};
 						assessmentMap[link.href] = assessment;
 						assessmentMap[rowLink.href] = assessment;
