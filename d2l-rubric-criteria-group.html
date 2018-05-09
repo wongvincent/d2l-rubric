@@ -125,10 +125,10 @@
 								</d2l-td>
 							</template>
 						</d2l-tr>
-					<template is="dom-if" if="[[_hasFeedback(item, assessmentResult)]]">
+					<template is="dom-if" if="[[_hasFeedback(criterion, assessmentResult)]]">
 						<d2l-tspan>
 							<d2l-rubric-feedback style="border:none">
-								 <s-html html="[[getAssessmentFeedback(item, assessmentResult)]]"></s-html>
+								 <s-html html="[[getAssessmentFeedback(crtiterion, assessmentResult)]]"></s-html>
 							</d2l-rubric-feedback>
 						</d2l-tspan>
 					</template>
@@ -234,29 +234,11 @@
 				return entities || [];
 			},
 
-<<<<<<< HEAD
-=======
-			_getDescription: function(entity) {
-				var description = entity && entity.getSubEntityByClass(this.HypermediaClasses.rubrics.description);
-				return description && description.properties && description.properties.html || '';
-			},
-
 			_hasFeedback: function(entity, assessmentResult) {
 				var entityLink = this._getSelfLink(entity);
 				return assessmentResult && assessmentResult[entityLink].feedback;
 			},
 
-			_getScore: function(criterionEntity, assessmentResult) {
-				if (!criterionEntity || !assessmentResult) {
-					return;
-				}
-				var score = this.getAssessedScore(criterionEntity, assessmentResult);
-				if (score !== undefined) {
-					return score.toString();
-				}
-			},
-
->>>>>>> Rubric feedback: first draft
 			_hasCustomPoints: function(criterionCell) {
 				// TODO: The API currently returns 0 points for cells without custom points, this will be null soon.
 				// TODO: Once we get null then remove the > 0 compare
