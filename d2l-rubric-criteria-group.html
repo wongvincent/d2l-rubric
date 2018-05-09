@@ -101,17 +101,17 @@
 				</d2l-tr>
 			</d2l-thead>
 			<d2l-tbody>
-				<template is="dom-repeat" items="[[_criteriaEntities]]">
+				<template is="dom-repeat" items="[[_criteriaEntities]]" as="criterion">
 						<d2l-tr>
-							<d2l-td class="criteria">[[item.properties.name]]</d2l-td>
-							<template is="dom-repeat" as="criterionCell" items="[[_getCriterionCells(item)]]">
+							<d2l-td class="criteria">[[criterion.properties.name]]</d2l-td>
+							<template is="dom-repeat" items="[[_getCriterionCells(criterion)]]" as="criterionCell">
 								<d2l-td class$="[[_getCriteriaClassName(criterionCell, assessmentResult)]]">
 									<d2l-rubric-criterion-cell href="[[_getSelfLink(criterionCell)]]" token="[[token]]" assessment-href="[[assessmentHref]]"/>
 								</d2l-td>
 							</template>
 							<template is="dom-if" if="[[_hasOutOf(entity)]]">
 								<d2l-td class="out-of">
-									<div>[[_getScore(item, assessmentResult)]]/[[item.properties.outOf]]</div>
+									<div>[[_localizeOutOf(criterion, assessmentResult)]]</div>
 								</d2l-td>
 							</template>
 						</d2l-tr>
@@ -216,16 +216,6 @@
 				return entities || [];
 			},
 
-			_getScore: function(criterionEntity, assessmentResult) {
-				if (!criterionEntity || !assessmentResult) {
-					return;
-				}
-				var score = this.getAssessedScore(criterionEntity, assessmentResult);
-				if (score !== undefined) {
-					return score.toString();
-				}
-			},
-
 			_hasCustomPoints: function(criterionCell) {
 				// TODO: The API currently returns 0 points for cells without custom points, this will be null soon.
 				// TODO: Once we get null then remove the > 0 compare
@@ -253,6 +243,17 @@
 					return;
 				}
 				return this.localize(type, 'number', points.toString());
+			},
+
+			_localizeOutOf: function(criterion, assessmentResult) {
+				var score = null;
+				if (assessmentResult) {
+					score = this.getAssessedScore(criterion, assessmentResult);
+				}
+				if (score) {
+					return this.localize('scoreOutOf', 'score', score.toString(), 'outOf', criterion.properties.outOf);
+				}
+				return this.localize('outOf', 'outOf', criterion.properties.outOf);
 			},
 
 			_getRowCount: function(criteria) {
