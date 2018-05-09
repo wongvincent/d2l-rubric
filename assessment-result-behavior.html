@@ -1,0 +1,69 @@
+<link rel="import" href="../d2l-hm-constants-behavior/d2l-hm-constants-behavior.html">
+<link rel="import" href="./siren-entity-behavior.html">
+
+<script>
+	'use strict';
+	window.D2L = window.D2L || {};
+	window.D2L.PolymerBehaviors = window.D2L.PolymerBehaviors || {};
+	window.D2L.PolymerBehaviors.Rubric = window.D2L.PolymerBehaviors.Rubric || {};
+
+	/**
+	 * Behavior for computing assessment results from an assessment entity
+	 * @polymerBehavior
+	 */
+	D2L.PolymerBehaviors.Rubric.AssessmentResultBehaviorImpl = {
+		properties: {
+			assessmentEntity: Object,
+			assessmentResult: {
+				type: Object,
+				value: null,
+				computed: '_computeAssessmentResult(assessmentEntity)'
+			}
+		},
+
+		_computeAssessmentResult: function(assessmentEntity) {
+			if (!assessmentEntity) {
+				return;
+			}
+			var assessmentMap = {};
+			var criteriaEntities = assessmentEntity.getSubEntitiesByClass(this.HypermediaClasses.rubrics.criterionCellSelector);
+			for (var i = 0; i < criteriaEntities.length; i++) {
+				var criterionEntity = criteriaEntities[i];
+				var selectedCriterionCellEntity = criterionEntity.getSubEntityByClass(this.HypermediaClasses.rubrics.selected);
+				if (selectedCriterionCellEntity) {
+					var link = selectedCriterionCellEntity.getLinkByRel(this.HypermediaRels.Rubrics.criterionCell);
+					var rowLink = selectedCriterionCellEntity.getLinkByRel(this.HypermediaRels.Rubrics.criterion);
+
+					if (link.href) {
+						var assessment = {
+							score: selectedCriterionCellEntity.properties.score,
+							level: selectedCriterionCellEntity.getLinkByRel(this.HypermediaRels.Rubrics.level)
+						};
+						assessmentMap[link.href] = assessment;
+						assessmentMap[rowLink.href] = assessment;
+					}
+				}
+			}
+			return assessmentMap;
+		},
+
+		getAssessedLevelHref: function(criterionEntity, assessmentResult) {
+			if (assessmentResult[this._getSelfLink(criterionEntity)]) {
+				return assessmentResult[this._getSelfLink(criterionEntity)].level.href;
+			}
+		},
+
+		getAssessedScore: function(criterionEntity, assessmentResult) {
+			if (assessmentResult[this._getSelfLink(criterionEntity)]) {
+				return assessmentResult[this._getSelfLink(criterionEntity)].score;
+			}
+		}
+	};
+
+	/** @polymerBehavior */
+	D2L.PolymerBehaviors.Rubric.AssessmentResultBehavior = [
+		D2L.PolymerBehaviors.Rubric.AssessmentResultBehaviorImpl,
+		D2L.PolymerBehaviors.Rubric.SirenEntityBehavior,
+		window.D2L.Hypermedia.HMConstantsBehavior
+	];
+</script>
