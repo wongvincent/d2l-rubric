@@ -1,8 +1,9 @@
+<link rel="import" href="../../d2l-fetch-siren-entity-behavior/d2l-fetch-siren-entity-behavior.html">
 
 <script>
 (function() {
 
-	// 'use strict';
+	'use strict';
 
 	window.D2L = window.D2L || {};
 	window.D2L.Rubric = window.D2L.Rubric || {};
@@ -48,8 +49,8 @@
 			if (!entity || bypassCache) {
 				this._store.get(token).set(entityId, { 'status': 'fetching', 'entity': null });
 
-				var headers = new Headers();
-				headers.set('Authorization', `Bearer ${token}`);
+				// var headers = new Headers();
+				// headers.set('Authorization', `Bearer ${token}`);
 
 				// if (bypassCache) {
 				// 	headers.set('pragma', 'no-cache');
@@ -78,12 +79,40 @@
 		update: function(entityId, token, entity) {
 			this._initContainer(this._store, entityId, token);
 			return new Promise((resolve) => {
-				this._store.get(token).set(entityId, { 'status': '', 'entity': entity });
-
-				this._notify(entityId, token, entity);
+				const entities = this.expand(entityId, entity);
+				entities.forEach(function(entity) {
+					this._store.get(token).set(entity.key, { 'status': '', 'entity': entity.value });
+					this._notify(entity.key, token, entity.value);
+				}.bind(this));
 
 				resolve(entity);
 			});
+		},
+
+		expand: function(entityId, entity) {
+			const entityIndex = new Set();
+			const expandEntities = [];
+			const entities = [];
+			expandEntities.push(entity);
+
+			while (expandEntities.length > 0) {
+				const expandEntity = expandEntities.shift();
+				(expandEntity.entities || []).forEach(function(entity) {
+					expandEntities.push(entity);
+				});
+
+				if (expandEntity.hasLinkByRel('self')) {
+					const href = expandEntity.getLinkByRel('self').href;
+					if (!entityIndex.has(href)) {
+						entityIndex.add(href);
+						entities.push({
+							key: href,
+							value: expandEntity
+						});
+					}
+				}
+			}
+			return entities;
 		},
 
 		setError: function(entityId, token, error) {

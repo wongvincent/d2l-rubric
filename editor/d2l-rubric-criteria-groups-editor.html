@@ -1,9 +1,7 @@
 <link rel="import" href="../../polymer/polymer.html">
-<link rel="import" href="../../d2l-fetch/d2l-fetch.html">
 <link rel="import" href="../../d2l-hm-constants-behavior/d2l-hm-constants-behavior.html">
-<link rel="import" href="../../iron-media-query/iron-media-query.html">
 
-<link rel="import" href="../store/entity-behavior.html">
+<link rel="import" href="../store/entity-editor-behavior.html">
 <link rel="import" href="./../d2l-rubric-loading.html">
 
 <link rel="import" href="./d2l-rubric-criteria-group-editor.html">
@@ -43,7 +41,7 @@
 			},
 
 			behaviors: [
-				D2L.PolymerBehaviors.Rubric.EntityBehavior,
+				D2L.PolymerBehaviors.Rubric.EntityEditorBehavior,
 				window.D2L.Hypermedia.HMConstantsBehavior
 			],
 
@@ -59,9 +57,6 @@
 				this._showContent = true;
 			},
 
-			_getSelfLink: function(entity) {
-				return entity && (entity.getLinkByRel('self') || {}).href || '';
-			}
 		});
 	</script>
 </dom-module>
