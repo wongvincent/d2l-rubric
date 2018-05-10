@@ -8,6 +8,7 @@
 <link rel="import" href="../d2l-icons/d2l-icon.html">
 <link rel="import" href="./siren-entity.html">
 <link rel="import" href="./assessment-result-behavior.html">
+<link rel="import" href="../d2l-colors/d2l-colors.html">
 
 <dom-module id="d2l-rubric-criterion-cell">
 	<template strip-whitespace>
@@ -19,10 +20,10 @@
 			.criterion-description-richtext {
 				display: block;
 				overflow-x: hidden;
+				color: var(--d2l-color-ferrite);
 			}
 			.custom-points {
-				font-weight: 700;
-				color: var(--d2l-color-galena);
+				color: var(--d2l-color-tungsten);
 				margin-bottom: 0.5rem;
 			}
 			.check-icon {
@@ -30,9 +31,12 @@
 				text-align: center;
 				margin: auto;
 			}
+			.descriptor-text {
+				@apply --d2l-body-small-text;
+			}
 		</style>
 		<siren-entity href="[[assessmentHref]]" token="[[token]]" entity="{{assessmentEntity}}"></siren-entity>
-		<div>
+		<div class="descriptor-text">
 			<div class="points custom-points" hidden=[[!_hasCustomPoints(entity)]]>
 				[[localize('points', 'number', entity.properties.points)]]
 			</div>

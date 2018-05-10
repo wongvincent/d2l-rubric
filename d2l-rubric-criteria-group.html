@@ -9,6 +9,7 @@
 <link rel="import" href="../d2l-hm-constants-behavior/d2l-hm-constants-behavior.html">
 <link rel="import" href="../d2l-colors/d2l-colors.html">
 <link rel="import" href="./d2l-rubric-loading.html">
+<link rel="import" href="./d2l-rubric-feedback.html">
 <link rel="import" href="./localize-behavior.html">
 <link rel="import" href="../iron-resizable-behavior/iron-resizable-behavior.html">
 <link rel="import" href="../d2l-offscreen/d2l-offscreen.html">
@@ -16,6 +17,7 @@
 <link rel="import" href="./d2l-rubric-criterion-cell.html">
 <link rel="import" href="./siren-entity.html">
 <link rel="import" href="./assessment-result-behavior.html">
+<link rel="import" href="../s-html/s-html.html">
 
 <dom-module id="d2l-rubric-criteria-group">
 	<template strip-whitespace>
@@ -52,14 +54,12 @@
 				@apply --d2l-body-compact-text;
 				vertical-align: text-top;
 			}
-			.custom-points {
-				font-weight: 700;
-				color: var(--d2l-color-galena);
-				margin-bottom: 0.5rem;
-			}
 			.criterion-description-richtext {
 				display: block;
 				overflow-x: hidden;
+			}
+			.feedback-wrapper {
+				border: none;
 			}
 			.selected {
 				border-color: var(--d2l-color-celestine);
@@ -115,7 +115,14 @@
 								</d2l-td>
 							</template>
 						</d2l-tr>
+					<template is="dom-if" if="[[_hasFeedback(criterion, assessmentResult)]]">
+						<d2l-tspan>
+							<d2l-rubric-feedback class="feedback-wrapper">
+								<s-html html="[[getAssessmentFeedback(criterion, assessmentResult)]]"></s-html>
+							</d2l-rubric-feedback>
+						</d2l-tspan>
 					</template>
+				</template>
 			</d2l-tbody>
 		</d2l-table>
 	</template>
@@ -214,6 +221,11 @@
 			_getCriterionCells: function(entity) {
 				var entities = entity && entity.getSubEntitiesByClass(this.HypermediaClasses.rubrics.criterionCell);
 				return entities || [];
+			},
+
+			_hasFeedback: function(entity, assessmentResult) {
+				var entityLink = this._getSelfLink(entity);
+				return assessmentResult && assessmentResult[entityLink].feedback;
 			},
 
 			_hasCustomPoints: function(criterionCell) {

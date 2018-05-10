@@ -1,0 +1,59 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="./siren-entity-behavior.html">
+<link rel="import" href="./localize-behavior.html">
+<link rel="import" href="../d2l-colors/d2l-colors.html">
+<link rel="import" href="../d2l-typography/d2l-typography-shared-styles.html">
+
+<dom-module id="d2l-rubric-feedback">
+	<template strip-whitespace>
+		<style>
+			:host {
+				display: block;
+			}
+            .feedback-arrow {
+               margin-top: -45px;
+               width: 0;
+               height: 0;
+               border: 12px solid transparent;
+               border-bottom-color: var(--d2l-table-border-color);
+           }
+           .feedback-arrow-inner {
+               position: relative;
+               top: 1px;
+               left: -12px;
+               width: 0;
+               height: 0;
+               border-left: 12px solid transparent;
+               border-right: 12px solid transparent;
+               border-bottom: 12px solid white;
+           }
+		   .feedback-heading {
+				@apply --d2l-label-text;
+				padding-top: 18px
+		   }
+		   .feedback-text {
+				@apply --d2l-body-compact-text;
+		   }
+		</style>
+		
+		<div class="feedback-arrow">
+			<div class="feedback-arrow-inner"></div>
+		</div>
+		<div class="feedback-heading">
+			[[localize('feedback')]]
+		</div>
+		<div class="feedback-text">
+			<slot></slot>
+		</div>
+	</template>
+	
+	<script>
+		Polymer({
+			is: 'd2l-rubric-feedback',
+
+			behaviors: [
+				D2L.PolymerBehaviors.Rubric.LocalizeBehavior
+			],
+		});
+	</script>
+</dom-module>

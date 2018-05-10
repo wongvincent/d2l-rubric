@@ -35,28 +35,37 @@
 					var rowLink = selectedCriterionCellEntity.getLinkByRel(this.HypermediaRels.Rubrics.criterion);
 
 					if (link.href) {
+						var feedback = selectedCriterionCellEntity.getSubEntityByClass(this.HypermediaClasses.rubrics.feedback);
 						var assessment = {
 							score: selectedCriterionCellEntity.properties.score,
-							level: selectedCriterionCellEntity.getLinkByRel(this.HypermediaRels.Rubrics.level)
+							level: selectedCriterionCellEntity.getLinkByRel(this.HypermediaRels.Rubrics.level),
+							feedback: feedback && feedback.properties && feedback.properties.html
 						};
 						assessmentMap[link.href] = assessment;
 						assessmentMap[rowLink.href] = assessment;
 					}
+
 				}
 			}
 			return assessmentMap;
 		},
 
-		getAssessedLevelHref: function(criterionEntity, assessmentResult) {
+		_getItem: function(criterionEntity, assessmentResult, itemFetcher) {
 			if (assessmentResult[this._getSelfLink(criterionEntity)]) {
-				return assessmentResult[this._getSelfLink(criterionEntity)].level.href;
+				return itemFetcher(assessmentResult[this._getSelfLink(criterionEntity)]);
 			}
 		},
 
+		getAssessedLevelHref: function(criterionEntity, assessmentResult) {
+			return this._getItem(criterionEntity, assessmentResult, function(x) {return x.level.href;});
+		},
+
 		getAssessedScore: function(criterionEntity, assessmentResult) {
-			if (assessmentResult[this._getSelfLink(criterionEntity)]) {
-				return assessmentResult[this._getSelfLink(criterionEntity)].score;
-			}
+			return this._getItem(criterionEntity, assessmentResult, function(x) {return x.score;});
+		},
+
+		getAssessmentFeedback: function(criterionEntity, assessmentResult) {
+			return this._getItem(criterionEntity, assessmentResult, function(x) {return x.feedback;});
 		}
 	};
 

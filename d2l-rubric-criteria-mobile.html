@@ -5,6 +5,10 @@
 <link rel="import" href="./d2l-rubric-levels-mobile.html">
 <link rel="import" href="../d2l-colors/d2l-colors.html">
 <link rel="import" href="./siren-entity-behavior.html">
+<link rel="import" href="./assessment-result-behavior.html">
+<link rel="import" href="./localize-behavior.html">
+<link rel="import" href="../d2l-typography/d2l-typography-shared-styles.html">
+<link rel="import" href="../s-html/s-html.html">
 
 <dom-module id="d2l-rubric-criteria-mobile">
 	<template strip-whitespace>
@@ -15,11 +19,35 @@
 			.line {
 				border: solid 0.5px var(--d2l-color-mica);
 			}
+			.feedback-container {
+				margin-top: 24px;
+				margin-bottom: 18px;
+				border: 1px solid var(--d2l-color-mica);
+				border-radius: 8px;
+				padding: 18px;
+				padding-bottom: 24px;
+			}
+			.feedback-heading {
+				@apply --d2l-body-small-text;
+				font-weight: 700;
+			}
+			.feedback-text {
+				@apply --d2l-body-compact-text;
+		   }
 		</style>
+		<siren-entity href="[[assessmentHref]]" token="[[token]]" entity="{{assessmentEntity}}"></siren-entity>
 		<hr class="line"></hr>
 		<template is="dom-repeat" items="[[_criteria]]" as="criterion">
 			<d2l-rubric-criterion-mobile href="[[_getSelfLink(criterion)]]" levels-href="[[levelsHref]]" assessment-href="[[assessmentHref]]" token="[[token]]" is-holistic="[[isHolistic]]">
 			</d2l-rubric-criterion-mobile>
+			<div hidden="[[!_hasFeedback(criterion, assessmentResult)]]">
+				<div class="feedback-container">
+					<div class="feedback-heading">[[localize('feedback')]]</div>
+					<div class="feedback-text">
+						<s-html html="[[_getFeedback(criterion, assessmentResult)]]"></s-html>
+					</div>
+				</div>
+			</div>
 			<hr class="line"></hr>
 		</template>
 	</template>
@@ -42,7 +70,9 @@
 
 			behaviors: [
 				D2L.PolymerBehaviors.Rubric.SirenEntityBehavior,
-				window.D2L.Hypermedia.HMConstantsBehavior
+				window.D2L.Hypermedia.HMConstantsBehavior,
+				D2L.PolymerBehaviors.Rubric.AssessmentResultBehavior,
+				D2L.PolymerBehaviors.Rubric.LocalizeBehavior
 			],
 
 			observers: [
@@ -58,6 +88,17 @@
 
 			_getSelfLink: function(entity) {
 				return entity && (entity.getLinkByRel('self') || {}).href || '';
+			},
+
+			_hasFeedback: function(entity, assessmentResult) {
+				var entityLink = this._getSelfLink(entity);
+				return assessmentResult && assessmentResult[entityLink].feedback;
+			},
+
+			_getFeedback: function(entity, assessmentResult) {
+				if (entity && assessmentResult) {
+					return this.getAssessmentFeedback(entity, assessmentResult);
+				}
 			}
 		});
 	</script>
