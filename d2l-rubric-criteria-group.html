@@ -35,9 +35,6 @@
 			d2l-th  {
 				text-align: center;
 			}
-			d2l-rubric-feedback {
-				border: none;
-			}
 			.level-name {
 				font-weight: 700;
 			}
@@ -118,7 +115,7 @@
 					<template is="dom-if" if="[[_hasFeedback(criterion, assessmentResult)]]">
 						<d2l-tspan>
 							<d2l-rubric-feedback style="border:none">
-								 <s-html html="[[getAssessmentFeedback(crtiterion, assessmentResult)]]"></s-html>
+								<s-html html="[[getAssessmentFeedback(criterion, assessmentResult)]]"></s-html>
 							</d2l-rubric-feedback>
 						</d2l-tspan>
 					</template>

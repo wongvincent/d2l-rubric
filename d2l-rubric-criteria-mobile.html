@@ -8,6 +8,7 @@
 <link rel="import" href="./assessment-result-behavior.html">
 <link rel="import" href="./localize-behavior.html">
 <link rel="import" href="../d2l-typography/d2l-typography-shared-styles.html">
+<link rel="import" href="../s-html/s-html.html">
 
 <dom-module id="d2l-rubric-criteria-mobile">
 	<template strip-whitespace>
@@ -43,7 +44,7 @@
 				<div class="feedback-container">
 					<div class="feedback-heading">[[localize('feedback')]]</div>
 					<div class="feedback-text">
-						[[getAssessmentFeedback(criterion,assessmentResult)]]
+						<s-html html="[[_getFeedback(criterion, assessmentResult)]]"></s-html>
 					</div>
 				</div>
 			</div>
@@ -92,6 +93,12 @@
 			_hasFeedback: function(entity, assessmentResult) {
 				var entityLink = this._getSelfLink(entity);
 				return assessmentResult && assessmentResult[entityLink].feedback;
+			},
+
+			_getFeedback: function(entity, assessmentResult) {
+				if (entity && assessmentResult) {
+					return this.getAssessmentFeedback(entity, assessmentResult);
+				}
 			}
 		});
 	</script>

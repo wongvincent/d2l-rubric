@@ -57,15 +57,15 @@
 		},
 
 		getAssessedLevelHref: function(criterionEntity, assessmentResult) {
-			return this._getItem(criterionEntity, assessmentResult, x => x.level.href);
+			return this._getItem(criterionEntity, assessmentResult, function(x) {return x.level.href;});
 		},
 
 		getAssessedScore: function(criterionEntity, assessmentResult) {
-			return this._getItem(criterionEntity, assessmentResult, x => x.score);
+			return this._getItem(criterionEntity, assessmentResult, function(x) {return x.score;});
 		},
 
 		getAssessmentFeedback: function(criterionEntity, assessmentResult) {
-			return this._getItem(criterionEntity, assessmentResult, x => x.feedback);
+			return this._getItem(criterionEntity, assessmentResult, function(x) {return x.feedback;});
 		}
 	};
 

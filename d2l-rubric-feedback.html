@@ -28,6 +28,7 @@
                border-bottom: 12px solid white;
            }
 		   .feedback-heading {
+				@apply --d2l-label-text;
 				padding-top: 18px
 		   }
 		   .feedback-text {
@@ -39,7 +40,7 @@
 			<div class="feedback-arrow-inner"></div>
 		</div>
 		<div class="feedback-heading">
-			<label><b>[[localize('feedback')]]</b></label>
+			[[localize('feedback')]]
 		</div>
 		<div class="feedback-text">
 			<slot></slot>
