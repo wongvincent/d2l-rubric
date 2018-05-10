@@ -1,0 +1,33 @@
+<link rel="import" href="../../polymer/polymer.html">
+<link rel="import" href="../../d2l-text-input/d2l-text-input.html">
+
+<link rel="import" href="../store/entity-editor-behavior.html">
+
+<dom-module id="d2l-rubric-level-editor">
+	<template strip-whitespace>
+		<style>
+			:host {
+			}
+
+			* {
+				box-sizing: border-box;
+			}
+
+		</style>
+
+		<d2l-text-input value="[[entity.properties.name]]"></d2l-text-input>
+	</template>
+
+	<script>
+		Polymer({
+			is: 'd2l-rubric-level-editor',
+
+			properties: {
+			},
+
+			behaviors: [
+				D2L.PolymerBehaviors.Rubric.EntityEditorBehavior
+			],
+		});
+	</script>
+</dom-module>

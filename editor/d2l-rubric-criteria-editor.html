@@ -1,0 +1,63 @@
+<link rel="import" href="../../polymer/polymer.html">
+<link rel="import" href="../../d2l-table/d2l-table-shared-styles.html">
+<link rel="import" href="../../d2l-hm-constants-behavior/d2l-hm-constants-behavior.html">
+
+<link rel="import" href="../store/entity-editor-behavior.html">
+<link rel="import" href="./d2l-rubric-criterion-editor.html">
+
+<dom-module id="d2l-rubric-criteria-editor">
+	<template strip-whitespace>
+		<style>
+			:host {
+				display: block;
+			}
+
+			* {
+				box-sizing: border-box;
+			}
+
+			d2l-rubric-criterion-editor {
+				border-bottom: var(--d2l-table-border);
+			}
+
+			d2l-rubric-criterion-editor:last-of-type {
+				border-bottom: none;
+			}
+		</style>
+
+		<template is="dom-repeat" items="[[_criteriaEntities]]" as="criterion">
+			<d2l-rubric-criterion-editor href="[[_getSelfLink(criterion)]]" token="[[token]]" has-out-of="[[hasOutOf]]"></d2l-rubric-criterion-editor>
+		</template>
+	</template>
+
+	<script>
+		Polymer({
+			is: 'd2l-rubric-criteria-editor',
+
+			properties: {
+				_criteriaEntities: Array,
+				hasOutOf: {
+					type: Boolean,
+					value: false
+				}
+			},
+
+			behaviors: [
+				D2L.PolymerBehaviors.Rubric.EntityEditorBehavior,
+				window.D2L.Hypermedia.HMConstantsBehavior
+			],
+
+			observers: [
+				'_onEntityChanged(entity)',
+			],
+
+			_onEntityChanged: function(entity) {
+				if (!entity) {
+					return;
+				}
+				this._criteriaEntities = entity.getSubEntitiesByClass(this.HypermediaClasses.rubrics.criterion);
+			},
+
+		});
+	</script>
+</dom-module>
