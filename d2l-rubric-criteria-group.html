@@ -58,6 +58,9 @@
 				display: block;
 				overflow-x: hidden;
 			}
+			.feedback-wrapper {
+				border: none;
+			}
 			.selected {
 				border-color: var(--d2l-color-celestine);
 				background-color: var(--d2l-color-celestine-plus-2);
@@ -114,7 +117,7 @@
 						</d2l-tr>
 					<template is="dom-if" if="[[_hasFeedback(criterion, assessmentResult)]]">
 						<d2l-tspan>
-							<d2l-rubric-feedback style="border:none">
+							<d2l-rubric-feedback class="feedback-wrapper">
 								<s-html html="[[getAssessmentFeedback(criterion, assessmentResult)]]"></s-html>
 							</d2l-rubric-feedback>
 						</d2l-tspan>
