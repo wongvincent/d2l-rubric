@@ -1,0 +1,56 @@
+<link rel="import" href="../../polymer/polymer.html">
+<link rel="import" href="../../d2l-hm-constants-behavior/d2l-hm-constants-behavior.html">
+<link rel="import" href="../../d2l-textarea/d2l-textarea.html">
+
+<link rel="import" href="../store/entity-editor-behavior.html">
+
+<dom-module id="d2l-rubric-criterion-description-editor">
+	<template strip-whitespace>
+		<style>
+			:host {
+				display: flex;
+				flex-grow: 1;
+
+				--d2l-textarea: {
+					display: block;
+					height: 100%;
+					overflow: hidden;
+					hyphens: auto;
+				};
+			}
+
+			* {
+				box-sizing: border-box;
+			}
+
+			d2l-textarea {
+				display: block;
+				flex-grow: 1;
+				width: 100%;
+			}
+
+		</style>
+
+		<d2l-textarea no-border hover-styles value=[[_getDescription(entity)]]></d2l-textarea>
+
+	</template>
+
+	<script>
+		Polymer({
+			is: 'd2l-rubric-criterion-description-editor',
+
+			properties: {
+			},
+
+			behaviors: [
+				D2L.PolymerBehaviors.Rubric.EntityEditorBehavior,
+				window.D2L.Hypermedia.HMConstantsBehavior
+			],
+
+			_getDescription: function(entity) {
+				var description = entity && entity.getSubEntityByClass(this.HypermediaClasses.rubrics.description);
+				return description && description.properties && description.properties.html || '';
+			},
+		});
+	</script>
+</dom-module>

@@ -1,0 +1,42 @@
+<link rel="import" href="../../polymer/polymer.html">
+<link rel="import" href="../../d2l-table/d2l-table-shared-styles.html">
+
+<dom-module id="d2l-rubric-editor-cell-styles">
+  <template>
+	<style>
+		.cell {
+			border-left: var(--d2l-table-border);
+			padding: 1rem;
+			flex: 1 1 0%;
+			/*
+			text-input min width is 2rem + 1em, so adding cell padding to this to give cell min-width
+			This is needed to enforce the same min-width on text input and text area cells
+			*/
+			min-width: calc(2rem + 1em + 2rem);
+		}
+
+		:host-context([dir="rtl"]) .cell {
+			border-left: none;
+			border-right: var(--d2l-table-border);
+		}
+
+		.col-first {
+			flex-shrink: 0;
+			flex-grow: 0;
+			flex-basis: 15%;
+			min-width: 7rem;
+			padding: 0;
+			border-left: none;
+		}
+
+		:host-context([dir="rtl"]) .col-first {
+			border-right: none;
+		}
+
+		.col-last {
+			flex: 0 0 auto;
+			min-width: 6rem;
+		}
+	</style>
+  </template>
+</dom-module>

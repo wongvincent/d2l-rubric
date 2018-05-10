@@ -1,0 +1,61 @@
+<link rel="import" href="../../polymer/polymer.html">
+<link rel="import" href="../../d2l-table/d2l-table-shared-styles.html">
+<link rel="import" href="../../d2l-hm-constants-behavior/d2l-hm-constants-behavior.html">
+
+<link rel="import" href="../store/entity-editor-behavior.html">
+<link rel="import" href="./d2l-rubric-level-editor.html">
+<link rel="import" href="./d2l-rubric-editor-cell-styles.html">
+
+<dom-module id="d2l-rubric-levels-editor">
+	<template strip-whitespace>
+		<style include="d2l-rubric-editor-cell-styles">
+			:host {
+				display: flex;
+				flex-direction: row;
+				justify-content: space-between;
+				overflow: hidden;
+			}
+
+			* {
+				box-sizing: border-box;
+			}
+		</style>
+
+		<div class="cell col-first"></div>
+		<template is="dom-repeat" items="[[_levels]]" as="level">
+			<div class="cell"><d2l-rubric-level-editor href="[[_getSelfLink(level)]]" token="[[token]]"></d2l-rubric-level-editor></div>
+		</template>
+		<div hidden="[[!hasOutOf]]" class="cell col-last"></div>
+	</template>
+
+	<script>
+		Polymer({
+			is: 'd2l-rubric-levels-editor',
+
+			properties: {
+				_levels: Array,
+				hasOutOf: {
+					type: Boolean,
+					value: false
+				}
+			},
+
+			behaviors: [
+				D2L.PolymerBehaviors.Rubric.EntityEditorBehavior,
+				window.D2L.Hypermedia.HMConstantsBehavior
+			],
+
+			observers: [
+				'_onEntityChanged(entity)',
+			],
+
+			_onEntityChanged: function(entity) {
+				if (!entity) {
+					return;
+				}
+				this._levels = entity.getSubEntitiesByClass(this.HypermediaClasses.rubrics.level);
+			},
+
+		});
+	</script>
+</dom-module>

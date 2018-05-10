@@ -5,7 +5,8 @@
 <link rel="import" href="../../d2l-alert/d2l-alert.html">
 <link rel="import" href="../d2l-rubric-loading.html">
 <link rel="import" href="../localize-behavior.html">
-<link rel="import" href="../siren-entity-behavior.html">
+<link rel="import" href="../store/entity-store.html">
+<link rel="import" href="../store/entity-editor-behavior.html">
 <link rel="import" href="./d2l-rubric-criteria-groups-editor.html">
 
 <!--
@@ -106,7 +107,7 @@ Creates and edits a rubric
 			},
 
 			behaviors: [
-				D2L.PolymerBehaviors.Rubric.SirenEntityBehavior,
+				D2L.PolymerBehaviors.Rubric.EntityEditorBehavior,
 				window.D2L.Hypermedia.HMConstantsBehavior,
 				D2L.PolymerBehaviors.Rubric.LocalizeBehavior
 			],
