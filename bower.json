@@ -40,7 +40,7 @@
     "iron-resizable-behavior": "^2.1.0",
     "polymer": "1 - 2",
     "s-html": "Brightspace/s-html#^1.0.0",
-    "d2l-textarea": "mdgbayly/textarea",
+    "d2l-textarea": "BrightspaceUI/textarea",
     "d2l-text-input": "brightspaceui/text-input#^0.3.0"
   },
   "devDependencies": {
